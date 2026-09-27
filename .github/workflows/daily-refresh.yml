@@ -1,0 +1,41 @@
+name: Daily PM Job Tracker Refresh
+
+# Runs at 11:00 UTC = 7:00 AM US Eastern during EDT (roughly mid-March to early November).
+# GitHub Actions cron has no timezone/DST awareness, so after DST ends (~Nov 1) this will
+# effectively fire at 6:00 AM Eastern instead of 7:00 AM, until DST resumes in spring.
+# Adjust the cron string twice a year (to '0 12 * * *' for EST) if you want it pinned to 7am local.
+on:
+  schedule:
+    - cron: '0 11 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Run refresh script
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/refresh_jobs.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "pm-job-tracker-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          git diff --quiet --cached || git commit -m "Daily job tracker refresh $(date -u +'%Y-%m-%d')"
+          git push
