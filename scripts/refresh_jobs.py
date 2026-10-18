@@ -6,7 +6,7 @@ Product Manager internships (Summer 2027) and full-time PM roles (May-Aug 2027
 start), then rewrites the `jobs` array and "last updated" line inside
 index.html in place.
 
-Requires: pip install anthropic
+Requires: pip install anthropic requests python-dateutil
 Env var:  ANTHROPIC_API_KEY
 """
 
@@ -18,6 +18,8 @@ from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 import anthropic
+import requests
+from dateutil import parser as date_parser
 
 SCHEMA_KEYS = [
     "role", "company", "location", "type", "workMode",
@@ -52,13 +54,56 @@ BAD_LINK_PATTERNS = [
 ]
 BAD_LINK_RE = re.compile("|".join(BAD_LINK_PATTERNS), re.IGNORECASE)
 
-# Phrases in a listing's own notes that admit the posting is probably already
-# closed/expired — reject these rather than publish a known-stale listing.
-STALE_NOTES_RE = re.compile(
+# Phrases that signal a posting is dead — checked both against the model's own
+# "notes" field and against the live-fetched text of the posting's own page.
+CLOSED_SIGNAL_RE = re.compile(
+    r"no longer accepting applications|position has been filled|"
+    r"this (?:job|position|posting|requisition)s? (?:has|have) (?:expired|been filled|been closed|closed)|"
+    r"(?:job|position|posting|requisition) (?:is|was) (?:no longer available|closed|expired|filled)|"
+    r"applications? (?:are|is) (?:now )?closed|this requisition has been closed|"
+    r"job has been closed|this position is no longer available|closed to new applicants|"
+    r"page not found|job not found|we(?:'| a)re sorry.{0,60}no longer (?:active|available)|"
     r"likely closed|already closed|appears closed|no longer accepting|"
     r"application (?:window|deadline) (?:has )?passed|posting (?:may be|is) expired",
     re.IGNORECASE,
 )
+
+LIVE_CHECK_TIMEOUT = 10
+LIVE_CHECK_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36 PMJobTrackerBot"
+}
+
+# Catches phrasing like "close Oct 6, 2026", "closes on October 6, 2026",
+# "deadline: 10/6/2026", "apply by Oct. 6, 2026" inside a listing's own notes
+# or startDate field, so we can compare the stated deadline against today's
+# date directly — this catches JS-rendered sites (e.g. Google careers) whose
+# "this posting has closed" banner a plain HTTP fetch can't see, because it
+# relies on the date the model already extracted rather than re-fetching.
+DEADLINE_PHRASE_RE = re.compile(
+    r"(?:clos(?:e|es|ed|ing)(?:\s+(?:on|date))?|deadline(?:\s*:)?|apply\s+by|applications?\s+(?:are\s+)?due)"
+    r"[^.\n]{0,40}?"
+    r"((?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4}"
+    r"|\d{1,2}/\d{1,2}/\d{2,4})",
+    re.IGNORECASE,
+)
+
+
+def _deadline_already_passed(text):
+    """Return True if `text` mentions an explicit close/deadline date and that
+    date is strictly before today (UTC). Never raises — unparseable dates are
+    treated as no signal (kept, not dropped)."""
+    if not text or not isinstance(text, str):
+        return False
+    today = datetime.now(timezone.utc).date()
+    for match in DEADLINE_PHRASE_RE.finditer(text):
+        try:
+            dt = date_parser.parse(match.group(1), fuzzy=True)
+        except (ValueError, OverflowError, TypeError):
+            continue
+        if dt.date() < today:
+            return True
+    return False
 
 PROMPT = f"""You are a highly selective Product Management career-opportunity research agent
 building a daily public job tracker for a university Product Management club. Today's date is
@@ -95,6 +140,10 @@ listing in your output — if you only have a generic page for a role, omit the 
 ACTIVE-JOB VERIFICATION: do not include a listing if your search results give you reason to believe
 the application window has already closed or the posting is stale/expired. When in doubt about
 whether a specific posting is still open, prefer excluding it over including a possibly-dead listing.
+If a posting states an explicit application open/close date (e.g. "Applications open Sep 22 – close
+Oct 6, 2026"), always include that exact date in the `notes` field in a recognizable form — this lets
+a downstream automated check cross-reference the stated deadline against today's date, which is the
+most reliable way to catch postings whose window has quietly closed since you last saw them indexed.
 
 NO-HALLUCINATION RULE: only report a detail (work authorization, salary, start date, work mode) if
 the source explicitly states it — use the literal string "Not specified" otherwise. Never guess,
@@ -176,6 +225,43 @@ def _is_valid_source(url):
     return True
 
 
+def _link_is_live(url):
+    """Best-effort check that a posting's URL is still a real, open listing.
+
+    Returns True unless there's positive evidence the posting is dead: a
+    404/410 status, a redirect that bounces from the specific job page to a
+    generic listing/search page (matches BAD_LINK_RE), or page text containing
+    a "closed/filled/expired" phrase. Network errors, timeouts, and bot-blocks
+    (403s, CAPTCHAs, etc.) are treated as unknown and the listing is kept
+    rather than punished for a flaky request or a site that blocks scrapers.
+
+    Known limitation: some ATS platforms (Workday in particular, and to some
+    extent Google's own careers site) render their "this posting has closed"
+    message client-side via JavaScript after the page loads. A plain HTTP GET
+    only sees the initial server-rendered HTML, so it won't see that message
+    and will treat the listing as still live. This catches plain-HTML closures
+    and dead links reliably; it is not a perfect oracle for JS-heavy sites.
+    """
+    try:
+        resp = requests.get(
+            url, headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT, allow_redirects=True
+        )
+    except requests.RequestException as e:
+        print(f"  could not verify liveness of {url} ({e}) — keeping, treated as unknown", file=sys.stderr)
+        return True
+
+    if resp.status_code in (404, 410):
+        return False
+
+    if resp.url != url and BAD_LINK_RE.search(resp.url):
+        return False  # bounced from the specific job page to a generic listing page
+
+    if resp.status_code < 400 and CLOSED_SIGNAL_RE.search(resp.text[:20000]):
+        return False
+
+    return True
+
+
 def get_jobs():
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     resp = client.messages.create(
@@ -214,8 +300,14 @@ def get_jobs():
 
         if not _is_valid_source(row["source"]):
             continue  # no usable direct link — drop per the hard link-quality rule
-        if STALE_NOTES_RE.search(row.get("notes", "")):
+        if CLOSED_SIGNAL_RE.search(row.get("notes", "")):
             continue  # listing admits it's probably already closed
+        if _deadline_already_passed(row.get("notes", "")) or _deadline_already_passed(row.get("startDate", "")):
+            print(f"  dropping (stated deadline already passed): {row['source']}", file=sys.stderr)
+            continue
+        if not _link_is_live(row["source"]):
+            print(f"  dropping (link check found it closed/dead): {row['source']}", file=sys.stderr)
+            continue
 
         candidates.append(row)
 
