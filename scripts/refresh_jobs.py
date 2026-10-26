@@ -74,6 +74,72 @@ LIVE_CHECK_HEADERS = {
                   "(KHTML, like Gecko) Chrome/124.0 Safari/537.36 PMJobTrackerBot"
 }
 
+# Most ATS platforms (including Google's own careers site and Workday) embed
+# schema.org JobPosting structured data as a <script type="application/ld+json">
+# block for SEO / "Google for Jobs" indexing purposes. Crucially, this block is
+# written server-side into the raw HTML even on sites whose visible "this
+# posting has closed" banner only renders client-side via JavaScript after the
+# page loads — so it's visible to a plain HTTP fetch when the human-facing
+# banner is not. If present, its `validThrough` field is a much more reliable
+# deadline signal than scraping visible text.
+LD_JSON_BLOCK_RE = re.compile(
+    r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+    re.DOTALL | re.IGNORECASE,
+)
+
+
+def _iter_jobposting_nodes(html_text):
+    """Yield dict nodes that look like schema.org JobPosting objects found in
+    any embedded JSON-LD block on the page. Tolerant of a bare object, an
+    array of objects, or an `@graph`-wrapped collection; never raises on
+    malformed/partial JSON (ATS pages often emit slightly-off JSON-LD)."""
+    for block in LD_JSON_BLOCK_RE.findall(html_text):
+        block = block.strip()
+        if not block:
+            continue
+        try:
+            data = json.loads(block)
+        except json.JSONDecodeError:
+            continue
+
+        if isinstance(data, list):
+            nodes = data
+        elif isinstance(data, dict) and isinstance(data.get("@graph"), list):
+            nodes = data["@graph"]
+        elif isinstance(data, dict):
+            nodes = [data]
+        else:
+            nodes = []
+
+        for node in nodes:
+            if not isinstance(node, dict):
+                continue
+            node_type = node.get("@type")
+            types = node_type if isinstance(node_type, list) else [node_type]
+            if any(isinstance(t, str) and t.lower() == "jobposting" for t in types):
+                yield node
+
+
+def _structured_data_says_expired(html_text):
+    """Return True if an embedded JobPosting's `validThrough` date has already
+    passed. Defensive by design: any parsing failure is swallowed and treated
+    as no signal (kept, not dropped) rather than risking a false drop."""
+    today = datetime.now(timezone.utc).date()
+    try:
+        for node in _iter_jobposting_nodes(html_text):
+            valid_through = node.get("validThrough")
+            if not valid_through or not isinstance(valid_through, str):
+                continue
+            try:
+                dt = date_parser.parse(valid_through)
+            except (ValueError, OverflowError, TypeError):
+                continue
+            if dt.date() < today:
+                return True
+    except Exception as e:  # pragma: no cover - never let this crash the run
+        print(f"  structured-data check error (ignored): {e}", file=sys.stderr)
+    return False
+
 # Catches phrasing like "close Oct 6, 2026", "closes on October 6, 2026",
 # "deadline: 10/6/2026", "apply by Oct. 6, 2026" inside a listing's own notes
 # or startDate field, so we can compare the stated deadline against today's
@@ -230,17 +296,11 @@ def _link_is_live(url):
 
     Returns True unless there's positive evidence the posting is dead: a
     404/410 status, a redirect that bounces from the specific job page to a
-    generic listing/search page (matches BAD_LINK_RE), or page text containing
-    a "closed/filled/expired" phrase. Network errors, timeouts, and bot-blocks
+    generic listing/search page (matches BAD_LINK_RE), page text containing a
+    "closed/filled/expired" phrase, or an embedded JobPosting `validThrough`
+    date that's already passed. Network errors, timeouts, and bot-blocks
     (403s, CAPTCHAs, etc.) are treated as unknown and the listing is kept
     rather than punished for a flaky request or a site that blocks scrapers.
-
-    Known limitation: some ATS platforms (Workday in particular, and to some
-    extent Google's own careers site) render their "this posting has closed"
-    message client-side via JavaScript after the page loads. A plain HTTP GET
-    only sees the initial server-rendered HTML, so it won't see that message
-    and will treat the listing as still live. This catches plain-HTML closures
-    and dead links reliably; it is not a perfect oracle for JS-heavy sites.
     """
     try:
         resp = requests.get(
@@ -256,8 +316,11 @@ def _link_is_live(url):
     if resp.url != url and BAD_LINK_RE.search(resp.url):
         return False  # bounced from the specific job page to a generic listing page
 
-    if resp.status_code < 400 and CLOSED_SIGNAL_RE.search(resp.text[:20000]):
-        return False
+    if resp.status_code < 400:
+        if CLOSED_SIGNAL_RE.search(resp.text[:20000]):
+            return False
+        if _structured_data_says_expired(resp.text):
+            return False
 
     return True
 
