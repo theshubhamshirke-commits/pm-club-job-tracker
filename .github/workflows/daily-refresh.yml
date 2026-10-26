@@ -1,41 +1,60 @@
-name: Daily PM Job Tracker Refresh
+"""
+Daily PM Club Job Tracker refresh script.
 
-# Runs at 11:00 UTC = 7:00 AM US Eastern during EDT (roughly mid-March to early November).
-# GitHub Actions cron has no timezone/DST awareness, so after DST ends (~Nov 1) this will
-# effectively fire at 6:00 AM Eastern instead of 7:00 AM, until DST resumes in spring.
-# Adjust the cron string twice a year (to '0 12 * * *' for EST) if you want it pinned to 7am local.
-on:
-  schedule:
-    - cron: '0 11 * * *'
-  workflow_dispatch: {}
+Calls the Anthropic API with the native web_search tool to research current
+Product Manager internships (Summer 2027) and full-time PM roles (May-Aug 2027
+start), then rewrites the `jobs` array and "last updated" line inside
+index.html in place.
 
-permissions:
-  contents: write
+Requires: pip install anthropic requests python-dateutil
+Env var:  ANTHROPIC_API_KEY
+"""
 
-jobs:
-  refresh:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+import os
+import re
+import json
+import sys
+from datetime import datetime, timezone
+from urllib.parse import urlparse
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+import anthropic
+import requests
+from dateutil import parser as date_parser
 
-      - name: Install dependencies
-        run: pip install anthropic requests python-dateutil
+SCHEMA_KEYS = [
+    "role", "company", "location", "type", "workMode",
+    "workAuth", "workAuthDetail", "salary", "industry",
+    "startDate", "endDate", "startDateFit", "priority",
+    "notes", "source", "dateFound",
+]
 
-      - name: Run refresh script
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/refresh_jobs.py
+TYPE_VALUES = {"Internship", "Full-time", "Rotational/Development Program", "Unclear"}
+WORK_AUTH_VALUES = {"Sponsorship available", "OPT/international possible", "Not specified", "No sponsorship"}
+START_FIT_VALUES = {"Confirmed Summer 2027", "Strong 2027 signal", "Flexible/Potential", "Not specified"}
+PRIORITY_VALUES = {"High priority", "Good fit", "Watch"}
 
-      - name: Commit and push if changed
-        run: |
-          git config user.name "pm-job-tracker-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add index.html
-          git diff --quiet --cached || git commit -m "Daily job tracker refresh $(date -u +'%Y-%m-%d')"
-          git push
+TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+# URL patterns that are generic search/listing/aggregator pages rather than a
+# specific job posting. A source matching any of these is rejected outright,
+# even if the model includes it — this is the exact bug pattern that caused
+# "link redirects to something else": several unrelated jobs all citing the
+# same generic search-results page as their "source".
+BAD_LINK_PATTERNS = [
+    r"indeed\.com/q-",
+    r"indeed\.com/jobs\?",
+    r"glassdoor\.com/Job/[\w-]+-jobs-SRCH",
+    r"linkedin\.com/jobs/search",
+    r"linkedin\.com/jobs/collections",
+    r"github\.com/[\w-]+/.*Product-Management-Internship",
+    r"intern-list\.com/pm-intern-list/?$",
+    r"wellfound\.com/jobs/?$",
+    r"ziprecruiter\.com/candidate/search",
+    r"builtin\.com/jobs/?$",
+]
+BAD_LINK_RE = re.compile("|".join(BAD_LINK_PATTERNS), re.IGNORECASE)
+
+# Phrases that signal a posting is dead — checked both against the model's own
+# "notes" field and against the live-fetched text of the posting's own page.
+CLOSED_SIGNAL_RE = re.compile(
+    r"no longer accepting applications|position has been filled|"
