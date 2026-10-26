@@ -6,7 +6,7 @@ Product Manager internships (Summer 2027) and full-time PM roles (May-Aug 2027
 start), then rewrites the `jobs` array and "last updated" line inside
 index.html in place.
 
-Requires: pip install anthropic requests python-dateutil
+Requires: pip install -r requirements.txt
 Env var:  ANTHROPIC_API_KEY
 """
 
@@ -34,6 +34,7 @@ START_FIT_VALUES = {"Confirmed Summer 2027", "Strong 2027 signal", "Flexible/Pot
 PRIORITY_VALUES = {"High priority", "Good fit", "Watch"}
 
 TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+MAX_PAUSE_CONTINUATIONS = 3
 
 # URL patterns that are generic search/listing/aggregator pages rather than a
 # specific job posting. A source matching any of these is rejected outright,
@@ -353,8 +354,8 @@ def _link_is_live(url):
     return True
 
 
-def get_jobs():
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+def _research_jobs(client):
+    """Stream a complete research turn, resuming bounded server-tool pauses."""
     # web_fetch lets the model actually retrieve each candidate's real current
     # page content (not just a cached search snippet) before including it —
     # this is what catches postings that look fine in search results but have
@@ -362,28 +363,48 @@ def get_jobs():
     # careers) where the "no longer available" message only shows up after
     # the page actually loads. Requires the web-fetch beta header + the
     # client.beta.messages namespace rather than the plain client.messages one.
-    resp = client.beta.messages.create(
-        model="claude-sonnet-4-5",
-        # Was 12000 — too low once web_fetch verification was added. The model
-        # was getting cut off mid-process (observed: truncated mid-sentence,
-        # having fetched several real pages but never reaching the final JSON
-        # array), which looked like "found 0 listings" but was actually "ran
-        # out of output budget before writing the answer." Raised well above
-        # what search+fetch+reasoning for ~15-20 candidates should ever need.
-        max_tokens=48000,
-        tools=[
-            {"type": "web_search_20250305", "name": "web_search", "max_uses": 30},
-            {
-                "type": "web_fetch_20250910",
-                "name": "web_fetch",
-                "max_uses": 25,
-                "max_content_tokens": 8000,
-            },
-        ],
-        betas=["web-fetch-2025-09-10"],
-        messages=[{"role": "user", "content": PROMPT}],
-    )
+    messages = [{"role": "user", "content": PROMPT}]
+    tools = [
+        {"type": "web_search_20250305", "name": "web_search", "max_uses": 30},
+        {
+            "type": "web_fetch_20250910",
+            "name": "web_fetch",
+            "max_uses": 25,
+            "max_content_tokens": 8000,
+        },
+    ]
+    for attempt in range(MAX_PAUSE_CONTINUATIONS + 1):
+        # A 48k output budget requires streaming in the SDK. The helper still
+        # returns a complete message, so filtering never sees partial events.
+        with client.beta.messages.stream(
+            model="claude-sonnet-4-5",
+            max_tokens=48000,
+            tools=tools,
+            betas=["web-fetch-2025-09-10"],
+            messages=messages,
+        ) as stream:
+            resp = stream.get_final_message()
 
+        _log_research_response(resp)
+        if resp.stop_reason == "end_turn":
+            return resp
+        if resp.stop_reason != "pause_turn":
+            raise RuntimeError(
+                f"Research did not finish (stop_reason={resp.stop_reason!r}); "
+                "keeping the previously published listings."
+            )
+        if attempt == MAX_PAUSE_CONTINUATIONS:
+            raise RuntimeError(
+                "Research exceeded the server-tool continuation limit; "
+                "keeping the previously published listings."
+            )
+        # Resume the same assistant turn with every tool block intact. Do not
+        # replace this with a new user prompt or parse its unfinished text.
+        messages.append({"role": "assistant", "content": resp.content})
+        print(f"Resuming paused research ({attempt + 1}/{MAX_PAUSE_CONTINUATIONS}).", file=sys.stderr)
+
+
+def _log_research_response(resp):
     # Diagnostic: confirm whether web_fetch (and web_search) actually ran, and
     # whether any fetch calls errored out server-side. Without this, a run
     # that returns zero candidates is ambiguous — it could mean "genuinely
@@ -398,8 +419,17 @@ def get_jobs():
             print(f"  tool call: {block.name} input={getattr(block, 'input', None)}", file=sys.stderr)
         elif btype in ("web_fetch_tool_result", "web_search_tool_result"):
             content = getattr(block, "content", None)
-            is_error = isinstance(content, dict) and content.get("type") == "web_fetch_tool_result_error"
+            result_type = content.get("type") if isinstance(content, dict) else getattr(content, "type", None)
+            is_error = result_type in ("web_fetch_tool_result_error", "web_search_tool_result_error")
             print(f"  tool result ({btype}): {'ERROR' if is_error else 'ok'} — {str(content)[:300]}", file=sys.stderr)
+
+
+def get_jobs():
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("ANTHROPIC_API_KEY is missing. Set it in the repository's Actions secrets.")
+    with anthropic.Anthropic(api_key=api_key, max_retries=2) as client:
+        resp = _research_jobs(client)
 
     text_parts = [block.text for block in resp.content if getattr(block, "type", None) == "text"]
     full_text = "\n".join(text_parts).strip()
@@ -502,11 +532,16 @@ def update_html(jobs, path="index.html"):
         f.write(html)
 
 
-if __name__ == "__main__":
+def main(path="index.html"):
     jobs = get_jobs()
     print(f"Found {len(jobs)} listings with verified unique sources.")
     if len(jobs) < 5:
         print("Too few valid listings found — aborting without publishing to avoid a broken/empty page.", file=sys.stderr)
-        sys.exit(1)
-    update_html(jobs)
+        return 1
+    update_html(jobs, path=path)
     print(f"index.html updated with {len(jobs)} jobs.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
