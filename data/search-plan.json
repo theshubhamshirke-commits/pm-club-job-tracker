@@ -1,0 +1,74 @@
+{
+  "batches": [
+    {
+      "name": "internships-technology",
+      "focus": "Summer 2027 US product management internships at software, AI, cloud and consumer technology companies.",
+      "queries": [
+        "\"product management intern\" \"summer 2027\" United States",
+        "\"product manager intern\" \"2027\" Microsoft Google Amazon",
+        "\"product management\" \"intern\" \"2027\" Roblox Databricks Atlassian",
+        "\"product management\" \"intern\" \"2027\" NVIDIA Adobe Salesforce",
+        "\"product manager\" \"intern\" \"2027\" site:jobs.intuit.com",
+        "\"product management\" \"intern\" \"2027\" site:boards.greenhouse.io",
+        "\"product management\" \"intern\" \"2027\" site:jobs.lever.co",
+        "\"product management\" \"intern\" \"2027\" site:myworkdayjobs.com"
+      ]
+    },
+    {
+      "name": "internships-other-industries",
+      "focus": "Summer 2027 US PM internships at finance, payments, healthcare, retail and industrial companies; include MBA PM internships.",
+      "queries": [
+        "\"product management\" \"intern\" \"summer 2027\" finance",
+        "\"product manager\" \"intern\" \"2027\" Mastercard Visa PayPal",
+        "\"product\" \"MBA\" \"intern\" \"2027\" Capital One American Express",
+        "\"product management\" \"intern\" \"2027\" healthcare",
+        "\"product management\" \"intern\" \"2027\" Walmart Target",
+        "\"product management\" \"intern\" \"2027\" industrial",
+        "\"product management\" \"intern\" \"2027\" site:jobs.smartrecruiters.com",
+        "\"product management\" \"intern\" \"2027\" site:jobs.ashbyhq.com"
+      ]
+    },
+    {
+      "name": "graduate-full-time",
+      "focus": "Full-time or rotational PM roles explicitly recruiting 2027 graduates or a 2027 start; retain May-August 2027 target. Exclude immediate experienced hires and explicit starts outside this window. Accept a 2027 graduate cohort with unstated start month but mark exact start Not specified.",
+      "queries": [
+        "\"associate product manager\" \"2027\" \"new grad\" United States",
+        "\"product manager\" \"2027 graduates\" United States",
+        "\"product manager\" \"2027 start\" United States",
+        "\"product management\" \"2027\" \"rotational\" United States",
+        "\"product manager\" \"2027\" \"university graduate\"",
+        "\"product manager\" \"2027\" \"MBA\" full time",
+        "\"product manager\" \"2027\" Stripe Roblox Databricks IBM",
+        "\"associate product manager\" \"2027\" site:myworkdayjobs.com"
+      ]
+    }
+  ],
+  "employers": [
+    "Roblox",
+    "Databricks",
+    "Amazon",
+    "Capital One",
+    "Intuit",
+    "Atlassian",
+    "NVIDIA",
+    "Medline",
+    "Solace",
+    "ID.me",
+    "Mastercard",
+    "Travelers",
+    "GE Vernova",
+    "Guardian Life",
+    "Lincoln Electric",
+    "Mohawk",
+    "American Express",
+    "Salesforce",
+    "Adobe",
+    "Visa",
+    "Qualcomm",
+    "Uline",
+    "TikTok",
+    "IBM",
+    "Appian",
+    "Google"
+  ]
+}

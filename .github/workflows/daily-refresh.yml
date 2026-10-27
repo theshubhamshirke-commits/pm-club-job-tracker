@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name "pm-job-tracker-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add index.html
+          git add index.html data/tracked-jobs.json data/refresh-report.json
           git diff --quiet --cached || git commit -m "Daily job tracker refresh $(date -u +'%Y-%m-%d')"
           git push
 

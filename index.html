@@ -91,13 +91,14 @@
 <header>
   <h1>PM Club Job Tracker — 2027 Product Management Internships &amp; Full-Time Roles (USA)</h1>
   <p id="updated-line">Last updated: —</p>
+  <p id="refresh-status" role="status"></p>
 </header>
 <div class="wrap">
 
   <div class="notice">
     <strong>About these openings:</strong> This tracker covers US product management internships for Summer 2027 and graduate PM roles with a stated 2027 hiring cycle. A 2027 cohort does not confirm a May–August start; check each role's dates.
     <br><br>
-    <strong>Source checks:</strong> Each listing links to its matching employer job description. The refresh checks the role title, 2027 timing, an Apply option and closure signals. Unreachable or inconclusive pages are excluded. Details that cannot be supported are marked <span class="badge badge-notspec">Not specified</span>. Industry and priority are tracker categories. Openings can close after the last update; confirm the employer's current terms before applying.
+    <strong>Source checks:</strong> Each listing links to its matching employer job description. Every daily run rechecks existing listings and searches for new openings. It checks the matching role, 2027 timing in the title or description, application availability and closure signals. Unreachable or inconclusive pages are excluded. Details that cannot be supported are marked <span class="badge badge-notspec">Not specified</span>. Industry and priority are tracker categories. Openings can close after the last update; confirm the employer's current terms before applying.
   </div>
 
   <div class="stat-row" id="stat-row"></div>
@@ -133,43 +134,8 @@
 <footer>Built for the Product Management Club · Daily refresh scheduled at 13:07 UTC · Data is best-effort and may be incomplete — always verify on the source site.</footer>
 
 <script>
+const refreshStatus = {"checkedAt": "2026-10-27T05:49:19.651062+00:00", "discoveryComplete": false, "statusCounts": {"open": 13, "unverified": 17, "closed": 6, "out_of_scope": 1}};
 const jobs = [
-  {
-    "role": "[Summer 2027] Product Management Intern",
-    "company": "Roblox",
-    "location": "San Mateo, CA",
-    "type": "Internship",
-    "workMode": "Hybrid",
-    "workAuth": "Not specified",
-    "workAuthDetail": "Company may not be able to employ candidates with certain U.S. visa categories or support H-1B sponsorship",
-    "salary": "$62/hr",
-    "industry": "Technology",
-    "startDate": "Summer 2027",
-    "endDate": "Not specified",
-    "startDateFit": "Confirmed Summer 2027",
-    "priority": "High priority",
-    "notes": "12-week program. Applications close October 30 at 5 PM PST, as stated by the employer. Exact program dates are not stated.",
-    "source": "https://careers.roblox.com/jobs/8143981",
-    "dateFound": "2026-10-27"
-  },
-  {
-    "role": "Product Management Intern (Summer 2027)",
-    "company": "Databricks",
-    "location": "Bellevue, WA; Mountain View, CA; San Francisco, CA",
-    "type": "Internship",
-    "workMode": "Not specified",
-    "workAuth": "Not specified",
-    "workAuthDetail": "Sponsorship policy not stated. Export-control restrictions may apply.",
-    "salary": "$51.50-$56.00/hr",
-    "industry": "Technology",
-    "startDate": "Summer 2027",
-    "endDate": "Not specified",
-    "startDateFit": "Confirmed Summer 2027",
-    "priority": "High priority",
-    "notes": "12-week paid internship. Graduating Fall 2027 or Spring 2028. SF Bay Area rate $54-$56/hr, Bellevue rate $51.50-$53.50/hr.",
-    "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
-    "dateFound": "2026-10-27"
-  },
   {
     "role": "Product Manager Technical (PMT) Intern - Summer 2027",
     "company": "Amazon",
@@ -186,7 +152,27 @@ const jobs = [
     "priority": "High priority",
     "notes": "12-week consecutive internship. MBA program with expected graduation December 2027 \u2013 June 2028. Most roles at Seattle or Arlington, VA headquarters.",
     "source": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027",
-    "dateFound": "2026-10-27"
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:49:19.651062+00:00"
+  },
+  {
+    "role": "Product Management Intern, 2027 Summer U.S.",
+    "company": "Atlassian",
+    "location": "San Francisco, United States",
+    "type": "Internship",
+    "workMode": "Remote",
+    "workAuth": "No sponsorship",
+    "workAuthDetail": "This position is not eligible for F1 and J1 students. It is not available for any work sponsorship.",
+    "salary": "Zone A: $51/hr - $57/hr; Zone B: $46/hr - $51/hr; Zone C: $42/hr - $47/hr",
+    "industry": "Technology",
+    "startDate": "Not specified",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "High priority",
+    "notes": "Not specified",
+    "source": "https://www.atlassian.com/company/careers/details/26274",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:46:58.237800+00:00"
   },
   {
     "role": "MBA Product Intern - Summer 2027",
@@ -204,7 +190,122 @@ const jobs = [
     "priority": "High priority",
     "notes": "10 weeks. Two-year MBA candidates must return to study after the internship and finish by August 2028. No employer immigration support, including OPT or CPT.",
     "source": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360",
-    "dateFound": "2026-10-27"
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:46:55.072463+00:00"
+  },
+  {
+    "role": "Product Management Intern (Summer 2027)",
+    "company": "Databricks",
+    "location": "Bellevue, WA; Mountain View, CA; San Francisco, CA",
+    "type": "Internship",
+    "workMode": "Not specified",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Sponsorship policy not stated. Export-control restrictions may apply.",
+    "salary": "$51.50-$56.00/hr",
+    "industry": "Technology",
+    "startDate": "Summer 2027",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "High priority",
+    "notes": "12-week paid internship. Graduating Fall 2027 or Spring 2028. SF Bay Area rate $54-$56/hr, Bellevue rate $51.50-$53.50/hr.",
+    "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:46:55.068730+00:00"
+  },
+  {
+    "role": "Summer 2027: Product Manager Intern",
+    "company": "Intuit",
+    "location": "Mountain View, California; San Diego, California",
+    "type": "Internship",
+    "workMode": "Hybrid",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Must be legally authorized to work in the United States on a full-time basis for the duration of the internship",
+    "salary": "Not specified",
+    "industry": "Fintech",
+    "startDate": "Cohort 1: Monday, May 17 - Friday, August 6, 2027 (12 weeks); Cohort 2: Monday, June 14 - Friday September 3, 2027 (12 weeks)",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "High priority",
+    "notes": "Not specified",
+    "source": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:46:58.149812+00:00"
+  },
+  {
+    "role": "MBA Intern, Product Management - Summer 2027",
+    "company": "Medline",
+    "location": "Northfield, Illinois; Chicago, Illinois",
+    "type": "Internship",
+    "workMode": "Not specified",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Not specified",
+    "salary": "$92,000.00 - $138,000.00 Annual",
+    "industry": "Healthcare",
+    "startDate": "Summer 2027",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "Good fit",
+    "notes": "Currently pursuing an MBA degree 3+ years of professional business experience in a relevant field",
+    "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805",
+    "dateFound": "2026-10-26",
+    "lastChecked": "2026-10-27T05:47:10.460025+00:00"
+  },
+  {
+    "role": "Product Management Intern - Summer 2027",
+    "company": "Medline",
+    "location": "Northfield, Illinois; Chicago, Illinois",
+    "type": "Internship",
+    "workMode": "Not specified",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Not specified",
+    "salary": "Not specified",
+    "industry": "Not specified",
+    "startDate": "Not specified",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "Watch",
+    "notes": "Not specified",
+    "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:47:28.713516+00:00"
+  },
+  {
+    "role": "Product Management MBA Intern, Data Center GPU - Summer 2027",
+    "company": "NVIDIA",
+    "location": "US, CA, Santa Clara",
+    "type": "Internship",
+    "workMode": "Not specified",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Not specified",
+    "salary": "The hourly rate for our interns is 38 USD - 94 USD.",
+    "industry": "Technology",
+    "startDate": "Summer 2027",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "Good fit",
+    "notes": "Pursuing an MBA in a relevant field or equivalent program (graduating in winter or summer 2028)",
+    "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:47:13.818681+00:00"
+  },
+  {
+    "role": "[Summer 2027] Product Management Intern",
+    "company": "Roblox",
+    "location": "San Mateo, CA",
+    "type": "Internship",
+    "workMode": "Hybrid",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Company may not be able to employ candidates with certain U.S. visa categories or support H-1B sponsorship",
+    "salary": "$62/hr",
+    "industry": "Technology",
+    "startDate": "Summer 2027",
+    "endDate": "Not specified",
+    "startDateFit": "Confirmed Summer 2027",
+    "priority": "High priority",
+    "notes": "12-week program. Applications close October 30 at 5 PM PST, as stated by the employer. Exact program dates are not stated.",
+    "source": "https://careers.roblox.com/jobs/8143981",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:46:55.068112+00:00"
   },
   {
     "role": "Associate Product Manager, New Grad (2027 Start)",
@@ -222,7 +323,65 @@ const jobs = [
     "priority": "High priority",
     "notes": "2027 graduate cohort for Fall 2026 or Spring 2027 graduates in computer science or a related engineering field. Exact start month is not stated; confirm May\u2013August availability.",
     "source": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002",
-    "dateFound": "2026-10-27"
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:46:58.017683+00:00"
+  },
+  {
+    "role": "Summer 2027 - Associate Product Manager (New Grad)",
+    "company": "ID.me",
+    "location": "Not specified",
+    "type": "Full-time",
+    "workMode": "On-site",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Not specified",
+    "salary": "Not specified",
+    "industry": "Technology",
+    "startDate": "May/June 2027",
+    "endDate": "N/A",
+    "startDateFit": "Strong 2027 signal",
+    "priority": "High priority",
+    "notes": "Not specified",
+    "source": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:47:01.961367+00:00"
+  },
+  {
+    "role": "[2027] Associate Product Manager, Early Career",
+    "company": "Roblox",
+    "location": "Not specified",
+    "type": "Rotational/Development Program",
+    "workMode": "Not specified",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Not specified",
+    "salary": "Not specified",
+    "industry": "Not specified",
+    "startDate": "Not specified",
+    "endDate": "Not specified",
+    "startDateFit": "Strong 2027 signal",
+    "priority": "Watch",
+    "notes": "Not specified",
+    "source": "https://careers.roblox.com/jobs/8143976",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:47:29.332101+00:00"
+  },
+  {
+    "role": "Associate Product Manager (College Grad 2027)",
+    "company": "Solace",
+    "location": "Redwood City, CA",
+    "type": "Full-time",
+    "workMode": "Hybrid",
+    "workAuth": "Not specified",
+    "workAuthDetail": "Applicants must be based in the United States.",
+    "salary": "Not specified",
+    "industry": "Healthcare",
+    "startDate": "July 2027",
+    "endDate": "N/A",
+    "startDateFit": "Strong 2027 signal",
+    "priority": "High priority",
+    "notes": "This is an in-person role for new college graduates in our Redwood City office, 3 days a week. Start date: July 2027.",
+    "source": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea",
+    "dateFound": "2026-10-27",
+    "lastChecked": "2026-10-27T05:47:01.498704+00:00"
   }
 ];
 
@@ -305,14 +464,15 @@ const columns = [
   { name: 'Priority', width: '100px', formatter: (cell) => gridjs.html(badge('priority', cell)) },
   { name: 'Notes', width: '200px' },
   { name: 'Source', width: '90px', formatter: (cell) => gridjs.html(`<a class="src-link" href="${escapeHtml(cell)}" target="_blank" rel="noopener">View »</a>`) },
-  { name: 'Found On', width: '95px' }
+  { name: 'Found On', width: '95px' },
+  { name: 'Last Checked (UTC)', width: '120px' }
 ];
 
 function toRows(data) {
   return data.map(j => [
     j.role, j.company, j.location, j.type, j.workMode, j.workAuth, j.salary,
     j.industry, (j.startDate + ' → ' + j.endDate), j.startDateFit, j.priority,
-    j.notes, j.source, j.dateFound
+    j.notes, j.source, j.dateFound, j.lastChecked ? j.lastChecked.slice(0, 16).replace('T', ' ') : 'Not recorded'
   ]);
 }
 
@@ -353,7 +513,22 @@ document.getElementById('f-priority').addEventListener('change', applyFilters);
 document.getElementById('f-industry').addEventListener('change', applyFilters);
 document.getElementById('f-search').addEventListener('input', applyFilters);
 
-document.getElementById('updated-line').textContent = 'Last updated: October 27, 2026, 00:32 UTC · Refreshes daily via GitHub Actions · ' + jobs.length + ' listings tracked';
+function renderRefreshStatus() {
+  const status = document.getElementById('refresh-status');
+  if (typeof refreshStatus === 'undefined') return;
+  const messages = [];
+  if (Date.now() - Date.parse(refreshStatus.checkedAt) > 36 * 60 * 60 * 1000) messages.push('The last check is over 36 hours old. Confirm availability with the employer.');
+  if (!refreshStatus.discoveryComplete) messages.push('The latest new-job search was incomplete. Existing listings were still rechecked.');
+  const pending = refreshStatus.statusCounts.unverified || 0;
+  if (pending) messages.push(pending + ' candidate posting(s) could not be verified and are hidden pending another check.');
+  if (!jobs.length) messages.push('No openings could be verified in this run. This does not mean there are no suitable jobs.');
+  status.textContent = messages.join(' ');
+}
+renderRefreshStatus();
+setInterval(renderRefreshStatus, 60000);
+
+document.getElementById('updated-line').textContent = 'Last updated: October 27, 2026, 05:49 UTC · Refreshes daily via GitHub Actions · ' + jobs.length + ' listings tracked';
 </script>
 </body>
 </html>
+

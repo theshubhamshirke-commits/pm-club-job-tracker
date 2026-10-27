@@ -14,9 +14,12 @@ import os
 import re
 import json
 import sys
+import hashlib
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 from html.parser import HTMLParser
 from datetime import datetime, timezone
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlsplit, urlunsplit, parse_qsl, urlencode
 
 import anthropic
 import requests
@@ -191,8 +194,9 @@ If a full-time posting reads like an ordinary immediate-hire role with no 2027-c
 
 Only include roles located in the United States. Use the employer's own job description or
 its official ATS posting as the source; job boards are for discovery only.
-Use the exact source heading for role. The automated verifier requires a 2027 role heading
-and a readable Apply control. For location, salary, workMode, startDate, endDate,
+Use the exact source heading for role. The 2027 timing may appear in the title OR the
+job description. A matching employer posting must still accept applications.
+For location, salary, workMode, startDate, endDate,
 workAuthDetail and notes, use short verbatim source excerpts or "Not specified".
 Do not infer remote/on-site work from an office location, calculate precise dates from a
 program duration, or borrow dates from a different internship at the same company.
@@ -212,35 +216,25 @@ link that two different listings could plausibly share. If you cannot find a spe
 a listing, DO NOT include that listing at all. Never reuse the same source URL for more than one
 listing in your output — if you only have a generic page for a role, omit the role instead.
 
-MANDATORY VERIFICATION FETCH (do this for every single candidate before it goes in your output):
-Your web_search results can be stale — a page can be indexed one day and closed, filled, or taken
-down the next, and many ATS sites (Workday, and Google's own careers site) render their "this posting
-has closed" or "page not found" message dynamically, so a search snippet alone can look fine even when
-the live page no longer is. Therefore: for every candidate listing, use your web_fetch tool to actually
-retrieve that exact `source` URL and read its real current content before finalizing the listing.
-  - If the fetched page clearly shows the specific role is open and accepting applications, keep it.
-  - If the fetched page says the posting is closed, filled, expired, no longer accepting applications,
-    or says the page/job cannot be found, DROP that listing entirely — do not include it.
-  - If the fetched content doesn't actually describe this specific role (e.g. it redirected to a
-    generic "all open jobs" page, a generic company homepage, or an unrelated listing), DROP it.
-  - If the fetch fails outright (network error, blocked, timeout) treat that as inconclusive, not as
-    proof it's open — prefer dropping a listing you couldn't actually verify over guessing it's fine.
-This fetch step is not optional and is more important than finding a large number of listings — a
-shorter list where every single entry has been freshly fetched and confirmed open beats a longer list
-based only on search snippets.
+MANDATORY SOURCE FETCH: use web_fetch on each candidate's exact employer/ATS URL.
+If the source says closed, filled, expired or no longer accepting applications, omit it.
+If it redirects to another role or a generic page, omit it. Search snippets alone do not
+prove an opening is currently available.
+For a specific official ATS link whose fetch is blocked or renders an unreadable JavaScript
+shell, you may return a candidate with the exact observed title, employer and URL, using
+"Not specified" for facts you could not read. Do not invent URLs or job IDs. These are
+CANDIDATES ONLY: a separate verifier checks the live employer page or public ATS payload
+and publishes only matching postings positively confirmed to accept applications. Keeping
+an unreadable candidate does not declare it open. Never borrow details from a different job.
 
 BE TERSE WHILE WORKING: do not narrate your process in prose ("Now let me search for...", "I can see
 that..."). Your output budget is limited and must be spent on actual searching, fetching, and the final
 JSON — not on describing what you're about to do. Call your tools silently with minimal or no
 commentary between calls. The only prose you should ever produce is the final JSON array itself.
 
-ACTIVE-JOB VERIFICATION: do not include a listing if your search results OR your verification fetch
-give you reason to believe the application window has already closed or the posting is stale/expired.
-When in doubt about whether a specific posting is still open, prefer excluding it over including a
-possibly-dead listing. If a posting states an explicit application open/close date (e.g. "Applications
-open Sep 22 – close Oct 6, 2026"), always include that exact date in the `notes` field in a recognizable
-form — this lets a downstream automated check cross-reference the stated deadline against today's date
-as a second, independent layer of verification on top of your own fetch.
+ACTIVE-JOB EVIDENCE: omit sources known to be closed or stale. Include any explicit
+application closing date in notes verbatim so the independent checker can compare it with
+today. A minimum period such as "accepted at least until" is not a hard closing deadline.
 
 NO-HALLUCINATION RULE: only report a detail (work authorization, salary, start date, work mode) if
 the source explicitly states it — use the literal string "Not specified" otherwise. Never guess,
@@ -270,7 +264,7 @@ For each listing, produce an object with EXACTLY these keys:
 
 Respond with ONLY a raw JSON array of these objects — no markdown code fences, no commentary before
 or after, no explanation, no apology. Just the JSON array, starting with [ and ending with ]. If your
-searches turned up fewer usable listings than you'd like, output as many as you genuinely verified
+searches turned up fewer usable listings than you'd like, output every plausible in-scope official candidate
 (even if that's only 6-10) — never pad with anything invented, and never refuse or return prose
 instead of data. If you truly found zero usable listings, respond with exactly [] and nothing else.
 """
@@ -279,9 +273,7 @@ instead of data. If you truly found zero usable listings, respond with exactly [
 def _extract_json_array(full_text):
     """Pull a JSON array out of the model's response, as leniently as possible.
 
-    Never raises — if nothing parseable is found, prints a warning and returns
-    an empty list so the caller's "too few listings" safety check can abort
-    the run cleanly instead of crashing with an ugly traceback.
+    Malformed output is a failed discovery pass, never an empty successful search.
     """
     try:
         parsed = json.loads(full_text)
@@ -301,12 +293,7 @@ def _extract_json_array(full_text):
         except json.JSONDecodeError:
             pass
 
-    print(
-        "WARNING: model did not return a parseable JSON array. "
-        f"First 1000 chars of its response:\n{full_text[:1000]}",
-        file=sys.stderr,
-    )
-    return []
+    raise ValueError("Research returned malformed data instead of a complete JSON array")
 
 
 def _is_valid_source(url):
@@ -333,6 +320,8 @@ class _PostingText(HTMLParser):
         self.ignored = 0
         self.heading = None
         self.control = None
+        self.heading_positions = []
+        self.heading_start = 0
 
     def handle_starttag(self, tag, attrs):
         if tag in ('script', 'style', 'noscript'):
@@ -341,6 +330,7 @@ class _PostingText(HTMLParser):
             return
         if tag == 'h1':
             self.heading = []
+            self.heading_start = len(self.parts)
         if tag in ('a', 'button'):
             attributes = dict(attrs)
             if 'disabled' not in attributes and attributes.get('aria-disabled') != 'true':
@@ -354,6 +344,7 @@ class _PostingText(HTMLParser):
             return
         if tag == 'h1' and self.heading is not None:
             self.headings.append(' '.join(self.heading))
+            self.heading_positions.append((self.headings[-1], self.heading_start))
             self.heading = None
         if tag in ('a', 'button') and self.control is not None:
             self.controls.append(' '.join(self.control))
@@ -373,88 +364,289 @@ def _normalized(text):
     return ' '.join(re.findall(r'\w+', text.casefold()))
 
 
-def _posting_matches(html_text, job):
-    """Require positive, matching evidence. A 200 response alone is not enough.
+# Positive evidence must belong to the job, not a footer or related opening.
+RELATED_RE = re.compile(r'\b(?:related jobs|similar jobs|related content|recommended jobs|privacy policy|equal opportunity employer)\b', re.I)
+PM_ROLE_RE = re.compile(r'\bproduct\s+(?:manager|management|intern)\b', re.I)
+INTERN_RE = re.compile(r'\bintern(?:ship|s)?\b', re.I)
+SUMMER_RE = re.compile(r'\bsummer[\s\-]+2027\b|\b2027\s+summer\b|\b(?:May|June|July|August)[^.!?\n]{0,30}\b2027\b', re.I)
+GRAD_RE = re.compile(
+    r'\b(?:new|college)[ -]grads?\b[^.!?\n]{0,25}\b2027\b|'
+    r'\b(?:class\s+of|cohort\s+of)\s+2027\b|'
+    r'\b2027\s+(?:APM|RPM|cohort|graduates?|graduate|new[ -]grads?|start)\b|'
+    r'\b(?:graduat(?:e|es|ing|ion)|cohort|start(?:ing|s|\s+date)?|begin(?:s|ning)?)\b[^.!?\n]{0,90}\b2027\b|'
+    r'\b2027\b[^.!?\n]{0,35}\b(?:graduates?|graduation|cohort|start)\b', re.I)
+US_RE = re.compile(r'\b(?:United States(?: of America)?|USA|U\.S\.|US|California|Washington|Virginia|Illinois|New York|Texas|Massachusetts|North Carolina|Colorado|Michigan|Minnesota|Wisconsin|Pennsylvania|Ohio|Florida|New Jersey|Oregon|Utah|Arizona|Maryland|Tennessee|Indiana|Connecticut|Missouri|Nebraska|Nevada|Kansas|Kentucky|Georgia)\b|,\s*(?:CA|WA|VA|IL|NY|TX|MA|NC|CO|MI|MN|WI|PA|OH|FL|NJ|OR|UT|AZ|MD|TN|IN|CT|MO|NE|NV|KS|KY|GA)\b')
 
-    JavaScript-only pages with no rendered Apply control fail closed. This may
-    omit real openings; it must never turn an inaccessible page into evidence.
-    """
+
+def _plain_text(html_text):
     page = _PostingText()
     page.feed(html_text)
-    visible = ' '.join(page.parts)
-    if CLOSED_SIGNAL_RE.search(visible) or _structured_data_says_expired(html_text):
+    return ' '.join(page.parts)
+
+
+def _primary_text(html_text, role):
+    page = _PostingText()
+    page.feed(html_text)
+    for heading, start in page.heading_positions:
+        if _normalized(heading) == _normalized(role):
+            return RELATED_RE.split(' '.join(page.parts[start:]), maxsplit=1)[0], page
+    return '', page
+
+
+def _scope_reason(job, description, country=''):
+    role = job['role']
+    if not PM_ROLE_RE.search(role):
+        return 'Role is not product management'
+    intern = bool(INTERN_RE.search(role))
+    if intern != (job['type'] == 'Internship'):
+        return 'Role title does not match the selected track'
+    if job['type'] not in TYPE_VALUES - {'Unclear'}:
+        return 'Employment track is not established'
+    # Do not mistake a 2026 internship for the student's 2027 graduation date.
+    years_in_title = set(re.findall(r'\b20\d{2}\b', role))
+    if years_in_title and '2027' not in years_in_title:
+        return 'Role title names a different recruiting year'
+    evidence = role + '\n' + description
+    if intern and not SUMMER_RE.search(evidence):
+        return 'No Summer 2027 internship timing in the posting'
+    titled_cohort = '2027' in years_in_title and re.search(r'\b(?:early career|new[ -]grad|college[ -]grad|graduate)\b', role, re.I)
+    if not intern and not (GRAD_RE.search(evidence) or titled_cohort):
+        return 'No 2027 graduate/cohort/start signal in the posting'
+    if not intern and re.search(r'\b(?:start(?:s|ing|\s+date)?|begin(?:s|ning)?)\b[^.!?\n]{0,35}\b(?:January|February|March|April|September|October|November|December|Fall|Autumn|Winter)\b[^.!?\n]{0,15}2027', description, re.I):
+        return 'Explicit start falls outside May-August 2027'
+    if country and _normalized(country) not in ('us', 'usa', 'united states', 'united states of america'):
+        return 'Posting is outside the United States'
+    location_phrases = re.findall(r'\b(?:locations?|located|based)\b[^.!?\n]{0,160}', description, re.I)
+    if not country and not (US_RE.search(description[:1000]) or any(US_RE.search(p) for p in location_phrases)):
+        return 'US location could not be established from the source'
+    return ''
+
+
+def _source_is_employer(job, url):
+    """Reject discovery boards; accept matching employer domains or ATS tenants."""
+    parsed = urlparse(url)
+    company = re.sub(r'[^a-z0-9]', '', job['company'].casefold())
+    if not company or company == 'notspecified':
         return False
-    if _deadline_already_passed(visible):
+    host = (parsed.hostname or '').lower()
+    is_ats = any(host == d or host.endswith('.' + d) for d in
+                 ('myworkdayjobs.com', 'greenhouse.io', 'lever.co', 'ashbyhq.com', 'smartrecruiters.com', 'icims.com'))
+    identity = host + (parsed.path if is_ats else '')
+    return company in re.sub(r'[^a-z0-9]', '', identity)
+
+
+def _posting_country(html_text, role):
+    """Use location metadata belonging to this exact role, when supplied."""
+    countries = []
+    for node in _iter_jobposting_nodes(html_text):
+        if _normalized(str(node.get('title', ''))) != _normalized(role):
+            continue
+        locations = node.get('jobLocation', [])
+        for location in locations if isinstance(locations, list) else [locations]:
+            if not isinstance(location, dict):
+                continue
+            address = location.get('address', {})
+            if not isinstance(address, dict):
+                continue
+            country = address.get('addressCountry', '')
+            if isinstance(country, dict):
+                country = country.get('name', '')
+            if isinstance(country, str) and country:
+                countries.append(country)
+    for country in countries:
+        if _normalized(country) in ('us', 'usa', 'united states', 'united states of america'):
+            return country
+    return countries[0] if countries else ''
+
+
+def _posting_matches(html_text, job):
+    """Readable matching employer heading, an Apply control, and track evidence."""
+    primary, page = _primary_text(html_text, job['role'])
+    if not primary:
         return False
-    role = _normalized(job['role'])
-    if role not in [_normalized(h) for h in page.headings]:
+    if CLOSED_SIGNAL_RE.search(primary) or _structured_data_says_expired(html_text):
         return False
-    if _normalized(job['company']) not in _normalized(visible):
+    if _deadline_already_passed(primary) or _scope_reason(job, primary):
         return False
-    if not re.search(r'product (?:manager|management|intern)', role):
-        return False
-    if '2027' not in role:
-        return False
-    if ('intern' in role) != (job['type'] == 'Internship'):
+    if _normalized(job['company']) not in _normalized(' '.join(page.parts)):
         return False
     return any(re.fullmatch(r'apply(?: now| for (?:this )?(?:job|position))?',
                             _normalized(c)) for c in page.controls)
 
 
-def _ground_optional_details(job, html_text):
-    """Withhold unsupported model details instead of publishing plausible guesses.
-
-    Literal excerpts are intentionally conservative: paraphrases can be correct,
-    but this check cannot prove that they are. Editorial category/priority labels
-    are separate from the employer's facts.
-    """
-    page = _PostingText()
-    page.feed(html_text)
-    source = _normalized(' '.join(page.parts))
+def _ground_optional_details(job, source_text):
+    """Keep literal source facts; withhold summaries this check cannot prove."""
+    source = _normalized(source_text)
     for field in ('location', 'salary', 'workMode', 'startDate', 'endDate',
                   'workAuthDetail', 'notes'):
         value = job[field]
-        if value in ('Not specified', 'N/A'):
-            continue
-        if _normalized(value) not in source:
+        if value not in ('Not specified', 'N/A') and _normalized(value) not in source:
             job[field] = 'Not specified'
-            print(f"  withheld unsupported {field}: {job['company']} / {job['role']}", file=sys.stderr)
     if job['workAuth'] != 'Not specified':
-        # Do not derive immigration eligibility from silence or export controls.
         if job['workAuthDetail'] == 'Not specified':
             job['workAuth'] = 'Not specified'
         elif job['workAuth'] == 'No sponsorship':
-            if not re.search(r'(?:not|cannot|unable to) sponsor|no sponsorship',
-                             job['workAuthDetail'], re.I):
+            if not re.search(r'(?:not|cannot|unable to) sponsor|no sponsorship|not available for (?:any )?work sponsorship', job['workAuthDetail'], re.I):
                 job['workAuth'] = 'Not specified'
         elif _normalized(job['workAuth']) not in source:
             job['workAuth'] = 'Not specified'
+    job['startDateFit'] = 'Confirmed Summer 2027' if job['type'] == 'Internship' else 'Strong 2027 signal'
+
+
+def _workday_posting(url, html_text):
+    """Read Workday's public job payload, including posted/canApply flags.
+
+    The tenant/site are taken from the employer page's app configuration. No
+    authentication or application submission is involved. Missing flags fail closed.
+    """
+    parsed = urlparse(url)
+    if not (parsed.hostname or '').endswith('.myworkdayjobs.com'):
+        return None
+    tenant = re.search(r'\btenant:\s*"([\w-]+)"', html_text)
+    site = re.search(r'\bsiteId:\s*"([\w-]+)"', html_text)
+    if not tenant or not site or '/job/' not in parsed.path:
+        return None
+    job_path = '/job/' + parsed.path.split('/job/', 1)[1].split('/apply', 1)[0]
+    endpoint = f'{parsed.scheme}://{parsed.netloc}/wday/cxs/{tenant[1]}/{site[1]}{job_path}'
+    response = requests.get(endpoint, headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT)
+    if response.status_code in (404, 410):
+        return {'status': 'closed', 'reason': f'Workday job endpoint returned {response.status_code}'}
+    if response.status_code != 200:
+        return {'status': 'unverified', 'reason': f'Workday job endpoint returned {response.status_code}'}
+    try:
+        info = response.json().get('jobPostingInfo', {})
+    except (ValueError, AttributeError):
+        return {'status': 'unverified', 'reason': 'Workday returned no readable job payload'}
+    if not info or not info.get('title'):
+        return {'status': 'unverified', 'reason': 'Workday returned no matching job'}
+    if info.get('canApply') is False or info.get('posted') is False:
+        return {'status': 'closed', 'reason': 'Workday reports applications unavailable'}
+    if info.get('canApply') is not True or info.get('posted') is not True:
+        return {'status': 'unverified', 'reason': 'Workday application status is unknown'}
+    return {'status': 'open', 'title': info['title'],
+            'description': _plain_text(info.get('jobDescription', '')),
+            'country': info.get('country', {}).get('descriptor', ''),
+            'location': '; '.join(v for v in [info.get('location', '')] + info.get('additionalLocations', [])
+                                  if v and v != 'University Recruiting'),
+            'reason': 'Matching Workday posting is posted and accepts applications'}
+
+
+def _ashby_posting(url):
+    """Read Ashby's documented public published-postings feed; no credentials.
+
+    https://developers.ashbyhq.com/docs/public-job-posting-api
+    Only a listed, exact job ID with its matching application URL can qualify.
+    """
+    parsed = urlparse(url)
+    if parsed.hostname != 'jobs.ashbyhq.com':
+        return None
+    parts = parsed.path.strip('/').split('/')
+    if len(parts) < 2 or not re.fullmatch(r'[\w-]+', parts[0]):
+        return None
+    response = requests.get('https://api.ashbyhq.com/posting-api/job-board/' + parts[0],
+                            headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT)
+    unknown = {'status': 'unverified', 'reason': 'Ashby did not confirm a listed matching posting and application URL'}
+    if response.status_code != 200:
+        return unknown
+    try:
+        rows = response.json()['jobs']
+    except (ValueError, KeyError, TypeError):
+        return unknown
+    if not isinstance(rows, list):
+        return unknown
+    for info in rows:
+        if not isinstance(info, dict) or info.get('id') != parts[1]:
+            continue
+        source = urlparse(info.get('jobUrl', ''))
+        apply = urlparse(info.get('applyUrl', ''))
+        expected = '/' + parts[0] + '/' + parts[1]
+        if (info.get('isListed') is not True or source.hostname != parsed.hostname
+                or source.path.rstrip('/') != expected or apply.hostname != parsed.hostname
+                or apply.path.rstrip('/') != expected + '/application'):
+            return unknown
+        address = info.get('address', {}).get('postalAddress', {})
+        description = _plain_text(info.get('descriptionHtml', ''))
+        if not info.get('title') or not description:
+            return unknown
+        return {'status': 'open', 'title': info['title'], 'description': description,
+                'country': address.get('addressCountry', ''), 'location': info.get('location', ''),
+                'workMode': {'Hybrid': 'Hybrid', 'Remote': 'Remote', 'OnSite': 'On-site'}.get(info.get('workplaceType')),
+                'reason': 'Matching listed Ashby posting with a job-specific application URL'}
+    return unknown
+
+
+def _verify_job(job, previous=None):
+    """Return an auditable status; unknown is never relabeled as closed or open."""
+    checked = datetime.now(timezone.utc).isoformat()
+    result = {'job': dict(job), 'status': 'unverified', 'reason': '', 'checkedAt': checked}
+    def finish(status, reason):
+        result.update(status=status, reason=reason)
+        return result
+    url = job['source']
+    if not _is_valid_source(url) or not _source_is_employer(job, url):
+        return finish('unverified', 'Source is not a specific recognized employer/ATS posting')
+    try:
+        response = requests.get(url, headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT, allow_redirects=True)
+        if response.status_code in (404, 410):
+            return finish('closed', f'Employer page returned {response.status_code}')
+        if response.status_code != 200:
+            return finish('unverified', f'Employer page returned HTTP {response.status_code}')
+        if not _is_valid_source(response.url) or not _source_is_employer(job, response.url):
+            return finish('unverified', 'Source redirected away from a matching employer posting')
+        primary, page = _primary_text(response.text, job['role'])
+        visible = primary or ' '.join(page.parts)
+        if CLOSED_SIGNAL_RE.search(visible) or _structured_data_says_expired(response.text):
+            return finish('closed', 'Employer page reports the posting closed or expired')
+        if _deadline_already_passed(visible):
+            return finish('closed', 'The stated application deadline has passed')
+        ats = _workday_posting(response.url, response.text) or _ashby_posting(response.url)
+        country = _posting_country(response.text, job['role'])
+        if ats:
+            if ats['status'] != 'open':
+                return finish(ats['status'], ats['reason'])
+            if _normalized(ats['title']) != _normalized(job['role']):
+                return finish('unverified', 'ATS title does not match this role')
+            primary = ats['description']
+            country = ats['country']
+            reason = ats['reason']
+        elif not primary:
+            return finish('unverified', 'Matching job heading is not readable')
+        elif not any(re.fullmatch(r'apply(?: now| for (?:this )?(?:job|position))?', _normalized(c)) for c in page.controls):
+            return finish('unverified', 'No readable enabled Apply control')
+        else:
+            reason = 'Matching employer heading and Apply control'
+        if CLOSED_SIGNAL_RE.search(primary) or _deadline_already_passed(primary):
+            return finish('closed', 'Job description reports closure or an elapsed deadline')
+        scope = _scope_reason(job, primary, country)
+        if scope:
+            return finish('out_of_scope', scope)
+        fingerprint = hashlib.sha256(_normalized(primary).encode()).hexdigest()
+        result['sourceFingerprint'] = fingerprint
+        # A retained row whose source changed must be grounded again. Unchanged
+        # reviewed facts need not be replaced with a new model interpretation.
+        if not previous or previous.get('sourceFingerprint') != fingerprint:
+            _ground_optional_details(result['job'], job['role'] + '\n' + primary)
+        if ats:
+            result['job']['location'] = ats['location'] or 'Not specified'
+            if ats.get('workMode'):
+                result['job']['workMode'] = ats['workMode']
+        result['job']['lastChecked'] = checked
+        result['finalUrl'] = response.url
+        return finish('open', reason)
+    except requests.RequestException as error:
+        return finish('unverified', f'Employer page could not be reached ({type(error).__name__})')
 
 
 def _link_is_live(job):
-    """Verify the exact role and Apply control, then withhold unsupported details."""
-    url = job['source']
-    try:
-        resp = requests.get(
-            url, headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT, allow_redirects=True
-        )
-    except requests.RequestException as e:
-        print(f"  could not verify {url} ({e}) — excluded as unknown", file=sys.stderr)
-        return False
-
-    if resp.status_code != 200:
-        return False
-
-    if not _is_valid_source(resp.url):
-        return False  # bounced from the specific job page to a generic listing page
-
-    if not _posting_matches(resp.text, job):
-        return False
-    _ground_optional_details(job, resp.text)
-    return True
+    # Compatibility helper for a single posting; the refresh uses full records.
+    result = _verify_job(job)
+    if result['status'] == 'open':
+        job.update(result['job'])
+        return True
+    return False
 
 
-def _research_jobs(client):
+def _research_jobs(client, prompt=None, telemetry=None):
     """Stream a complete research turn, resuming bounded server-tool pauses."""
     # web_fetch lets the model actually retrieve each candidate's real current
     # page content (not just a cached search snippet) before including it —
@@ -463,7 +655,7 @@ def _research_jobs(client):
     # careers) where the "no longer available" message only shows up after
     # the page actually loads. Requires the web-fetch beta header + the
     # client.beta.messages namespace rather than the plain client.messages one.
-    messages = [{"role": "user", "content": PROMPT}]
+    messages = [{"role": "user", "content": prompt or PROMPT}]
     tools = [
         {"type": "web_search_20250305", "name": "web_search", "max_uses": 30},
         {
@@ -486,17 +678,29 @@ def _research_jobs(client):
             resp = stream.get_final_message()
 
         _log_research_response(resp)
+        if telemetry is not None:
+            for block in resp.content:
+                if getattr(block, 'type', '') == 'server_tool_use':
+                    key = 'queries' if block.name == 'web_search' else 'fetchedUrls'
+                    value = getattr(block, 'input', {}).get('query' if key == 'queries' else 'url')
+                    if value and value not in telemetry.setdefault(key, []):
+                        telemetry[key].append(value)
+                elif getattr(block, 'type', '') in ('web_search_tool_result', 'web_fetch_tool_result'):
+                    content = getattr(block, 'content', None)
+                    kind = content.get('type', '') if isinstance(content, dict) else getattr(content, 'type', '')
+                    if kind.endswith('_error'):
+                        telemetry.setdefault('toolErrors', []).append(kind)
         if resp.stop_reason == "end_turn":
             return resp
         if resp.stop_reason != "pause_turn":
             raise RuntimeError(
                 f"Research did not finish (stop_reason={resp.stop_reason!r}); "
-                "keeping the previously published listings."
+                "discarding this discovery pass."
             )
         if attempt == MAX_PAUSE_CONTINUATIONS:
             raise RuntimeError(
                 "Research exceeded the server-tool continuation limit; "
-                "keeping the previously published listings."
+                "discarding this discovery pass."
             )
         # Resume the same assistant turn with every tool block intact. Do not
         # replace this with a new user prompt or parse its unfinished text.
@@ -521,92 +725,223 @@ def _log_research_response(resp):
             content = getattr(block, "content", None)
             result_type = content.get("type") if isinstance(content, dict) else getattr(content, "type", None)
             is_error = result_type in ("web_fetch_tool_result_error", "web_search_tool_result_error")
-            print(f"  tool result ({btype}): {'ERROR' if is_error else 'ok'} — {str(content)[:300]}", file=sys.stderr)
+            print(f"  tool result ({btype}): {'ERROR' if is_error else 'ok'}", file=sys.stderr)
+
+
+def _clean_job(job):
+    if not isinstance(job, dict):
+        return None
+    row = {key: value.strip() if isinstance(value := job.get(key), str) and value.strip()
+           else 'Not specified' for key in SCHEMA_KEYS}
+    if row['role'] == 'Not specified' or row['company'] == 'Not specified' or not _is_valid_source(row['source']):
+        return None
+    if row['type'] not in TYPE_VALUES:
+        row['type'] = 'Unclear'
+    if row['workAuth'] not in WORK_AUTH_VALUES:
+        row['workAuth'] = 'Not specified'
+    if row['startDateFit'] not in START_FIT_VALUES:
+        row['startDateFit'] = 'Not specified'
+    if row['priority'] not in PRIORITY_VALUES:
+        row['priority'] = 'Watch'
+    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', row['dateFound']):
+        row['dateFound'] = TODAY
+    return row
+
+
+def _result_jobs(resp):
+    full_text = '\n'.join(block.text for block in resp.content if getattr(block, 'type', '') == 'text')
+    rows = _extract_json_array(full_text)
+    return [clean for row in rows if (clean := _clean_job(row)) is not None]
 
 
 def get_jobs():
-    api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+    """Single-pass discovery helper; publication always verifies these candidates."""
+    api_key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
     if not api_key:
-        raise RuntimeError("ANTHROPIC_API_KEY is missing. Set it in the repository's Actions secrets.")
+        raise RuntimeError('ANTHROPIC_API_KEY is missing. Set it in the repository Actions secrets.')
     with anthropic.Anthropic(api_key=api_key, max_retries=2) as client:
-        resp = _research_jobs(client)
+        return _result_jobs(_research_jobs(client))
 
-    text_parts = [block.text for block in resp.content if getattr(block, "type", None) == "text"]
-    full_text = "\n".join(text_parts).strip()
-    print(f"Final text output from model (first 500 chars): {full_text[:500]!r}", file=sys.stderr)
 
-    data = _extract_json_array(full_text)
-    print(f"Model returned {len(data)} raw candidate(s) before any filtering.", file=sys.stderr)
+def recover_candidates(urls, employers):
+    """Recover observed source URLs even if the research JSON is malformed.
 
-    # Pass 1: basic schema cleanup + reject invalid/generic/missing sources.
-    # Every rejection path below prints *why*, so a run that drops to zero
-    # candidates is diagnosable straight from the log instead of a bare count.
-    drop_counts = {
-        "not_dict": 0,
-        "bad_source": 0,
-        "notes_say_closed": 0,
-        "deadline_passed": 0,
-        "link_dead": 0,
-    }
-    candidates = []
-    for job in data:
-        if not isinstance(job, dict):
-            drop_counts["not_dict"] += 1
+    Employer identities are a reviewed configuration, titles come from the live
+    posting itself, and all returned candidates still require full verification.
+    """
+    def recover(url):
+        company = next((name for name in employers if _source_is_employer({'company': name}, url)), None)
+        if not company or not _is_valid_source(url):
+            return None
+        try:
+            response = requests.get(url, headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT)
+            if response.status_code != 200 or not _source_is_employer({'company': company}, response.url):
+                return None
+            ats = _workday_posting(response.url, response.text) or _ashby_posting(response.url)
+            if ats:
+                titles = [ats['title']] if ats['status'] == 'open' else []
+            else:
+                page = _PostingText()
+                page.feed(response.text)
+                titles = page.headings
+            titles = [title for title in titles if PM_ROLE_RE.search(title)]
+            if len(titles) != 1:
+                return None
+            title = titles[0]
+            return dict.fromkeys(SCHEMA_KEYS, 'Not specified') | {
+                'company': company, 'role': title, 'source': response.url,
+                'type': 'Internship' if INTERN_RE.search(title) else 'Full-time',
+                'dateFound': TODAY, 'priority': 'Watch'}
+        except (requests.RequestException, ValueError, KeyError, TypeError):
+            return None
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        return [row for row in pool.map(recover, dict.fromkeys(urls)) if row]
+
+
+def discover_jobs(plan_path):
+    """Run independent searches; one track cannot consume the other's budget."""
+    plan = json.loads(Path(plan_path).read_text())
+    candidates, batches = [], []
+    api_key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
+    if not api_key:
+        return [], [{'name': 'discovery', 'status': 'failed', 'error': 'ANTHROPIC_API_KEY is missing'}]
+    with anthropic.Anthropic(api_key=api_key, max_retries=2) as client:
+        for batch in plan['batches']:
+            stats = {'name': batch['name'], 'queries': [], 'fetchedUrls': [], 'toolErrors': []}
+            prompt = PROMPT + '\nTHIS PASS ONLY: ' + batch['focus'] + '\n'
+            prompt += ('Execute each of the following exact search queries before finalizing. '
+                       'Then follow promising official postings and search further as needed. '
+                       'Return every in-scope official candidate you can find within the tool budget; '
+                       'there is no five-job or twenty-job limit. Do not return unrelated roles '\
+                       'to reach a target count.\n' + '\n'.join(batch['queries']))
+            try:
+                response = _research_jobs(client, prompt=prompt, telemetry=stats)
+                found = _result_jobs(response)
+                candidates.extend(found)
+                actual = {_normalized(q) for q in stats['queries']}
+                stats['missingQueries'] = [q for q in batch['queries'] if _normalized(q) not in actual]
+                stats['status'] = 'complete' if not stats['missingQueries'] and not stats['toolErrors'] else 'partial'
+                stats['candidateCount'] = len(found)
+            except Exception as error:
+                # A broken discovery pass must not prevent existing-job checks.
+                stats.update(status='failed', error=f'{type(error).__name__}: {str(error)[:300]}')
+            recovered = recover_candidates(stats['fetchedUrls'], plan.get('employers', []))
+            candidates.extend(recovered)
+            stats['recoveredFromSources'] = len(recovered)
+            batches.append(stats)
+            print(f"Discovery pass {batch['name']}: {stats['status']} ({stats.get('candidateCount', 0)} candidates)")
+    return candidates, batches
+
+
+def _job_key(job):
+    """Collapse common tracking/ATS aliases without merging distinct requisitions."""
+    parts = urlsplit(job['source'])
+    host = (parts.hostname or '').lower().removeprefix('www.')
+    company = _normalized(job['company'])
+    if host.endswith('myworkdayjobs.com'):
+        match = re.search(r'_(R[A-Z0-9]+|JR\d+|REF\w+)(?:-\d+)?(?:/|$)', parts.path, re.I)
+        if match:
+            return company + ':workday:' + match[1].lower()
+    if host.endswith('databricks.com'):
+        match = re.search(r'-(\d{8,})/?$', parts.path)
+        if match:
+            return company + ':databricks:' + match[1]
+    if host.endswith('amazon.jobs'):
+        match = re.search(r'/jobs/(\d+)', parts.path)
+        if match:
+            return company + ':amazon:' + match[1]
+    query = [(k, v) for k, v in parse_qsl(parts.query) if not k.lower().startswith('utm_') and k.lower() not in ('source', 'src', 'ref', 'referrer')]
+    return urlunsplit(('https', host, parts.path.rstrip('/'), urlencode(sorted(query)), ''))
+
+
+def _load_page_jobs(path):
+    text = Path(path).read_text()
+    match = re.search(r'const jobs\s*=\s*', text)
+    if not match:
+        raise ValueError('Existing page has no readable jobs array')
+    data, _ = json.JSONDecoder().raw_decode(text[match.end():])
+    if not isinstance(data, list):
+        raise ValueError('Existing jobs data is not an array')
+    return [clean for row in data if (clean := _clean_job(row)) is not None]
+
+
+def _check_many(items):
+    def check(item):
+        job, previous = item
+        try:
+            return _verify_job(job, previous)
+        except Exception as error:
+            return {'job': job, 'status': 'unverified', 'reason': f'Verification error ({type(error).__name__})',
+                    'checkedAt': datetime.now(timezone.utc).isoformat()}
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        return list(pool.map(check, items))
+
+
+def refresh(path='index.html', data_dir=None, discovery=discover_jobs):
+    """Recheck the entire published list first, then add verified discoveries."""
+    data_dir = Path(data_dir) if data_dir else Path(path).resolve().parent / 'data'
+    data_dir.mkdir(parents=True, exist_ok=True)
+    state_path = data_dir / 'tracked-jobs.json'
+    state = json.loads(state_path.read_text()) if state_path.exists() else {'jobs': []}
+    records = {_job_key(record['job']): record for record in state['jobs']}
+    published = _load_page_jobs(path)
+    published_keys = {_job_key(row) for row in published}
+    existing = {key: record['job'] for key, record in records.items() if record['status'] in ('open', 'unverified')}
+    existing.update({_job_key(row): row for row in published})
+    # Recheck published AND temporarily unverified jobs even when discovery fails.
+    checked = _check_many([(row, records.get(key)) for key, row in existing.items()])
+    refreshed = {_job_key(record['job']): record for record in checked}
+    checked_existing_count = len(checked)
+    try:
+        discovered, batches = discovery(data_dir / 'search-plan.json')
+    except Exception as error:
+        discovered, batches = [], [{'name': 'discovery', 'status': 'failed', 'error': type(error).__name__}]
+    # Seeds recover old known URLs once, without declaring them open or trusting
+    # their historical fields. Closed seeds are not re-requested every day.
+    seeds_path = data_dir / 'discovery-seeds.json'
+    seeds = json.loads(seeds_path.read_text()) if seeds_path.exists() else []
+    new = {}
+    for raw, seed in [(row, False) for row in discovered] + [(row, True) for row in seeds]:
+        row = _clean_job(raw)
+        if not row:
             continue
-        row = {}
-        for key in SCHEMA_KEYS:
-            val = job.get(key)
-            row[key] = val.strip() if isinstance(val, str) and val.strip() else "Not specified"
-
-        if row["dateFound"] in ("Not specified", ""):
-            row["dateFound"] = TODAY
-
-        if row["type"] not in TYPE_VALUES:
-            row["type"] = "Unclear"
-        if row["workAuth"] not in WORK_AUTH_VALUES:
-            row["workAuth"] = "Not specified"
-        if row["startDateFit"] not in START_FIT_VALUES:
-            row["startDateFit"] = "Not specified"
-        if row["priority"] not in PRIORITY_VALUES:
-            row["priority"] = "Watch"
-
-        if not _is_valid_source(row["source"]):
-            drop_counts["bad_source"] += 1
-            print(f"  dropping (invalid/generic/missing link): {row['source']!r} ({row.get('role')!r} @ {row.get('company')!r})", file=sys.stderr)
+        key = _job_key(row)
+        if key in refreshed or (seed and key in records):
             continue
-        if CLOSED_SIGNAL_RE.search(row.get("notes", "")):
-            drop_counts["notes_say_closed"] += 1
-            print(f"  dropping (notes admit closed): {row['source']} — notes: {row.get('notes')!r}", file=sys.stderr)
-            continue
-        if _deadline_already_passed(row.get("notes", "")) or _deadline_already_passed(row.get("startDate", "")):
-            drop_counts["deadline_passed"] += 1
-            print(f"  dropping (stated deadline already passed): {row['source']}", file=sys.stderr)
-            continue
-        if not _link_is_live(row):
-            drop_counts["link_dead"] += 1
-            print(f"  dropping (posting could not be positively verified): {row['source']}", file=sys.stderr)
-            continue
+        if key in records:
+            row['dateFound'] = records[key]['job']['dateFound']
+        new.setdefault(key, row)
+    new_checks = _check_many([(row, records.get(key)) for key, row in new.items()])
+    refreshed.update({_job_key(record['job']): record for record in new_checks})
+    records.update(refreshed)
+    open_records = [r for r in refreshed.values() if r['status'] == 'open']
+    jobs = [r['job'] for r in open_records]
+    jobs.sort(key=lambda j: (j['type'] != 'Internship', j['company'].casefold(), j['role'].casefold()))
+    complete = bool(batches) and all(b['status'] == 'complete' for b in batches)
+    now = datetime.now(timezone.utc).isoformat()
+    from collections import Counter
+    report = {'checkedAt': now, 'discoveryComplete': complete, 'batches': batches,
+              'publishedCount': len(jobs), 'previousPublishedCount': len(published),
+              'existingRechecked': checked_existing_count, 'discoveredCandidates': len(discovered),
+              'newCandidatesChecked': len(new_checks),
+              'addedCount': sum(_job_key(j) not in published_keys for j in jobs),
+              'statusCounts': dict(Counter(r['status'] for r in refreshed.values())),
+              'checks': [{k: v for k, v in r.items() if k != 'sourceFingerprint'} for r in refreshed.values()]}
+    # Empty is an honest result of this check, not proof that no jobs exist.
+    # Unknown entries stay in state for retries, never in the open-jobs table.
+    update_html(jobs, path=path, report=report)
+    for target, value in ((state_path, {'version': 1, 'updatedAt': now, 'jobs': list(records.values())}),
+                          (data_dir / 'refresh-report.json', report)):
+        temp = target.with_suffix('.tmp')
+        temp.write_text(json.dumps(value, indent=2) + '\n')
+        temp.replace(target)
+    if not complete:
+        print('::warning::New-job discovery was incomplete; existing postings were still rechecked. See data/refresh-report.json.')
+    print(f"Published {len(jobs)} verified openings; rechecked {checked_existing_count} known postings; added {report['addedCount']}.")
+    return report
 
-        candidates.append(row)
 
-    print(f"After per-listing filters: {len(candidates)} remain. Drop reasons: {drop_counts}", file=sys.stderr)
-
-    # Pass 2: drop any source URL reused across more than one listing — this is
-    # the exact signature of the "generic page masquerading as a direct link"
-    # bug (several unrelated jobs all citing the same aggregator page).
-    url_counts = {}
-    for row in candidates:
-        url_counts[row["source"]] = url_counts.get(row["source"], 0) + 1
-
-    cleaned = [row for row in candidates if url_counts[row["source"]] == 1]
-    dropped_dupes = len(candidates) - len(cleaned)
-    if dropped_dupes:
-        print(f"Dropped {dropped_dupes} listing(s) sharing a reused source URL.", file=sys.stderr)
-
-    return cleaned
-
-
-def update_html(jobs, path="index.html"):
+def update_html(jobs, path="index.html", report=None):
     with open(path, "r", encoding="utf-8") as f:
         html = f.read()
 
@@ -627,19 +962,21 @@ def update_html(jobs, path="index.html"):
     if not updated_pattern.search(html):
         raise ValueError("Could not find the updated-line text assignment in index.html.")
     html = updated_pattern.sub(lambda _m: updated_line, html, count=1)
-
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(html)
+    if report is not None:
+        summary = {key: report[key] for key in ('checkedAt', 'discoveryComplete', 'statusCounts')}
+        status = 'const refreshStatus = ' + json.dumps(summary).replace('<', '\\u003c') + ';'
+        pattern = re.compile(r'const refreshStatus = .*?;(?=\s*const jobs)', re.DOTALL)
+        if pattern.search(html):
+            html = pattern.sub(lambda _: status, html, count=1)
+        else:
+            html = html.replace('const jobs = ', status + '\nconst jobs = ', 1)
+    temp = Path(path).with_suffix('.tmp')
+    temp.write_text(html, encoding='utf-8')
+    temp.replace(path)
 
 
 def main(path="index.html"):
-    jobs = get_jobs()
-    print(f"Found {len(jobs)} listings with verified unique sources.")
-    if not jobs:
-        print("No verified listings found — preserving the last successful page and timestamp.", file=sys.stderr)
-        return 1
-    update_html(jobs, path=path)
-    print(f"index.html updated with {len(jobs)} jobs.")
+    refresh(path=path)
     return 0
 
 
