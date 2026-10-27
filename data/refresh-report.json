@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-27T05:49:19.651062+00:00",
+  "checkedAt": "2026-10-27T18:45:02.188156+00:00",
   "discoveryComplete": false,
   "batches": [
     {
@@ -13,36 +13,30 @@
         "\"product management\" \"intern\" \"2027\" site:boards.greenhouse.io",
         "\"product management\" \"intern\" \"2027\" site:jobs.lever.co",
         "\"product management\" \"intern\" \"2027\" site:myworkdayjobs.com",
-        "Atlassian product management intern 2027 summer",
-        "Adobe product management intern 2027",
-        "Salesforce product management intern 2027",
-        "Qualcomm product management intern summer 2027",
-        "TikTok product manager intern 2027 summer",
-        "Databricks product management intern 2027 summer careers site",
-        "NVIDIA product manager MBA intern 2027 careers",
-        "Visa APM product manager intern summer 2027",
-        "Atlassian product management intern 2027 apply greenhouseboards"
+        "product management intern summer 2027 Atlassian site:atlassian.com",
+        "product manager intern 2027 Adobe Nvidia careers",
+        "product management intern 2027 Stripe Meta Apple",
+        "product management intern 2027 Snap Spotify Airbnb"
       ],
       "fetchedUrls": [
         "https://careers.mastercard.com/us/en/job/R-287624/Product-Management-Intern-Summer-2027-United-States",
         "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
-        "https://www.google.com/about/careers/applications/jobs/results/134770032394543814",
+        "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
         "https://careers.roblox.com/jobs/8143981",
+        "https://www.google.com/about/careers/applications/jobs/results/134770032394543814",
+        "https://www.atlassian.com/company/careers/details/26274",
+        "https://salesforce.wd12.myworkdayjobs.com/Futureforce_Internships/job/California---San-Francisco/Summer-2027-Intern---Associate-Product-Manager--APM-_JR348039",
+        "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Job-Posting-Title-Associate-Product-Manager--APM--Intern---Summer-2027_REF088604W-2",
         "https://careers.adobe.com/us/en/job/R172261/2027-MBA-Intern-Product-Manager",
-        "https://www.databricks.com/company/careers/product/product-management-intern-summer-2027-6883068002",
-        "https://www.atlassian.com/company/careers/all-jobs",
-        "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Associate-Product-Manager--APM--Intern---Summer-2027_REF088603W",
-        "https://jobs.nvidia.com/careers/job/893397711858",
-        "https://careers.mastercard.com/us/en/job/R-287625/Product-Management-Intern-Summer-2027-St-Louis-MO-US",
-        "https://www.atlassian.com/company/careers/details/26274"
+        "https://jobs.nvidia.com/careers/job/893397725881"
       ],
       "toolErrors": [
-        "web_fetch_tool_result_error",
         "web_fetch_tool_result_error"
       ],
       "missingQueries": [],
       "status": "partial",
-      "candidateCount": 7
+      "candidateCount": 12,
+      "recoveredFromSources": 3
     },
     {
       "name": "internships-other-industries",
@@ -55,37 +49,39 @@
         "\"product management\" \"intern\" \"2027\" industrial",
         "\"product management\" \"intern\" \"2027\" site:jobs.smartrecruiters.com",
         "\"product management\" \"intern\" \"2027\" site:jobs.ashbyhq.com",
-        "American Express \"product\" \"intern\" \"2027\" campus graduate",
-        "Travelers \"product management\" \"intern\" \"2027\"",
-        "Guardian Life \"product management\" \"intern\" \"2027\"",
-        "\"product management\" \"intern\" \"2027\" CVS Health UnitedHealth Humana",
-        "GE Vernova \"product management\" \"intern\" \"2027\"",
-        "Mohawk Industries Lincoln Electric \"product\" \"intern\" \"2027\"",
-        "site:careers.gevernova.com \"product management intern\" \"2027\"",
-        "site:guardianlife.wd5.myworkdayjobs.com \"2027\" \"product\"",
-        "site:jobs.lincolnelectric.com \"product management\" \"2027\"",
-        "site:careers.mohawkind.com \"product management\" \"2027\"",
-        "site:aexp.eightfold.ai OR site:americanexpress.com \"product management\" \"intern\" \"2027\""
+        "CVS Health Aetna product management intern 2027",
+        "UnitedHealth Optum product manager intern 2027",
+        "Guardian Life product management intern 2027",
+        "American Express product intern summer 2027",
+        "Caterpillar Deere industrial product management intern 2027",
+        "JPMorgan Chase product management intern 2027",
+        "ABB product management intern 2027",
+        "General Motors product management MBA intern 2027",
+        "Atlassian product management intern summer 2027",
+        "BNY product management intern 2027"
       ],
       "fetchedUrls": [
         "https://careers.mastercard.com/us/en/job/R-287624/Product-Management-Intern-Summer-2027-United-States",
+        "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Job-Posting-Title-Associate-Product-Manager--APM--Intern---Summer-2027_REF088604W-2",
         "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360",
-        "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Associate-Product-Manager--APM--Intern---Summer-2027_REF088603W",
         "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983",
-        "https://travelers.wd5.myworkdayjobs.com/en-US/External/job/CT---Hartford/Product-Management-Development-Program--PMDP--Pricing-Analyst---Summer-2027_R-51216",
-        "https://careers.gevernova.com/ge-vernova-product-management-intern-controls-lifecare-services-summer-2027/job/R5050801",
         "https://guardianlife.wd5.myworkdayjobs.com/en-US/Guardian-Life-Careers/job/XMLNAME-2027-Guardian-Summer-Intern--Life-Product-Development_R000110125",
-        "https://jobs.lincolnelectric.com/job/Cleveland-Product-Management-Summer-2027-Internship-(Euclid,-Oh)-OH-44117/1428885133/",
-        "https://careers.mohawkind.com/job/Calhoun-Product-Management-Intern-Summer-2027-GA-30701/1428867733/",
-        "https://careers.americanexpress.com/en/sites/CX_1/job/26012558"
+        "https://guardianlife.wd5.myworkdayjobs.com/en-US/Guardian-Life-Careers/job/XMLNAME-2027-Guardian-Summer-Intern--Group-Benefits-Product-Management_R000110107",
+        "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
+        "https://www.databricks.com/company/careers/product/product-management-intern-summer-2027-6883068002",
+        "https://careers.abb/us/en/job/JR00047280/Product-Management-Intern-Summer-2027",
+        "https://search-careers.gm.com/en/jobs/jr-202620538/2027-summer-intern-digital-product-product-management-mba/",
+        "https://www.atlassian.com/company/careers/details/11066"
       ],
       "toolErrors": [
         "web_fetch_tool_result_error",
         "web_fetch_tool_result_error",
         "web_fetch_tool_result_error"
       ],
-      "status": "failed",
-      "error": "ValueError: Research returned malformed data instead of a complete JSON array"
+      "missingQueries": [],
+      "status": "partial",
+      "candidateCount": 16,
+      "recoveredFromSources": 4
     },
     {
       "name": "graduate-full-time",
@@ -98,48 +94,50 @@
         "\"product manager\" \"2027\" \"MBA\" full time",
         "\"product manager\" \"2027\" Stripe Roblox Databricks IBM",
         "\"associate product manager\" \"2027\" site:myworkdayjobs.com",
-        "Solace \"Associate Product Manager\" \"2027\" college grad",
-        "ID.me \"associate product manager\" \"2027\" summer",
-        "Roblox \"associate product manager\" \"2027\" early career",
-        "Salesforce \"associate product manager\" \"2027\" August",
-        "Amazon \"ALA\" \"product manager\" \"2027\" full time",
-        "Capital One \"MBA Product Manager\" \"2027\" August",
-        "Intuit \"rotational product management\" \"2027\" September full time",
-        "American Express \"2027\" \"digital product management\" graduate"
+        "Roblox associate product manager 2027 early career",
+        "IBM product manager 2027 new graduate",
+        "Stripe product manager 2027 graduate",
+        "TikTok product manager 2027 graduate start",
+        "Disney associate product manager program 2027",
+        "Solace associate product manager 2027 college grad",
+        "Amazon product manager 2027 leadership accelerator",
+        "Capital One MBA product manager 2027"
       ],
       "fetchedUrls": [
         "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002",
-        "https://careers.appian.com/jobs/8069612-product-manager--2027-graduates-",
         "https://www.google.com/about/careers/applications/jobs/results/107272685397910214-associate-product-manager/",
         "https://careers.adobe.com/us/en/job/R171900/2027-MBA-University-Graduate-Product-Manager",
+        "https://careers.roblox.com/jobs/8143976",
+        "https://stripe.com/careers/listing/product-manager-new-grad-accelerator/7737124",
         "https://visa.wd5.myworkdayjobs.com/en-US/Visa/job/Associate-Product-Manager--APM---New-College-Graduate-Rotational-Program--2027_REF088601W-1",
+        "https://www.disneycareers.com/en/job/glendale/associate-product-manager-program/391/100651632256",
         "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea",
-        "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
-        "https://careers.roblox.com/jobs",
-        "https://salesforce.wd12.myworkdayjobs.com/en-US/External_Career_Site/job/California---San-Francisco/Associate-Product-Manager--starting-summer-2027-_JR351508-1/apply/autofillWithResume",
-        "https://app.joinhandshake.com/public/jobs/11280516",
-        "https://www.capitalonecareers.com/job/mclean/mba-product-manager-2027/31238/107390963760",
-        "https://jobs.intuit.com/job/mountain-view/product-manager-2-rotational-product-management-rpm-program/27595/94906363488"
+        "https://www.amazon.jobs/en/jobs/10490981/2027-amazon-leadership-accelerator-ala-product-manager-full-time",
+        "https://careers.appian.com/jobs/8069612-product-manager--2027-graduates-",
+        "https://jobs.intuit.com/job/mountain-view/product-manager-2-rotational-product-management-rpm-program/27595/100634831200",
+        "https://salesforce.wd12.myworkdayjobs.com/en-US/External_Career_Site/job/California---San-Francisco/Associate-Product-Manager--starting-summer-2027-_JR351508-1"
       ],
       "toolErrors": [
+        "web_fetch_tool_result_error",
         "web_fetch_tool_result_error",
         "web_fetch_tool_result_error"
       ],
       "missingQueries": [],
       "status": "partial",
-      "candidateCount": 10
+      "candidateCount": 0,
+      "recoveredFromSources": 3
     }
   ],
-  "publishedCount": 13,
-  "previousPublishedCount": 9,
-  "existingRechecked": 26,
-  "discoveredCandidates": 43,
-  "newCandidatesChecked": 11,
-  "addedCount": 4,
+  "publishedCount": 11,
+  "previousPublishedCount": 13,
+  "existingRechecked": 30,
+  "discoveredCandidates": 38,
+  "newCandidatesChecked": 18,
+  "addedCount": 0,
   "statusCounts": {
-    "open": 13,
-    "unverified": 17,
-    "closed": 6,
+    "unverified": 33,
+    "open": 11,
+    "closed": 3,
     "out_of_scope": 1
   },
   "checks": [
@@ -160,13 +158,11 @@
         "priority": "High priority",
         "notes": "12-week program. Applications close October 30 at 5 PM PST, as stated by the employer. Exact program dates are not stated.",
         "source": "https://careers.roblox.com/jobs/8143981",
-        "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:46:55.068112+00:00"
+        "dateFound": "2026-10-27"
       },
-      "status": "open",
-      "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:46:55.068112+00:00",
-      "finalUrl": "https://careers.roblox.com/jobs/8143981"
+      "status": "unverified",
+      "reason": "Employer page could not be reached (ReadTimeout)",
+      "checkedAt": "2026-10-27T18:39:25.289461+00:00"
     },
     {
       "job": {
@@ -186,11 +182,11 @@
         "notes": "12-week paid internship. Graduating Fall 2027 or Spring 2028. SF Bay Area rate $54-$56/hr, Bellevue rate $51.50-$53.50/hr.",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:46:55.068730+00:00"
+        "lastChecked": "2026-10-27T18:39:25.289843+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:46:55.068730+00:00",
+      "checkedAt": "2026-10-27T18:39:25.289843+00:00",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002"
     },
     {
@@ -211,11 +207,11 @@
         "notes": "12-week consecutive internship. MBA program with expected graduation December 2027 \u2013 June 2028. Most roles at Seattle or Arlington, VA headquarters.",
         "source": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:49:19.651062+00:00"
+        "lastChecked": "2026-10-27T18:39:25.290168+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:49:19.651062+00:00",
+      "checkedAt": "2026-10-27T18:39:25.290168+00:00",
       "finalUrl": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027"
     },
     {
@@ -236,11 +232,11 @@
         "notes": "10 weeks. Two-year MBA candidates must return to study after the internship and finish by August 2028. No employer immigration support, including OPT or CPT.",
         "source": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:46:55.072463+00:00"
+        "lastChecked": "2026-10-27T18:39:25.291281+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:46:55.072463+00:00",
+      "checkedAt": "2026-10-27T18:39:25.291281+00:00",
       "finalUrl": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360"
     },
     {
@@ -261,11 +257,11 @@
         "notes": "2027 graduate cohort for Fall 2026 or Spring 2027 graduates in computer science or a related engineering field. Exact start month is not stated; confirm May\u2013August availability.",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:46:58.017683+00:00"
+        "lastChecked": "2026-10-27T18:39:25.526771+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:46:58.017683+00:00",
+      "checkedAt": "2026-10-27T18:39:25.526771+00:00",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002"
     },
     {
@@ -286,11 +282,11 @@
         "notes": "Not specified",
         "source": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:46:58.149812+00:00"
+        "lastChecked": "2026-10-27T18:39:25.755143+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:46:58.149812+00:00",
+      "checkedAt": "2026-10-27T18:39:25.755143+00:00",
       "finalUrl": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632"
     },
     {
@@ -311,11 +307,11 @@
         "notes": "Not specified",
         "source": "https://www.atlassian.com/company/careers/details/26274",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:46:58.237800+00:00"
+        "lastChecked": "2026-10-27T18:39:25.770974+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:46:58.237800+00:00",
+      "checkedAt": "2026-10-27T18:39:25.770974+00:00",
       "finalUrl": "https://www.atlassian.com/company/careers/details/26274"
     },
     {
@@ -339,7 +335,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:46:58.620616+00:00"
+      "checkedAt": "2026-10-27T18:39:26.078167+00:00"
     },
     {
       "job": {
@@ -362,7 +358,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:00.711901+00:00"
+      "checkedAt": "2026-10-27T18:39:26.126378+00:00"
     },
     {
       "job": {
@@ -385,7 +381,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:00.967909+00:00"
+      "checkedAt": "2026-10-27T18:39:26.394527+00:00"
     },
     {
       "job": {
@@ -405,11 +401,11 @@
         "notes": "This is an in-person role for new college graduates in our Redwood City office, 3 days a week. Start date: July 2027.",
         "source": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:47:01.498704+00:00"
+        "lastChecked": "2026-10-27T18:39:26.634204+00:00"
       },
       "status": "open",
       "reason": "Matching listed Ashby posting with a job-specific application URL",
-      "checkedAt": "2026-10-27T05:47:01.498704+00:00",
+      "checkedAt": "2026-10-27T18:39:26.634204+00:00",
       "finalUrl": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea"
     },
     {
@@ -430,11 +426,11 @@
         "notes": "Not specified",
         "source": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:47:01.961367+00:00"
+        "lastChecked": "2026-10-27T18:39:27.058798+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:47:01.961367+00:00",
+      "checkedAt": "2026-10-27T18:39:27.058798+00:00",
       "finalUrl": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003"
     },
     {
@@ -458,7 +454,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-27T05:47:02.007479+00:00"
+      "checkedAt": "2026-10-27T18:39:27.338638+00:00"
     },
     {
       "job": {
@@ -481,7 +477,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-27T05:47:04.275885+00:00"
+      "checkedAt": "2026-10-27T18:39:27.742208+00:00"
     },
     {
       "job": {
@@ -504,7 +500,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-27T05:47:04.275951+00:00"
+      "checkedAt": "2026-10-27T18:39:27.742269+00:00"
     },
     {
       "job": {
@@ -527,7 +523,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-27T05:47:04.275979+00:00"
+      "checkedAt": "2026-10-27T18:39:27.742301+00:00"
     },
     {
       "job": {
@@ -550,7 +546,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:04.276655+00:00"
+      "checkedAt": "2026-10-27T18:39:27.742333+00:00"
     },
     {
       "job": {
@@ -573,7 +569,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-27T05:47:05.287220+00:00"
+      "checkedAt": "2026-10-27T18:39:27.894561+00:00"
     },
     {
       "job": {
@@ -596,7 +592,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-27T05:47:07.510828+00:00"
+      "checkedAt": "2026-10-27T18:39:28.684914+00:00"
     },
     {
       "job": {
@@ -619,7 +615,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:07.676711+00:00"
+      "checkedAt": "2026-10-27T18:39:28.726064+00:00"
     },
     {
       "job": {
@@ -642,7 +638,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 500",
-      "checkedAt": "2026-10-27T05:47:08.235634+00:00"
+      "checkedAt": "2026-10-27T18:39:29.285323+00:00"
     },
     {
       "job": {
@@ -662,11 +658,11 @@
         "notes": "Currently pursuing an MBA degree 3+ years of professional business experience in a relevant field",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805",
         "dateFound": "2026-10-26",
-        "lastChecked": "2026-10-27T05:47:10.460025+00:00"
+        "lastChecked": "2026-10-27T18:39:29.341753+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-10-27T05:47:10.460025+00:00",
+      "checkedAt": "2026-10-27T18:39:29.341753+00:00",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805"
     },
     {
@@ -690,7 +686,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:10.713140+00:00"
+      "checkedAt": "2026-10-27T18:39:29.437029+00:00"
     },
     {
       "job": {
@@ -713,7 +709,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:10.720150+00:00"
+      "checkedAt": "2026-10-27T18:39:30.129782+00:00"
     },
     {
       "job": {
@@ -736,7 +732,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:11.122470+00:00"
+      "checkedAt": "2026-10-27T18:39:30.487594+00:00"
     },
     {
       "job": {
@@ -756,173 +752,12 @@
         "notes": "Pursuing an MBA in a relevant field or equivalent program (graduating in winter or summer 2028)",
         "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:47:13.818681+00:00"
+        "lastChecked": "2026-10-27T18:39:30.684497+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-10-27T05:47:13.818681+00:00",
+      "checkedAt": "2026-10-27T18:39:30.684497+00:00",
       "finalUrl": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1"
-    },
-    {
-      "job": {
-        "role": "Associate Product Manager Intern, Summer 2027",
-        "company": "Google",
-        "location": "Mountain View, CA, USA; New York, NY, USA; San Francisco, CA, USA; San Bruno, CA, USA",
-        "type": "Internship",
-        "workMode": "Not specified",
-        "workAuth": "Not specified",
-        "workAuthDetail": "Not specified",
-        "salary": "$94,000 - $125,000 (USD) annually",
-        "industry": "Technology",
-        "startDate": "Summer 2027 (12 weeks full-time outside of university term time)",
-        "endDate": "Not specified",
-        "startDateFit": "Confirmed Summer 2027",
-        "priority": "High priority",
-        "notes": "Application window: September 22, 2026 - October 6, 2026. Participation in the internship program requires that you are located in the United States for the duration of the internship program. This internship is intended for students who are entering their penultimate year of a degree program in Product Management, Computer Science, or a related field.",
-        "source": "https://www.google.com/about/careers/applications/jobs/results/134770032394543814",
-        "dateFound": "2026-10-27"
-      },
-      "status": "closed",
-      "reason": "Employer page reports the posting closed or expired",
-      "checkedAt": "2026-10-27T05:47:21.912035+00:00"
-    },
-    {
-      "job": {
-        "role": "Product Manager (2027 Graduates)",
-        "company": "Appian",
-        "location": "McLean, VA",
-        "type": "Full-time",
-        "workMode": "On-site",
-        "workAuth": "No sponsorship",
-        "workAuthDetail": "At this time, Appian will not sponsor a new applicant for employment authorization for this position.",
-        "salary": "$110,000$113,000 USD",
-        "industry": "Technology",
-        "startDate": "Not specified",
-        "endDate": "N/A",
-        "startDateFit": "Strong 2027 signal",
-        "priority": "High priority",
-        "notes": "5 days a week in office. Education: Currently pursuing a Bachelor's degree (or higher) in Computer Science or Computer Engineering with a strong academic record. Thank you for your interest in joining our team! Please note that we will officially begin reviewing applications and scheduling interviews starting August 2026.",
-        "source": "https://careers.appian.com/jobs/8069612-product-manager--2027-graduates-",
-        "dateFound": "2026-10-27"
-      },
-      "status": "closed",
-      "reason": "Employer page returned 404",
-      "checkedAt": "2026-10-27T05:47:21.913018+00:00"
-    },
-    {
-      "job": {
-        "role": "Associate Product Manager, University Graduate, 2027 Start",
-        "company": "Google",
-        "location": "Mountain View, CA; New York, NY; San Bruno, CA; San Jose, CA",
-        "type": "Full-time",
-        "workMode": "On-site",
-        "workAuth": "Not specified",
-        "workAuthDetail": "Not specified",
-        "salary": "$116000 - $165000 (USD) + 15% bonus target + equity + benefits",
-        "industry": "Technology",
-        "startDate": "April - August 2027",
-        "endDate": "N/A",
-        "startDateFit": "Confirmed Summer 2027",
-        "priority": "High priority",
-        "notes": "Applications open September 22, 2026 - close October 6, 2026. All applicants will be notified by the end of Spring 2027 with an update.",
-        "source": "https://www.google.com/about/careers/applications/jobs/results/107272685397910214-associate-product-manager",
-        "dateFound": "2026-10-27"
-      },
-      "status": "closed",
-      "reason": "Employer page reports the posting closed or expired",
-      "checkedAt": "2026-10-27T05:47:21.914054+00:00"
-    },
-    {
-      "job": {
-        "role": "Product Management MBA Intern, Data Center GPU - Summer 2027",
-        "company": "NVIDIA",
-        "location": "Santa Clara, CA",
-        "type": "Internship",
-        "workMode": "On-site",
-        "workAuth": "Not specified",
-        "workAuthDetail": "Not specified",
-        "salary": "$38 - $94 per hour",
-        "industry": "Technology",
-        "startDate": "Summer 2027",
-        "endDate": "Summer internship",
-        "startDateFit": "Confirmed Summer 2027",
-        "priority": "Good fit",
-        "notes": "For MBA students graduating winter or summer 2028; applications accepted until at least September 19, 2026",
-        "source": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR1991072",
-        "dateFound": "2026-10-26"
-      },
-      "status": "closed",
-      "reason": "Workday job endpoint returned 404",
-      "checkedAt": "2026-10-27T05:47:21.914639+00:00"
-    },
-    {
-      "job": {
-        "role": "Product Management MBA Intern, Laptop - Summer 2027",
-        "company": "NVIDIA",
-        "location": "Santa Clara, CA",
-        "type": "Internship",
-        "workMode": "Not specified",
-        "workAuth": "Not specified",
-        "workAuthDetail": "Not specified",
-        "salary": "$38 - $94 per hour",
-        "industry": "Technology",
-        "startDate": "Summer 2027",
-        "endDate": "Summer internship",
-        "startDateFit": "Confirmed Summer 2027",
-        "priority": "Good fit",
-        "notes": "For MBA students pursuing product management (graduating winter 2027 or summer 2028)",
-        "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Product-Management-MBA-Intern--Laptop---Summer-2027_JR1990958",
-        "dateFound": "2026-10-26"
-      },
-      "status": "closed",
-      "reason": "Workday job endpoint returned 404",
-      "checkedAt": "2026-10-27T05:47:24.425353+00:00"
-    },
-    {
-      "job": {
-        "role": "Product Manager MBA Intern, Enterprise AI - Summer 2027",
-        "company": "NVIDIA",
-        "location": "Santa Clara, CA",
-        "type": "Internship",
-        "workMode": "Not specified",
-        "workAuth": "Not specified",
-        "workAuthDetail": "Not specified",
-        "salary": "$38 - $94 per hour",
-        "industry": "Technology",
-        "startDate": "Summer 2027",
-        "endDate": "Summer internship",
-        "startDateFit": "Confirmed Summer 2027",
-        "priority": "Good fit",
-        "notes": "For MBA students graduating December 2027 or May/June 2028; working on NVIDIA IT agentic AI products",
-        "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Product-Manager-MBA-Intern--Enterprise-AI---Summer-2027_JR1991064",
-        "dateFound": "2026-10-26"
-      },
-      "status": "closed",
-      "reason": "Workday job endpoint returned 404",
-      "checkedAt": "2026-10-27T05:47:26.356376+00:00"
-    },
-    {
-      "job": {
-        "role": "MBA Rotational Program - Summer 2027",
-        "company": "Riot Games",
-        "location": "Los Angeles, CA",
-        "type": "Rotational/Development Program",
-        "workMode": "On-site",
-        "workAuth": "Not specified",
-        "workAuthDetail": "Not specified",
-        "salary": "Not specified",
-        "industry": "Technology",
-        "startDate": "Summer 2027",
-        "endDate": "Two-year full-time program",
-        "startDateFit": "Strong 2027 signal",
-        "priority": "Good fit",
-        "notes": "Posted October 9, 2026; two-year full-time leadership development program for MBA graduates expected to graduate Spring 2027; two rotations across Game Product Management and Corporate Strategy; requires 3+ years experience",
-        "source": "https://www.riotgames.com/en/work-with-us/job/8238328/mba-rotational-program-summer-2027-los-angeles-usa",
-        "dateFound": "2026-10-26"
-      },
-      "status": "out_of_scope",
-      "reason": "Role is not product management",
-      "checkedAt": "2026-10-27T05:47:26.442856+00:00"
     },
     {
       "job": {
@@ -942,11 +777,11 @@
         "notes": "Not specified",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:47:28.713516+00:00"
+        "lastChecked": "2026-10-27T18:39:31.475681+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-10-27T05:47:28.713516+00:00",
+      "checkedAt": "2026-10-27T18:39:31.475681+00:00",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983"
     },
     {
@@ -970,7 +805,7 @@
       },
       "status": "unverified",
       "reason": "No readable enabled Apply control",
-      "checkedAt": "2026-10-27T05:47:28.721308+00:00"
+      "checkedAt": "2026-10-27T18:39:32.040481+00:00"
     },
     {
       "job": {
@@ -989,13 +824,11 @@
         "priority": "Watch",
         "notes": "Not specified",
         "source": "https://careers.roblox.com/jobs/8143976",
-        "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-27T05:47:29.332101+00:00"
+        "dateFound": "2026-10-27"
       },
-      "status": "open",
-      "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-27T05:47:29.332101+00:00",
-      "finalUrl": "https://careers.roblox.com/jobs/8143976"
+      "status": "unverified",
+      "reason": "Employer page could not be reached (ReadTimeout)",
+      "checkedAt": "2026-10-27T18:39:32.500480+00:00"
     },
     {
       "job": {
@@ -1017,13 +850,422 @@
         "dateFound": "2026-10-27"
       },
       "status": "unverified",
+      "reason": "Employer page returned HTTP 202",
+      "checkedAt": "2026-10-27T18:39:32.531242+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management Intern, Summer 2027 - United States",
+        "company": "Mastercard",
+        "location": "Purchase, NY, United States",
+        "type": "Internship",
+        "workMode": "Not specified",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
+        "industry": "Fintech",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "43 days ago posting",
+        "source": "https://careers.mastercard.com/us/en/job/R-287624/Product-Management-Intern-Summer-2027-United-States",
+        "dateFound": "2026-10-27"
+      },
+      "status": "closed",
+      "reason": "Employer page returned 410",
+      "checkedAt": "2026-10-27T18:45:00.092130+00:00"
+    },
+    {
+      "job": {
+        "role": "Associate Product Manager Intern, Summer 2027",
+        "company": "Google",
+        "location": "Mountain View, CA, USA; New York, NY, USA; San Francisco, CA, USA; San Bruno, CA, USA",
+        "type": "Internship",
+        "workMode": "Not specified",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Participation in the internship program requires that you are located in the United States for the duration of the internship program",
+        "salary": "$94,000 - $125,000 (USD) annualized + 0% bonus target",
+        "industry": "Technology",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "This role will begin accepting applications on September 22, 2026. Please complete your application by October 6, 2026. Ability to work full-time for 12 weeks outside of university term time",
+        "source": "https://www.google.com/about/careers/applications/jobs/results/134770032394543814",
+        "dateFound": "2026-10-27"
+      },
+      "status": "closed",
+      "reason": "Employer page reports the posting closed or expired",
+      "checkedAt": "2026-10-27T18:45:00.092850+00:00"
+    },
+    {
+      "job": {
+        "role": "Summer 2027 Intern - Associate Product Manager (APM)",
+        "company": "Salesforce",
+        "location": "California - San Francisco",
+        "type": "Internship",
+        "workMode": "Not specified",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
+        "industry": "Technology",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 2026-07-16. Our interns and new graduates work on real projects that affect how our business runs",
+        "source": "https://salesforce.wd12.myworkdayjobs.com/Futureforce_Internships/job/California---San-Francisco/Summer-2027-Intern---Associate-Product-Manager--APM-_JR348039",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Workday job endpoint returned 403",
+      "checkedAt": "2026-10-27T18:45:00.093479+00:00"
+    },
+    {
+      "job": {
+        "role": "Associate Product Manager (APM) Intern - Summer 2027",
+        "company": "Visa",
+        "location": "Foster City, CA",
+        "type": "Internship",
+        "workMode": "Hybrid",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$46-$55/hr",
+        "industry": "Fintech",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Applications accepted at least until September 25, 2026. Posted 2026-09-17",
+        "source": "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Job-Posting-Title-Associate-Product-Manager--APM--Intern---Summer-2027_REF088604W-2",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Workday job endpoint returned 403",
+      "checkedAt": "2026-10-27T18:45:00.094524+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management MBA Intern, Laptop - Summer 2027",
+        "company": "NVIDIA",
+        "location": "Santa Clara, CA",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$38 - $94/hr",
+        "industry": "Technology",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Applications for this job will be accepted at least until October 19, 2026. Pursuing an MBA in product management or an equivalent program area (graduating in winter 2027 or summer 2028)",
+        "source": "https://jobs.nvidia.com/careers/job/893397725881",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-27T05:47:31.945919+00:00"
+      "checkedAt": "2026-10-27T18:45:00.449143+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management MBA Intern, Enterprise AI - Summer 2027",
+        "company": "NVIDIA",
+        "location": "Santa Clara, CA",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$38 - $94/hr",
+        "industry": "Technology",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Applications for this job will be accepted at least until October 23, 2026. Currently pursuing an MBA with relevant experience and graduating in December 2027 or May/June 2028",
+        "source": "https://hitmarker.net/jobs/nvidia-product-manager-mba-intern-enterprise-ai-summer-2027-5296724",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.618806+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management Intern, Summer 2027 - St. Louis, MO (US)",
+        "company": "Mastercard",
+        "location": "O Fallon, Missouri, United States",
+        "type": "Internship",
+        "workMode": "Not specified",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
+        "industry": "Fintech",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 2026-09-23",
+        "source": "https://careers.mastercard.com/us/en/job/R-287625/Product-Management-Intern-Summer-2027-St-Louis-MO-US",
+        "dateFound": "2026-10-27"
+      },
+      "status": "closed",
+      "reason": "Employer page returned 410",
+      "checkedAt": "2026-10-27T18:45:00.618944+00:00"
+    },
+    {
+      "job": {
+        "role": "2027 Guardian Summer Intern, Life Product Development",
+        "company": "Guardian Life Insurance",
+        "location": "New York, NY",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "F-1 visa holders with Optional Practical Training (OPT) who will require H-1B status, TNs, or current H-1B visa holders will not be considered. H1-B and green card sponsorship are not available for this position.",
+        "salary": "$20.00 - $35.00 per hour",
+        "industry": "Insurance",
+        "startDate": "May 27, 2027",
+        "endDate": "August 6, 2027",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Posted 9/14/2026. Application window closes Friday, November 13, 2026 at 11:59PM ET or when filled. 10-week internship. Current junior with graduation date of May 2028. Cross-functional product development process for new individual life products. Housing not provided.",
+        "source": "https://guardianlife.wd5.myworkdayjobs.com/en-US/Guardian-Life-Careers/job/XMLNAME-2027-Guardian-Summer-Intern--Life-Product-Development_R000110125",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.711966+00:00"
+    },
+    {
+      "job": {
+        "role": "2027 Guardian Summer Intern, Group Benefits Product Management",
+        "company": "Guardian Life Insurance",
+        "location": "Boston, MA",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "Not eligible to work in the U.S. without company sponsorship. F-1 OPT requiring H-1B, TNs, current H-1B holders not considered.",
+        "salary": "$20.00 - $35.00 per hour",
+        "industry": "Insurance",
+        "startDate": "May 27, 2027",
+        "endDate": "August 6, 2027",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Posted 9/19/2026. Application window closes November 13, 2026 at 11:59PM ET or when filled. 10-week internship. Current junior graduating May 2028. Analyze absence, product KPIs, customer data to identify trends, risks, opportunities. Housing not provided.",
+        "source": "https://guardianlife.wd5.myworkdayjobs.com/en-US/Guardian-Life-Careers/job/XMLNAME-2027-Guardian-Summer-Intern--Group-Benefits-Product-Management_R000110107",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.712121+00:00"
+    },
+    {
+      "job": {
+        "role": "2027 BNY Summer Internship Program - Product Management",
+        "company": "BNY",
+        "location": "New York, NY",
+        "type": "Internship",
+        "workMode": "Hybrid",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Does not require sponsorship for employment visa status (now or in the future)",
+        "salary": "Not specified",
+        "industry": "Financial Services",
+        "startDate": "Summer 2027",
+        "endDate": "10 weeks",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 8/24/2026. Apply by November 22, 2026. Enrollment in 4-year undergraduate degree program. Graduating Dec 2027 or May 2028. Minimum 3.0 GPA. Product discovery, design, development, delivery execution.",
+        "source": "https://interninsider.me/internships/bny/2027-bny-summer-internship-program-product-management-b8659831-8250-40dd-9ec6-54f9ea57a21b",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.712148+00:00"
+    },
+    {
+      "job": {
+        "role": "BNY Summer Internship Program - Product Management",
+        "company": "BNY",
+        "location": "Lake Mary, FL",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Does not require sponsorship for employment visa status",
+        "salary": "Not specified",
+        "industry": "Financial Services",
+        "startDate": "Summer 2027",
+        "endDate": "10 weeks",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 10/1/2026. Apply by October 31, 2026. Graduation date Dec 2027 or May 2028. Minimum 3.0 GPA. Business or technology-related majors preferred. On-site modality.",
+        "source": "https://interninsider.me/internships/bny/bny-summer-internship-program-product-management-2d570483-a60a-44ab-b332-1557443c15ba",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.712168+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management Intern, 2027 Summer U.S.",
+        "company": "Atlassian",
+        "location": "San Francisco, CA or Remote",
+        "type": "Internship",
+        "workMode": "Remote",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "This position is not eligible for F1 and J1 students. It is not available for any work sponsorship.",
+        "salary": "$51-$57 per hour (Zone A); $46-$51 per hour (Zone B); $42-$47 per hour (Zone C)",
+        "industry": "Technology",
+        "startDate": "May/June 2027 - August/September 2027",
+        "endDate": "12 weeks",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Posted 9/2/2026. Must work in Pacific Time Zone. Currently enrolled full time in technical degree program, returning after internship, graduation by June 2028. Available 40 hours per week. Hands-on training, professional growth, mentorship, innovative AI technologies.",
+        "source": "https://zapply.jobs/jobs/862b1a5b-7d0e-40bc-a9dc-3cfdfd8d886e/",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.712186+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management Intern - Summer 2027",
+        "company": "ABB",
+        "location": "New Berlin, WI",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "Must be legally authorized to work in the United States without company sponsorship now and in the future.",
+        "salary": "$20.00 - $34.00 per hour",
+        "industry": "Industrial",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 9/25/2026. Apply by November 25, 2026 per some sources. Currently enrolled in bachelor's degree program. Reliable transportation required. Competitive benchmarking, market research, product documentation, launch coordination. Official ABB careers page now shows job closed.",
+        "source": "https://careers.abb/us/en/job/JR00047280/Product-Management-Intern-Summer-2027",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Matching job heading is not readable",
+      "checkedAt": "2026-10-27T18:45:00.712202+00:00"
+    },
+    {
+      "job": {
+        "role": "2027 Summer Intern - Digital Product: Product Management (MBA)",
+        "company": "General Motors",
+        "location": "Austin, TX; Warren, MI",
+        "type": "Internship",
+        "workMode": "Hybrid",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "GM does not provide immigration-related sponsorship for this role. This includes H1-B, OPT, STEM OPT, CPT, TN, J-1, etc.",
+        "salary": "$85,000 - $105,000 annually (prorated for 12 weeks)",
+        "industry": "Automotive",
+        "startDate": "May 24 or June 14, 2027",
+        "endDate": "12 weeks",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Posted 9/18/2026. MBA or graduate degree graduating August 2027 or later. Customer Experience Platforms (CXP) team. Connected vehicles, mobility, customer experiences, electric and autonomous platforms. Hybrid: onsite 3 days per week minimum. One-time lump sum taxable relocation stipend provided.",
+        "source": "https://search-careers.gm.com/en/jobs/jr-202620538/2027-summer-intern-digital-product-product-management-mba/",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.755478+00:00"
+    },
+    {
+      "job": {
+        "role": "Campus Graduate Masters Summer Internship Program - 2027 Product Management, Global Commercial Services",
+        "company": "American Express",
+        "location": "New York, NY",
+        "type": "Internship",
+        "workMode": "Hybrid",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "We do not provide visa sponsorship for this role",
+        "salary": "$24.05 - $63.00 per hour",
+        "industry": "Payments",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Recruitment began 9/2/2026, expired 9/23/2026 per one source; multiple GCS product management postings for different divisions. Graduate-level. Own product strategy for commercial banking, cash flow management, or payments products.",
+        "source": "https://career.clemson.edu/jobs/american-express-campus-graduate-masters-summer-internship-program-2027-product-management-global-commercial-servi/",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.755516+00:00"
+    },
+    {
+      "job": {
+        "role": "Digital Product Management Intern",
+        "company": "American Express",
+        "location": "Phoenix, AZ",
+        "type": "Internship",
+        "workMode": "Hybrid",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "We do not provide visa sponsorship for this role",
+        "salary": "Paid",
+        "industry": "Payments",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 48 days ago (early Sept 2026). Apply by November 30. Full-time internship. Hybrid, remote, or on-site options available. Phoenix location. Campus Graduate Masters program track.",
+        "source": "https://interninsider.me/internships/american-express/digital-product-management-intern-46ecbfac-885f-4037-837f-e9ee71b2808b",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.755537+00:00"
+    },
+    {
+      "job": {
+        "role": "Campus Undergraduate Summer Internship Program - 2027 Product Management, Global Merchant & Network Services",
+        "company": "American Express",
+        "location": "New York, NY",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$24.05 - $63.00 per hour range",
+        "industry": "Payments",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 8/12/2026 per intern insider. Best applied by Aug 12 (likely rolling). Full-time bachelor's program, graduation Dec 2027 - June 2028. End-to-end lifecycle of digital products and applications for global merchant network. Paid position.",
+        "source": "https://interninsider.me/internships/american-express/campus-undergraduate-summer-internship-program-2027-product-management-global-me-8d23bbec-6b97-49e5-9fc4-e338bb3f849a",
+        "dateFound": "2026-10-27"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-10-27T18:45:00.755556+00:00"
+    },
+    {
+      "job": {
+        "role": "2027 Amazon Leadership Accelerator (ALA) - Product Manager Full Time",
+        "company": "Amazon",
+        "location": "Not specified",
+        "type": "Full-time",
+        "workMode": "Not specified",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
+        "industry": "Not specified",
+        "startDate": "Not specified",
+        "endDate": "Not specified",
+        "startDateFit": "Not specified",
+        "priority": "Watch",
+        "notes": "Not specified",
+        "source": "https://www.amazon.jobs/en/jobs/10490981/2027-amazon-leadership-accelerator-ala-product-manager-full-time",
+        "dateFound": "2026-10-27"
+      },
+      "status": "out_of_scope",
+      "reason": "No 2027 graduate/cohort/start signal in the posting",
+      "checkedAt": "2026-10-27T18:45:00.755576+00:00"
     }
-  ],
-  "researchRun": "https://github.com/theshubhamshirke-commits/pm-club-job-tracker/actions/runs/40456206638",
-  "researchCompletedAt": "2026-10-27T05:41:48.875269+00:00",
-  "verificationFollowup": true,
-  "recoveredFromSources": 10,
-  "researchCandidates": 17
+  ]
 }
