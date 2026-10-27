@@ -1,0 +1,66 @@
+name: Verify broader PM discovery
+
+# Runs at 13:07 UTC = ~9:07 AM US Eastern during EDT (roughly mid-March to early November).
+# GitHub Actions cron has no timezone/DST awareness, so after DST ends (~Nov 1, 2026) this will
+# effectively fire at ~8:07 AM Eastern instead of 9:07 AM, until DST resumes in spring (~March 8, 2027).
+# Adjust the cron string twice a year (to '7 14 * * *' for EST) if you want it pinned to ~9am local.
+# Using :07 instead of exactly :00 avoids the worst of GitHub's top-of-the-hour scheduling
+# congestion, which is a common cause of scheduled workflows running late or getting skipped.
+on:
+  push:
+    branches: ['codex/continuous-verification-2026-10-27']
+    paths: ['.github/workflows/manual-verification.yml']
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: pm-job-tracker-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run offline regression tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Run refresh script
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/refresh_jobs.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "pm-job-tracker-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html data/tracked-jobs.json data/refresh-report.json
+          git diff --quiet --cached || git commit -m "Daily job tracker refresh $(date -u +'%Y-%m-%d')"
+          git push
+
+      # GITHUB_TOKEN commits do not automatically trigger branch-based Pages.
+      - name: Request GitHub Pages rebuild
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --jq .status
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo '### Job tracker refresh or publication failed' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Review the failed step. A successful data commit does not guarantee a successful Pages deployment; compare the live page timestamp with index.html.' >> "$GITHUB_STEP_SUMMARY"

@@ -91,13 +91,14 @@
 <header>
   <h1>PM Club Job Tracker — 2027 Product Management Internships &amp; Full-Time Roles (USA)</h1>
   <p id="updated-line">Last updated: —</p>
+  <p id="refresh-status" role="status"></p>
 </header>
 <div class="wrap">
 
   <div class="notice">
     <strong>About these openings:</strong> This tracker covers US product management internships for Summer 2027 and graduate PM roles with a stated 2027 hiring cycle. A 2027 cohort does not confirm a May–August start; check each role's dates.
     <br><br>
-    <strong>Source checks:</strong> Each listing links to its matching employer job description. The refresh checks the role title, 2027 timing, an Apply option and closure signals. Unreachable or inconclusive pages are excluded. Details that cannot be supported are marked <span class="badge badge-notspec">Not specified</span>. Industry and priority are tracker categories. Openings can close after the last update; confirm the employer's current terms before applying.
+    <strong>Source checks:</strong> Each listing links to its matching employer job description. Every daily run rechecks existing listings and searches for new openings. It checks the matching role, 2027 timing in the title or description, application availability and closure signals. Unreachable or inconclusive pages are excluded. Details that cannot be supported are marked <span class="badge badge-notspec">Not specified</span>. Industry and priority are tracker categories. Openings can close after the last update; confirm the employer's current terms before applying.
   </div>
 
   <div class="stat-row" id="stat-row"></div>
@@ -305,14 +306,15 @@ const columns = [
   { name: 'Priority', width: '100px', formatter: (cell) => gridjs.html(badge('priority', cell)) },
   { name: 'Notes', width: '200px' },
   { name: 'Source', width: '90px', formatter: (cell) => gridjs.html(`<a class="src-link" href="${escapeHtml(cell)}" target="_blank" rel="noopener">View »</a>`) },
-  { name: 'Found On', width: '95px' }
+  { name: 'Found On', width: '95px' },
+  { name: 'Last Checked (UTC)', width: '120px' }
 ];
 
 function toRows(data) {
   return data.map(j => [
     j.role, j.company, j.location, j.type, j.workMode, j.workAuth, j.salary,
     j.industry, (j.startDate + ' → ' + j.endDate), j.startDateFit, j.priority,
-    j.notes, j.source, j.dateFound
+    j.notes, j.source, j.dateFound, j.lastChecked ? j.lastChecked.slice(0, 16).replace('T', ' ') : 'Not recorded'
   ]);
 }
 
@@ -352,6 +354,20 @@ document.getElementById('f-workauth').addEventListener('change', applyFilters);
 document.getElementById('f-priority').addEventListener('change', applyFilters);
 document.getElementById('f-industry').addEventListener('change', applyFilters);
 document.getElementById('f-search').addEventListener('input', applyFilters);
+
+function renderRefreshStatus() {
+  const status = document.getElementById('refresh-status');
+  if (typeof refreshStatus === 'undefined') return;
+  const messages = [];
+  if (Date.now() - Date.parse(refreshStatus.checkedAt) > 36 * 60 * 60 * 1000) messages.push('The last check is over 36 hours old. Confirm availability with the employer.');
+  if (!refreshStatus.discoveryComplete) messages.push('The latest new-job search was incomplete. Existing listings were still rechecked.');
+  const pending = refreshStatus.statusCounts.unverified || 0;
+  if (pending) messages.push(pending + ' candidate posting(s) could not be verified and are hidden pending another check.');
+  if (!jobs.length) messages.push('No openings could be verified in this run. This does not mean there are no suitable jobs.');
+  status.textContent = messages.join(' ');
+}
+renderRefreshStatus();
+setInterval(renderRefreshStatus, 60000);
 
 document.getElementById('updated-line').textContent = 'Last updated: October 27, 2026, 00:32 UTC · Refreshes daily via GitHub Actions · ' + jobs.length + ' listings tracked';
 </script>

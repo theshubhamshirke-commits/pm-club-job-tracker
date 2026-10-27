@@ -20,28 +20,48 @@ For a live refresh, configure the `ANTHROPIC_API_KEY` Actions secret, or set it
 locally, then run `python scripts/refresh_jobs.py`. Live runs use Anthropic API
 credits. Never commit a key to the repository.
 
-## Failure behavior
+## Daily behavior and coverage
 
-Research uses streaming to support its 48,000-token output budget. Paused
-server-tool turns can resume up to three times; truncated, refused, disconnected,
-or unfinished responses fail without replacing the existing listings. Any
-nonempty verified result can publish; there is no quota to pad with weak listings.
-Zero results preserve the previous page and its timestamp. Inspect the failed
-Actions step and the page's last-updated timestamp when a refresh fails.
+Each run rechecks every published opening and previously unverified candidate,
+then searches three independent passes: technology internships, internships in
+other industries, and 2027 graduate full-time/rotational PM roles. Each pass has
+eight required queries in `data/search-plan.json`, up to 30 search and 25 fetch
+uses, and at most three paused-turn continuations. This increases API usage over
+the former single search pass; it is bounded and does not guarantee exhaustive
+market coverage or a particular number of jobs.
 
-The refresh workflow runs offline tests before research, serializes overlapping
-runs, and stops after 45 minutes. Passing offline tests does not establish that
-the API account has credit, that all source sites are reachable, or that a live
-refresh has completed.
+Full-time roles still require explicit 2027 graduate/cohort/start evidence in
+the matching description or title. Immediate experienced-hire roles do not qualify.
+The target is May-August 2027; an explicit start outside that window is excluded.
+A 2027 graduate cohort with no stated month is labeled a strong 2027 signal, not
+an exact confirmed summer start. Internships require Summer 2027 timing. Both
+tracks are United States only.
 
-The source check now fails closed on HTTP errors, timeouts, generic redirects,
-mismatched role titles, missing Apply controls, expired deadlines, and closed
-postings. It requires a matching PM heading containing 2027 on a readable page;
-this conservative rule omits some genuine openings, including JavaScript-only
-pages. Unknown is not evidence that a job is open. Optional factual details are
-withheld unless their text appears on the fetched page. These checks reduce
-unsupported output; they do not guarantee future availability or interpret every
-employer's eligibility terms. Industry and priority are editorial tracker labels.
+Source checks require an exact matching PM title plus an enabled Apply control,
+or a matching public Workday payload with both `posted` and `canApply` true.
+Closed or expired postings are removed. Unreachable or inconclusive sources are
+hidden and saved for another check; they are not labeled closed. Description
+checks exclude related-job/footer text and use job location metadata when present.
+Optional facts are retained only when grounded in source text, or when previously
+reviewed facts have an unchanged source fingerprint. Industry and priority are
+editorial labels. These checks are conservative and may omit genuine openings.
+
+`data/tracked-jobs.json` persists verification state. `data/refresh-report.json`
+records each check, exclusion reason, discovery queries and pass status. Historical
+URLs in `data/discovery-seeds.json` are candidates only; each must pass fresh checks.
+A source check is a snapshot, not a guarantee that the opening stays available.
+
+Streaming supports the 48,000-token output budget. Truncated, refused or malformed
+research output fails that discovery pass. Existing openings are still rechecked;
+only freshly verified rows publish. A partially completed search is shown on the
+page and in the report. If no source can be verified, the page displays an honest
+empty result, while unknown candidates remain queued for retry. A completely
+failed workflow leaves its previous page timestamp; the page warns when checks
+are over 36 hours old.
+
+Offline regression tests run before research. Overlapping refreshes are serialized
+and each workflow stops after 45 minutes. Passing tests does not establish API
+credit, source reachability, complete discovery or successful live deployment.
 
 The daily workflow explicitly requests a Pages rebuild after pushing because
 commits made with `GITHUB_TOKEN` do not automatically build branch-based Pages.

@@ -70,7 +70,7 @@ def sample_jobs():
     return [dict.fromkeys(tracker.SCHEMA_KEYS, "Not specified") | {
         "role": "Product Management Intern", "company": f"Test Company {i}",
         "type": "Internship", "startDateFit": "Confirmed Summer 2027",
-        "priority": "Good fit", "source": f"https://example.com/careers/job/{i}",
+        "priority": "Good fit", "source": f"https://testcompany{i}.com/careers/job/{i}",
         "dateFound": tracker.TODAY,
     } for i in range(5)]
 
@@ -130,54 +130,90 @@ class PublishingTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.page = Path(self.temp.name) / "index.html"
-        self.original = (Path(__file__).resolve().parents[1] / "index.html").read_text()
-        self.page.write_text(self.original)
+        self.page = Path(self.temp.name) / 'index.html'
+        self.page.write_text((Path(__file__).resolve().parents[1] / 'index.html').read_text())
+        self.original_jobs = sample_jobs()[:2]
+        tracker.update_html(self.original_jobs, self.page)
+        self.original = self.page.read_text()
+        self.data = self.page.parent / 'data'
 
-    def run_with_response(self, text, reason="end_turn"):
-        client = fake_client([response_events(text, reason)], [])
-        with patch.dict("os.environ", {"ANTHROPIC_API_KEY": "offline-test-key"}), \
-             patch.object(tracker.anthropic, "Anthropic", return_value=client), \
-             patch.object(tracker, "_link_is_live", return_value=True):
-            return tracker.main(path=self.page)
+    def check(self, job, previous=None):
+        return {'job': job | {'lastChecked': '2026-10-27T00:00:00Z'}, 'status': 'open',
+                'checkedAt': '2026-10-27T00:00:00Z', 'reason': 'offline fixture'}
 
-    def test_complete_stream_passes_filtering_and_updates_real_template(self):
-        self.assertEqual(self.run_with_response(json.dumps(sample_jobs())), 0)
-        updated = self.page.read_text()
-        data = json.JSONDecoder().raw_decode(updated.split("const jobs = ", 1)[1])[0]
-        self.assertEqual(data, sample_jobs())
-        self.assertIn("function badge", updated)
-        self.assertIn("Last updated:", updated)
+    def run_refresh(self, new=None, check=None, failed=False):
+        def discovery(_):
+            if failed:
+                raise RuntimeError('search disconnected')
+            return new or [], [{'name': 'test', 'status': 'complete'}]
+        with patch.object(tracker, '_verify_job', side_effect=check or self.check):
+            return tracker.refresh(self.page, discovery=discovery)
 
-    def test_truncated_response_keeps_existing_page_byte_for_byte(self):
-        with self.assertRaisesRegex(RuntimeError, "did not finish"):
-            self.run_with_response(json.dumps(sample_jobs()), "max_tokens")
-        self.assertEqual(self.page.read_text(), self.original)
+    def test_existing_jobs_survive_search_omission_and_new_jobs_are_added(self):
+        report = self.run_refresh(sample_jobs()[2:3])
+        self.assertEqual(report['existingRechecked'], 2)
+        self.assertEqual(report['publishedCount'], 3)
+        self.assertEqual(report['addedCount'], 1)
+        self.assertEqual(len(tracker._load_page_jobs(self.page)), 3)
 
-    def test_small_verified_result_is_published_without_padding(self):
-        self.assertEqual(self.run_with_response(json.dumps(sample_jobs()[:1])), 0)
-        data = json.JSONDecoder().raw_decode(self.page.read_text().split('const jobs = ', 1)[1])[0]
-        self.assertEqual(len(data), 1)
+    def test_discovery_failure_still_rechecks_existing_jobs(self):
+        report = self.run_refresh(failed=True)
+        self.assertEqual(report['existingRechecked'], 2)
+        self.assertEqual(report['publishedCount'], 2)
+        self.assertFalse(report['discoveryComplete'])
+        self.assertIn('"discoveryComplete": false', self.page.read_text())
 
-    def test_empty_or_malformed_results_keep_existing_page(self):
-        for text in ("[]", "Response was cut off ["):
-            with self.subTest(text=text):
-                self.assertEqual(self.run_with_response(text), 1)
-                self.assertEqual(self.page.read_text(), self.original)
+    def test_closed_removed_unknown_hidden_then_retried(self):
+        def unavailable(job, previous):
+            result = self.check(job)
+            result['status'] = 'closed' if job['company'].endswith('0') else 'unverified'
+            return result
+        report = self.run_refresh(check=unavailable)
+        self.assertEqual(report['publishedCount'], 0)
+        self.assertEqual(tracker._load_page_jobs(self.page), [])
+        state = json.loads((self.data / 'tracked-jobs.json').read_text())
+        self.assertEqual({r['status'] for r in state['jobs']}, {'closed', 'unverified'})
+        report = self.run_refresh()
+        self.assertEqual(report['existingRechecked'], 1)
+        self.assertEqual(report['publishedCount'], 1)
+
+    def test_duplicate_discoveries_reuse_existing_record(self):
+        duplicate = self.original_jobs[0] | {'source': self.original_jobs[0]['source'] + '?utm_source=search'}
+        report = self.run_refresh([duplicate, duplicate])
+        self.assertEqual(report['newCandidatesChecked'], 0)
+        self.assertEqual(report['publishedCount'], 2)
+
+    def test_small_verified_result_is_not_padded(self):
+        def one(job, previous):
+            result = self.check(job)
+            result['status'] = 'open' if job['company'].endswith('0') else 'closed'
+            return result
+        self.assertEqual(self.run_refresh(check=one)['publishedCount'], 1)
 
     def test_template_mismatch_does_not_write_half_an_update(self):
-        original = self.original.replace("document.getElementById('updated-line').textContent =", "const differentTemplate =")
+        original = self.original.replace("document.getElementById('updated-line').textContent =", 'const differentTemplate =')
         self.page.write_text(original)
-        with self.assertRaisesRegex(ValueError, "updated-line"):
+        with self.assertRaisesRegex(ValueError, 'updated-line'):
             tracker.update_html(sample_jobs(), self.page)
         self.assertEqual(self.page.read_text(), original)
+
+    def test_embedded_script_content_is_escaped(self):
+        row = sample_jobs()[0] | {'notes': '</script><script>alert(1)</script>'}
+        tracker.update_html([row], self.page)
+        self.assertNotIn(row['notes'], self.page.read_text())
+        self.assertEqual(tracker._load_page_jobs(self.page)[0]['notes'], row['notes'])
+
+    def test_malformed_discovery_data_is_not_successful_empty_search(self):
+        with self.assertRaises(ValueError):
+            tracker._extract_json_array('Response was cut off [')
+        self.assertEqual(tracker._extract_json_array('[]'), [])
 
 
 class PostingVerificationTests(unittest.TestCase):
     def setUp(self):
         self.job = sample_jobs()[0] | {'role': 'Product Management Intern (Summer 2027)'}
         self.html = ('<h1>Product Management Intern (Summer 2027)</h1>'
-                     '<p>Test Company 0. Build product features for our customers.</p>'
+                     '<p>Test Company 0. San Mateo, CA, United States. Build product features for our customers.</p>'
                      '<button>Apply now</button>')
 
     def test_matching_open_posting_passes(self):
@@ -230,6 +266,65 @@ class PostingVerificationTests(unittest.TestCase):
         with patch.object(tracker, 'datetime') as clock:
             clock.now.return_value = datetime(2026, 10, 31, tzinfo=timezone.utc)
             self.assertTrue(tracker._deadline_already_passed('Applications close Friday, October 30th at 5 PM PST'))
+
+
+    def test_description_timing_qualifies_without_2027_in_title(self):
+        job = self.job | {'role': 'Product Management Intern'}
+        page = self.html.replace(self.job['role'], job['role']) + '<p>Summer 2027 internship</p>'
+        self.assertTrue(tracker._posting_matches(page, job))
+
+    def test_related_job_or_footer_cannot_supply_missing_2027(self):
+        job = self.job | {'role': 'Product Management Intern'}
+        page = self.html.replace(self.job['role'], job['role'])
+        for unrelated in ('Related jobs: Summer 2027 Product Manager Intern', 'Privacy Policy Copyright Summer 2027'):
+            self.assertFalse(tracker._posting_matches(page + '<p>' + unrelated + '</p>', job))
+
+    def test_fulltime_requires_2027_signal_and_rejects_explicit_fall_start(self):
+        job = self.job | {'role': 'Associate Product Manager', 'type': 'Full-time'}
+        for text, expected in [('United States. Hiring immediately.', False),
+                               ('United States. Class of 2027.', True),
+                               ('United States. Starts September 2027.', False)]:
+            self.assertEqual(not tracker._scope_reason(job, text), expected)
+
+    def test_non_us_metadata_overrides_us_company_footer(self):
+        job = self.job
+        page = self.html + '<script type="application/ld+json">' + json.dumps({
+            '@type': 'JobPosting', 'title': job['role'],
+            'jobLocation': {'address': {'addressCountry': 'Canada'}},
+        }) + '</script>'
+        response = SimpleNamespace(status_code=200, url=job['source'], text=page)
+        with patch.object(tracker.requests, 'get', return_value=response):
+            self.assertEqual(tracker._verify_job(job)['status'], 'out_of_scope')
+
+    def test_workday_requires_positive_application_flags_and_matching_title(self):
+        job = self.job | {'company': 'Testco', 'source': 'https://testco.wd5.myworkdayjobs.com/External/job/City/PM_R123-1'}
+        shell = SimpleNamespace(status_code=200, url=job['source'], text='tenant: "testco", siteId: "External",')
+        info = {'title': job['role'], 'jobDescription': '<p>Summer 2027 internship</p>',
+                'country': {'descriptor': 'United States of America'}, 'location': 'San Mateo, CA',
+                'canApply': True, 'posted': True, 'startDate': '2026-10-01'}
+        for changes, expected in [({}, 'open'), ({'canApply': False}, 'closed'),
+                                  ({'posted': False}, 'closed'), ({'canApply': None}, 'unverified'),
+                                  ({'title': 'Unrelated job'}, 'unverified'),
+                                  ({'country': {'descriptor': 'Canada'}}, 'out_of_scope')]:
+            payload = SimpleNamespace(status_code=200, json=lambda: {'jobPostingInfo': info | changes})
+            with self.subTest(changes=changes), patch.object(tracker.requests, 'get', side_effect=[shell, payload]):
+                result = tracker._verify_job(job)
+                self.assertEqual(result['status'], expected)
+                if expected == 'open':
+                    self.assertEqual(result['job']['startDate'], 'Not specified')
+
+    def test_changed_source_regrounds_optional_facts(self):
+        job = self.job | {'salary': '$999/hr'}
+        response = SimpleNamespace(status_code=200, url=job['source'], text=self.html)
+        with patch.object(tracker.requests, 'get', return_value=response):
+            result = tracker._verify_job(job, {'sourceFingerprint': 'old'})
+        self.assertEqual(result['status'], 'open')
+        self.assertEqual(result['job']['salary'], 'Not specified')
+
+    def test_workday_locales_and_apply_urls_have_same_identity(self):
+        job = self.job | {'source': 'https://company.wd5.myworkdayjobs.com/en-US/Jobs/job/City/PM_JR123-1'}
+        alternate = job | {'source': 'https://company.wd5.myworkdayjobs.com/Jobs/job/City/PM_JR123-2/apply?source=search'}
+        self.assertEqual(tracker._job_key(job), tracker._job_key(alternate))
 
 
 if __name__ == "__main__":
