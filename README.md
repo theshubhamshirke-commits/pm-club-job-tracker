@@ -1,9 +1,13 @@
 # PM Club Job Tracker
 
+https://theshubhamshirke-commits.github.io/pm-club-job-tracker/
+
+
+
+
 The static page is `index.html`. GitHub Actions runs `scripts/refresh_jobs.py`
 daily at 13:07 UTC and can also be started from the Actions tab.
 
-https://theshubhamshirke-commits.github.io/pm-club-job-tracker/
 
 ## Setup and checks
 
