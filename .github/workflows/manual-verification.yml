@@ -1,53 +1,29 @@
-name: Manual PM tracker verification
+name: Manual PM tracker publication check
 
-# One-off live verification; generated results stay on this branch for review.
 on:
   push:
     branches: ['codex/manual-refresh-2026-10-26']
     paths: ['.github/workflows/manual-verification.yml']
-  workflow_dispatch: {}
 
 permissions:
-  contents: write
-
-concurrency:
-  group: pm-tracker-manual-verification
-  cancel-in-progress: false
+  contents: read
+  pages: write
 
 jobs:
-  refresh:
+  verify-publication:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 10
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install dependencies
-        run: python -m pip install -r requirements.txt
-
+      - run: python -m pip install -r requirements.txt
       - name: Run offline regression tests
         run: python -m unittest discover -s tests -v
-
-      - name: Run refresh script
+      - name: Test the daily Pages rebuild request
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/refresh_jobs.py
-
-      - name: Report refresh failure
-        if: failure()
-        run: |
-          echo '### Job tracker refresh failed' >> "$GITHUB_STEP_SUMMARY"
-          echo 'No new listings were published. The page retains its last successful update. Review the failed step above.' >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Commit and push if changed
-        run: |
-          git config user.name "pm-job-tracker-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add index.html
-          git diff --quiet --cached || git commit -m "Daily job tracker refresh $(date -u +'%Y-%m-%d')"
-          git push
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --jq .status
