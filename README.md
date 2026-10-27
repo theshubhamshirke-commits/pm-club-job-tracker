@@ -3,7 +3,7 @@
 The static page is `index.html`. GitHub Actions runs `scripts/refresh_jobs.py`
 daily at 13:07 UTC and can also be started from the Actions tab.
 
-https://github.com/theshubhamshirke-commits/pm-club-job-tracker
+https://theshubhamshirke-commits.github.io/pm-club-job-tracker/
 
 ## Setup and checks
 
