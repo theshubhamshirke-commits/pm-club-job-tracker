@@ -76,3 +76,6 @@ subsequent daily refreshes can change the list.
 The current `claude-sonnet-4-5` model is retained by this repair. The installed
 SDK reports its retirement on November 30, 2026; validate a replacement before
 then. The UTC schedule changes local Eastern time with daylight saving time.
+
+
+https://github.com/theshubhamshirke-commits/pm-club-job-tracker
