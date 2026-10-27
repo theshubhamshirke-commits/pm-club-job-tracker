@@ -3,11 +3,13 @@
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
 import anthropic
 import httpx2 as httpx
+import requests
 
 from scripts import refresh_jobs as tracker
 
@@ -152,8 +154,13 @@ class PublishingTests(unittest.TestCase):
             self.run_with_response(json.dumps(sample_jobs()), "max_tokens")
         self.assertEqual(self.page.read_text(), self.original)
 
-    def test_empty_or_malformed_or_too_small_results_keep_existing_page(self):
-        for text in ("[]", "Response was cut off [", json.dumps(sample_jobs()[:2])):
+    def test_small_verified_result_is_published_without_padding(self):
+        self.assertEqual(self.run_with_response(json.dumps(sample_jobs()[:1])), 0)
+        data = json.JSONDecoder().raw_decode(self.page.read_text().split('const jobs = ', 1)[1])[0]
+        self.assertEqual(len(data), 1)
+
+    def test_empty_or_malformed_results_keep_existing_page(self):
+        for text in ("[]", "Response was cut off ["):
             with self.subTest(text=text):
                 self.assertEqual(self.run_with_response(text), 1)
                 self.assertEqual(self.page.read_text(), self.original)
@@ -164,6 +171,65 @@ class PublishingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "updated-line"):
             tracker.update_html(sample_jobs(), self.page)
         self.assertEqual(self.page.read_text(), original)
+
+
+class PostingVerificationTests(unittest.TestCase):
+    def setUp(self):
+        self.job = sample_jobs()[0] | {'role': 'Product Management Intern (Summer 2027)'}
+        self.html = ('<h1>Product Management Intern (Summer 2027)</h1>'
+                     '<p>Test Company 0. Build product features for our customers.</p>'
+                     '<button>Apply now</button>')
+
+    def test_matching_open_posting_passes(self):
+        self.assertTrue(tracker._posting_matches(self.html, self.job))
+
+    def test_wrong_role_generic_page_closed_page_and_missing_apply_fail(self):
+        pages = [
+            self.html.replace('Product Management', 'Product Design'),
+            self.html.replace('<h1>Product Management Intern (Summer 2027)</h1>', '<h1>All jobs</h1>'),
+            self.html.replace('<button>Apply now</button>', ''),
+            self.html.replace('<button>', '<button disabled>'),
+            self.html + '<p>This position is no longer available</p>',
+            '<script>' + 'x' * 22000 + '</script>' + self.html + '<p>Applications are closed</p>',
+            '<script>' + self.html + '</script>',
+        ]
+        for page in pages:
+            with self.subTest(page=page[:80]):
+                self.assertFalse(tracker._posting_matches(page, self.job))
+
+    def test_non_pm_and_wrong_track_fail_even_with_matching_title(self):
+        for role, track in [('Product Designer (2027)', 'Full-time'),
+                            ('Product Management Intern (Summer 2027)', 'Full-time'),
+                            ('Product Manager (2026)', 'Full-time')]:
+            job = self.job | {'role': role, 'type': track}
+            page = self.html.replace(self.job['role'], role)
+            self.assertFalse(tracker._posting_matches(page, job))
+
+    def test_network_failures_and_http_errors_are_unknown_not_open(self):
+        for status in (403, 404, 410, 429, 500):
+            response = SimpleNamespace(status_code=status, url=self.job['source'], text=self.html)
+            with patch.object(tracker.requests, 'get', return_value=response):
+                self.assertFalse(tracker._link_is_live(self.job))
+        with patch.object(tracker.requests, 'get', side_effect=requests.Timeout()):
+            self.assertFalse(tracker._link_is_live(self.job))
+
+    def test_unsupported_dates_work_mode_and_salary_are_withheld(self):
+        self.job.update(startDate='May 25, 2027', workMode='On-site', salary='$62/hr')
+        tracker._ground_optional_details(self.job, self.html)
+        for field in ('startDate', 'workMode', 'salary'):
+            self.assertEqual(self.job[field], 'Not specified')
+
+    def test_expired_structured_deadline_overrides_apply_control(self):
+        page = self.html + '<script type="application/ld+json">' + json.dumps({
+            '@type': 'JobPosting', 'validThrough': '2020-01-01',
+        }) + '</script>'
+        self.assertFalse(tracker._posting_matches(page, self.job))
+
+    def test_deadline_without_year_is_checked_in_current_year(self):
+        from datetime import datetime, timezone
+        with patch.object(tracker, 'datetime') as clock:
+            clock.now.return_value = datetime(2026, 10, 31, tzinfo=timezone.utc)
+            self.assertTrue(tracker._deadline_already_passed('Applications close Friday, October 30th at 5 PM PST'))
 
 
 if __name__ == "__main__":

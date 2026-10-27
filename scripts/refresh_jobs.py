@@ -14,6 +14,7 @@ import os
 import re
 import json
 import sys
+from html.parser import HTMLParser
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
@@ -69,7 +70,7 @@ CLOSED_SIGNAL_RE = re.compile(
     re.IGNORECASE,
 )
 
-LIVE_CHECK_TIMEOUT = 10
+LIVE_CHECK_TIMEOUT = 30
 LIVE_CHECK_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/124.0 Safari/537.36 PMJobTrackerBot"
@@ -150,7 +151,7 @@ def _structured_data_says_expired(html_text):
 DEADLINE_PHRASE_RE = re.compile(
     r"(?:clos(?:e|es|ed|ing)(?:\s+(?:on|date))?|deadline(?:\s*:)?|apply\s+by|applications?\s+(?:are\s+)?due)"
     r"[^.\n]{0,40}?"
-    r"((?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s*\d{4}"
+    r"((?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?"
     r"|\d{1,2}/\d{1,2}/\d{2,4})",
     re.IGNORECASE,
 )
@@ -188,6 +189,13 @@ posting gives a real signal of 2027 graduate/MBA timing: explicit 2027 start mon
 university/campus recruiting for 2027, or an explicit flexible-start policy tied to 2027 graduation.
 If a full-time posting reads like an ordinary immediate-hire role with no 2027-cycle signal, exclude it.
 
+Only include roles located in the United States. Use the employer's own job description or
+its official ATS posting as the source; job boards are for discovery only.
+Use the exact source heading for role. The automated verifier requires a 2027 role heading
+and a readable Apply control. For location, salary, workMode, startDate, endDate,
+workAuthDetail and notes, use short verbatim source excerpts or "Not specified".
+Do not infer remote/on-site work from an office location, calculate precise dates from a
+program duration, or borrow dates from a different internship at the same company.
 The goal is relevance and verification quality over sheer quantity. A handful of well-verified,
 correctly-linked listings is far better than a long list with weak or duplicate links.
 
@@ -311,46 +319,138 @@ def _is_valid_source(url):
         return False
     if BAD_LINK_RE.search(url):
         return False
+    if parsed.username or parsed.password or parsed.path.rstrip('/') in ('', '/careers', '/jobs'):
+        return False
     return True
 
 
-def _link_is_live(url):
-    """Best-effort check that a posting's URL is still a real, open listing.
+class _PostingText(HTMLParser):
+    """Read server-rendered text and controls, excluding scripts and styles."""
 
-    Returns True unless there's positive evidence the posting is dead: a
-    404/410 status, a redirect that bounces from the specific job page to a
-    generic listing/search page (matches BAD_LINK_RE), page text containing a
-    "closed/filled/expired" phrase. Network errors, timeouts, and bot-blocks
-    (403s, CAPTCHAs, etc.) are treated as unknown and the listing is kept
-    rather than punished for a flaky request or a site that blocks scrapers.
+    def __init__(self):
+        super().__init__()
+        self.parts, self.headings, self.controls = [], [], []
+        self.ignored = 0
+        self.heading = None
+        self.control = None
 
-    Known limitation: some ATS platforms (Workday in particular, and to some
-    extent Google's own careers site) render their "this posting has closed"
-    message client-side via JavaScript after the page loads. A plain HTTP GET
-    only sees the initial server-rendered HTML, so it won't see that message
-    and will treat the listing as still live. This catches plain-HTML closures
-    and dead links reliably; it is not a perfect oracle for JS-heavy sites.
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style', 'noscript'):
+            self.ignored += 1
+        if self.ignored:
+            return
+        if tag == 'h1':
+            self.heading = []
+        if tag in ('a', 'button'):
+            attributes = dict(attrs)
+            if 'disabled' not in attributes and attributes.get('aria-disabled') != 'true':
+                self.control = []
+
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style', 'noscript'):
+            self.ignored = max(0, self.ignored - 1)
+            return
+        if self.ignored:
+            return
+        if tag == 'h1' and self.heading is not None:
+            self.headings.append(' '.join(self.heading))
+            self.heading = None
+        if tag in ('a', 'button') and self.control is not None:
+            self.controls.append(' '.join(self.control))
+            self.control = None
+
+    def handle_data(self, data):
+        if self.ignored:
+            return
+        self.parts.append(data)
+        if self.heading is not None:
+            self.heading.append(data)
+        if self.control is not None:
+            self.control.append(data)
+
+
+def _normalized(text):
+    return ' '.join(re.findall(r'\w+', text.casefold()))
+
+
+def _posting_matches(html_text, job):
+    """Require positive, matching evidence. A 200 response alone is not enough.
+
+    JavaScript-only pages with no rendered Apply control fail closed. This may
+    omit real openings; it must never turn an inaccessible page into evidence.
     """
+    page = _PostingText()
+    page.feed(html_text)
+    visible = ' '.join(page.parts)
+    if CLOSED_SIGNAL_RE.search(visible) or _structured_data_says_expired(html_text):
+        return False
+    if _deadline_already_passed(visible):
+        return False
+    role = _normalized(job['role'])
+    if role not in [_normalized(h) for h in page.headings]:
+        return False
+    if _normalized(job['company']) not in _normalized(visible):
+        return False
+    if not re.search(r'product (?:manager|management|intern)', role):
+        return False
+    if '2027' not in role:
+        return False
+    if ('intern' in role) != (job['type'] == 'Internship'):
+        return False
+    return any(re.fullmatch(r'apply(?: now| for (?:this )?(?:job|position))?',
+                            _normalized(c)) for c in page.controls)
+
+
+def _ground_optional_details(job, html_text):
+    """Withhold unsupported model details instead of publishing plausible guesses.
+
+    Literal excerpts are intentionally conservative: paraphrases can be correct,
+    but this check cannot prove that they are. Editorial category/priority labels
+    are separate from the employer's facts.
+    """
+    page = _PostingText()
+    page.feed(html_text)
+    source = _normalized(' '.join(page.parts))
+    for field in ('location', 'salary', 'workMode', 'startDate', 'endDate',
+                  'workAuthDetail', 'notes'):
+        value = job[field]
+        if value in ('Not specified', 'N/A'):
+            continue
+        if _normalized(value) not in source:
+            job[field] = 'Not specified'
+            print(f"  withheld unsupported {field}: {job['company']} / {job['role']}", file=sys.stderr)
+    if job['workAuth'] != 'Not specified':
+        # Do not derive immigration eligibility from silence or export controls.
+        if job['workAuthDetail'] == 'Not specified':
+            job['workAuth'] = 'Not specified'
+        elif job['workAuth'] == 'No sponsorship':
+            if not re.search(r'(?:not|cannot|unable to) sponsor|no sponsorship',
+                             job['workAuthDetail'], re.I):
+                job['workAuth'] = 'Not specified'
+        elif _normalized(job['workAuth']) not in source:
+            job['workAuth'] = 'Not specified'
+
+
+def _link_is_live(job):
+    """Verify the exact role and Apply control, then withhold unsupported details."""
+    url = job['source']
     try:
         resp = requests.get(
             url, headers=LIVE_CHECK_HEADERS, timeout=LIVE_CHECK_TIMEOUT, allow_redirects=True
         )
     except requests.RequestException as e:
-        print(f"  could not verify liveness of {url} ({e}) — keeping, treated as unknown", file=sys.stderr)
-        return True
-
-    if resp.status_code in (404, 410):
+        print(f"  could not verify {url} ({e}) — excluded as unknown", file=sys.stderr)
         return False
 
-    if resp.url != url and BAD_LINK_RE.search(resp.url):
+    if resp.status_code != 200:
+        return False
+
+    if not _is_valid_source(resp.url):
         return False  # bounced from the specific job page to a generic listing page
 
-    if resp.status_code < 400:
-        if CLOSED_SIGNAL_RE.search(resp.text[:20000]):
-            return False
-        if _structured_data_says_expired(resp.text):
-            return False
-
+    if not _posting_matches(resp.text, job):
+        return False
+    _ground_optional_details(job, resp.text)
     return True
 
 
@@ -456,7 +556,7 @@ def get_jobs():
         row = {}
         for key in SCHEMA_KEYS:
             val = job.get(key)
-            row[key] = val if val not in (None, "") else "Not specified"
+            row[key] = val.strip() if isinstance(val, str) and val.strip() else "Not specified"
 
         if row["dateFound"] in ("Not specified", ""):
             row["dateFound"] = TODAY
@@ -482,9 +582,9 @@ def get_jobs():
             drop_counts["deadline_passed"] += 1
             print(f"  dropping (stated deadline already passed): {row['source']}", file=sys.stderr)
             continue
-        if not _link_is_live(row["source"]):
+        if not _link_is_live(row):
             drop_counts["link_dead"] += 1
-            print(f"  dropping (link check found it closed/dead): {row['source']}", file=sys.stderr)
+            print(f"  dropping (posting could not be positively verified): {row['source']}", file=sys.stderr)
             continue
 
         candidates.append(row)
@@ -510,7 +610,7 @@ def update_html(jobs, path="index.html"):
     with open(path, "r", encoding="utf-8") as f:
         html = f.read()
 
-    jobs_json = json.dumps(jobs, indent=2)
+    jobs_json = json.dumps(jobs, indent=2).replace('<', '\\u003c')
     new_jobs_block = "const jobs = " + jobs_json + ";"
 
     jobs_pattern = re.compile(r"const jobs = \[.*?\];(?=\s*function badge)", re.DOTALL)
@@ -535,8 +635,8 @@ def update_html(jobs, path="index.html"):
 def main(path="index.html"):
     jobs = get_jobs()
     print(f"Found {len(jobs)} listings with verified unique sources.")
-    if len(jobs) < 5:
-        print("Too few valid listings found — aborting without publishing to avoid a broken/empty page.", file=sys.stderr)
+    if not jobs:
+        print("No verified listings found — preserving the last successful page and timestamp.", file=sys.stderr)
         return 1
     update_html(jobs, path=path)
     print(f"index.html updated with {len(jobs)} jobs.")

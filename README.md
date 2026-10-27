@@ -24,15 +24,34 @@ credits. Never commit a key to the repository.
 
 Research uses streaming to support its 48,000-token output budget. Paused
 server-tool turns can resume up to three times; truncated, refused, disconnected,
-or unfinished responses fail without replacing the existing listings. The
-existing minimum of five valid listings is also retained. Inspect the failed
+or unfinished responses fail without replacing the existing listings. Any
+nonempty verified result can publish; there is no quota to pad with weak listings.
+Zero results preserve the previous page and its timestamp. Inspect the failed
 Actions step and the page's last-updated timestamp when a refresh fails.
 
 The refresh workflow runs offline tests before research, serializes overlapping
 runs, and stops after 45 minutes. Passing offline tests does not establish that
 the API account has credit, that all source sites are reachable, or that a live
-refresh has completed. The HTTP link check still treats inaccessible sites as
-unknown, and the model's extracted listing details still require source review.
+refresh has completed.
+
+The source check now fails closed on HTTP errors, timeouts, generic redirects,
+mismatched role titles, missing Apply controls, expired deadlines, and closed
+postings. It requires a matching PM heading containing 2027 on a readable page;
+this conservative rule omits some genuine openings, including JavaScript-only
+pages. Unknown is not evidence that a job is open. Optional factual details are
+withheld unless their text appears on the fetched page. These checks reduce
+unsupported output; they do not guarantee future availability or interpret every
+employer's eligibility terms. Industry and priority are editorial tracker labels.
+
+The daily workflow explicitly requests a Pages rebuild after pushing because
+commits made with `GITHUB_TOKEN` do not automatically build branch-based Pages.
+This uses the built-in token with `pages: write`; no additional secret is needed.
+Keep Pages configured for `main` / repository root. Check the separate Pages
+deployment run as well as the refresh job before treating an update as live.
+
+The manually reviewed five-listing snapshot and corrections are recorded in
+`data/manual-review-2026-10-27.json`. That report describes that snapshot only;
+subsequent daily refreshes can change the list.
 
 The current `claude-sonnet-4-5` model is retained by this repair. The installed
 SDK reports its retirement on November 30, 2026; validate a replacement before

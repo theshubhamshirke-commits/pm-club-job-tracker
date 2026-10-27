@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: pm-job-tracker-refresh
@@ -42,12 +43,6 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/refresh_jobs.py
 
-      - name: Report refresh failure
-        if: failure()
-        run: |
-          echo '### Job tracker refresh failed' >> "$GITHUB_STEP_SUMMARY"
-          echo 'No new listings were published. The page retains its last successful update. Review the failed step above.' >> "$GITHUB_STEP_SUMMARY"
-
       - name: Commit and push if changed
         run: |
           git config user.name "pm-job-tracker-bot"
@@ -55,3 +50,16 @@ jobs:
           git add index.html
           git diff --quiet --cached || git commit -m "Daily job tracker refresh $(date -u +'%Y-%m-%d')"
           git push
+
+      # GITHUB_TOKEN commits do not automatically trigger branch-based Pages.
+      - name: Request GitHub Pages rebuild
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --jq .status
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo '### Job tracker refresh or publication failed' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Review the failed step. A successful data commit does not guarantee a successful Pages deployment; compare the live page timestamp with index.html.' >> "$GITHUB_STEP_SUMMARY"
