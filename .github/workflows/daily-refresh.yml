@@ -58,8 +58,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --jq .status
 
+      # Keep fresh verification and Pages publication even during a research outage.
+      - name: Check discovery health after publication request
+        run: python scripts/check_discovery_health.py
+
       - name: Report failure
         if: failure()
         run: |
-          echo '### Job tracker refresh or publication failed' >> "$GITHUB_STEP_SUMMARY"
+          echo '### Job tracker verification, discovery, or publication failed' >> "$GITHUB_STEP_SUMMARY"
           echo 'Review the failed step. A successful data commit does not guarantee a successful Pages deployment; compare the live page timestamp with index.html.' >> "$GITHUB_STEP_SUMMARY"
