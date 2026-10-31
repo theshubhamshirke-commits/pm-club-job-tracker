@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-30T18:32:46.991705+00:00",
+  "checkedAt": "2026-10-31T17:39:01.914130+00:00",
   "discoveryComplete": false,
   "batches": [
     {
@@ -8,7 +8,7 @@
       "fetchedUrls": [],
       "toolErrors": [],
       "status": "failed",
-      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CgYuCL81rNFKDG6fH5M8e'}",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CgaiuWi89aDqktW9vcnyh'}",
       "recoveredFromSources": 0
     },
     {
@@ -17,7 +17,7 @@
       "fetchedUrls": [],
       "toolErrors": [],
       "status": "failed",
-      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CgYuCM4L8mXQsCkXU6Hmd'}",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CgaiuXYySHCzwmaLesnrv'}",
       "recoveredFromSources": 0
     },
     {
@@ -26,7 +26,7 @@
       "fetchedUrls": [],
       "toolErrors": [],
       "status": "failed",
-      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CgYuCMcZFunsSvLcyV6jU'}",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011CgaiuY7To7T8jS22TSgHK'}",
       "recoveredFromSources": 0
     }
   ],
@@ -37,8 +37,9 @@
   "newCandidatesChecked": 0,
   "addedCount": 0,
   "statusCounts": {
-    "unverified": 33,
-    "open": 11
+    "unverified": 32,
+    "open": 11,
+    "closed": 1
   },
   "checks": [
     {
@@ -62,7 +63,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-10-30T18:32:10.700717+00:00"
+      "checkedAt": "2026-10-31T17:38:26.876642+00:00"
     },
     {
       "job": {
@@ -82,11 +83,11 @@
         "notes": "12-week paid internship. Graduating Fall 2027 or Spring 2028. SF Bay Area rate $54-$56/hr, Bellevue rate $51.50-$53.50/hr.",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:10.701111+00:00"
+        "lastChecked": "2026-10-31T17:38:26.877138+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:10.701111+00:00",
+      "checkedAt": "2026-10-31T17:38:26.877138+00:00",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002"
     },
     {
@@ -107,11 +108,11 @@
         "notes": "12-week consecutive internship. MBA program with expected graduation December 2027 \u2013 June 2028. Most roles at Seattle or Arlington, VA headquarters.",
         "source": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:10.701433+00:00"
+        "lastChecked": "2026-10-31T17:38:26.877448+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:10.701433+00:00",
+      "checkedAt": "2026-10-31T17:38:26.877448+00:00",
       "finalUrl": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027"
     },
     {
@@ -132,11 +133,11 @@
         "notes": "10 weeks. Two-year MBA candidates must return to study after the internship and finish by August 2028. No employer immigration support, including OPT or CPT.",
         "source": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:10.702546+00:00"
+        "lastChecked": "2026-10-31T17:38:26.877938+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:10.702546+00:00",
+      "checkedAt": "2026-10-31T17:38:26.877938+00:00",
       "finalUrl": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360"
     },
     {
@@ -157,11 +158,11 @@
         "notes": "2027 graduate cohort for Fall 2026 or Spring 2027 graduates in computer science or a related engineering field. Exact start month is not stated; confirm May\u2013August availability.",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:10.913390+00:00"
+        "lastChecked": "2026-10-31T17:38:27.003758+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:10.913390+00:00",
+      "checkedAt": "2026-10-31T17:38:27.003758+00:00",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002"
     },
     {
@@ -182,11 +183,11 @@
         "notes": "Not specified",
         "source": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:11.100505+00:00"
+        "lastChecked": "2026-10-31T17:38:27.104948+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:11.100505+00:00",
+      "checkedAt": "2026-10-31T17:38:27.104948+00:00",
       "finalUrl": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632"
     },
     {
@@ -207,11 +208,11 @@
         "notes": "Not specified",
         "source": "https://www.atlassian.com/company/careers/details/26274",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:11.449330+00:00"
+        "lastChecked": "2026-10-31T17:38:27.159929+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:11.449330+00:00",
+      "checkedAt": "2026-10-31T17:38:27.159929+00:00",
       "finalUrl": "https://www.atlassian.com/company/careers/details/26274"
     },
     {
@@ -235,7 +236,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:11.512095+00:00"
+      "checkedAt": "2026-10-31T17:38:27.243914+00:00"
     },
     {
       "job": {
@@ -258,7 +259,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:11.691050+00:00"
+      "checkedAt": "2026-10-31T17:38:27.373148+00:00"
     },
     {
       "job": {
@@ -281,7 +282,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:11.929552+00:00"
+      "checkedAt": "2026-10-31T17:38:27.645505+00:00"
     },
     {
       "job": {
@@ -301,11 +302,11 @@
         "notes": "This is an in-person role for new college graduates in our Redwood City office, 3 days a week. Start date: July 2027.",
         "source": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:11.942605+00:00"
+        "lastChecked": "2026-10-31T17:38:27.701046+00:00"
       },
       "status": "open",
       "reason": "Matching listed Ashby posting with a job-specific application URL",
-      "checkedAt": "2026-10-30T18:32:11.942605+00:00",
+      "checkedAt": "2026-10-31T17:38:27.701046+00:00",
       "finalUrl": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea"
     },
     {
@@ -326,11 +327,11 @@
         "notes": "Not specified",
         "source": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:12.003225+00:00"
+        "lastChecked": "2026-10-31T17:38:27.779331+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-10-30T18:32:12.003225+00:00",
+      "checkedAt": "2026-10-31T17:38:27.779331+00:00",
       "finalUrl": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003"
     },
     {
@@ -354,7 +355,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-30T18:32:12.256246+00:00"
+      "checkedAt": "2026-10-31T17:38:27.980652+00:00"
     },
     {
       "job": {
@@ -377,7 +378,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:12.319355+00:00"
+      "checkedAt": "2026-10-31T17:38:28.004266+00:00"
     },
     {
       "job": {
@@ -400,7 +401,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:12.319492+00:00"
+      "checkedAt": "2026-10-31T17:38:28.004351+00:00"
     },
     {
       "job": {
@@ -423,7 +424,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:12.319514+00:00"
+      "checkedAt": "2026-10-31T17:38:28.004392+00:00"
     },
     {
       "job": {
@@ -446,7 +447,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:12.319535+00:00"
+      "checkedAt": "2026-10-31T17:38:28.004430+00:00"
     },
     {
       "job": {
@@ -469,7 +470,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-30T18:32:12.337702+00:00"
+      "checkedAt": "2026-10-31T17:38:28.118587+00:00"
     },
     {
       "job": {
@@ -492,7 +493,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-30T18:32:12.905145+00:00"
+      "checkedAt": "2026-10-31T17:38:28.433181+00:00"
     },
     {
       "job": {
@@ -515,7 +516,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:12.928378+00:00"
+      "checkedAt": "2026-10-31T17:38:28.566740+00:00"
     },
     {
       "job": {
@@ -538,7 +539,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 500",
-      "checkedAt": "2026-10-30T18:32:13.130272+00:00"
+      "checkedAt": "2026-10-31T17:38:28.602282+00:00"
     },
     {
       "job": {
@@ -558,11 +559,11 @@
         "notes": "Currently pursuing an MBA degree 3+ years of professional business experience in a relevant field",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805",
         "dateFound": "2026-10-26",
-        "lastChecked": "2026-10-30T18:32:13.316321+00:00"
+        "lastChecked": "2026-10-31T17:38:28.724382+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-10-30T18:32:13.316321+00:00",
+      "checkedAt": "2026-10-31T17:38:28.724382+00:00",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805"
     },
     {
@@ -586,7 +587,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:13.335371+00:00"
+      "checkedAt": "2026-10-31T17:38:28.889582+00:00"
     },
     {
       "job": {
@@ -609,7 +610,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:13.502439+00:00"
+      "checkedAt": "2026-10-31T17:38:29.135013+00:00"
     },
     {
       "job": {
@@ -632,7 +633,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:14.295190+00:00"
+      "checkedAt": "2026-10-31T17:38:29.680209+00:00"
     },
     {
       "job": {
@@ -643,7 +644,7 @@
         "workMode": "Not specified",
         "workAuth": "Not specified",
         "workAuthDetail": "Not specified",
-        "salary": "The hourly rate for our interns is 38 USD - 94 USD.",
+        "salary": "Not specified",
         "industry": "Technology",
         "startDate": "Summer 2027",
         "endDate": "Not specified",
@@ -652,11 +653,11 @@
         "notes": "Pursuing an MBA in a relevant field or equivalent program (graduating in winter or summer 2028)",
         "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:14.298259+00:00"
+        "lastChecked": "2026-10-31T17:38:29.685459+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-10-30T18:32:14.298259+00:00",
+      "checkedAt": "2026-10-31T17:38:29.685459+00:00",
       "finalUrl": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1"
     },
     {
@@ -677,11 +678,11 @@
         "notes": "Not specified",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-10-30T18:32:15.074461+00:00"
+        "lastChecked": "2026-10-31T17:38:30.473325+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-10-30T18:32:15.074461+00:00",
+      "checkedAt": "2026-10-31T17:38:30.473325+00:00",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983"
     },
     {
@@ -703,9 +704,9 @@
         "source": "https://careers.gevernova.com/ge-vernova-product-management-intern-controls-lifecare-services-summer-2027/job/R5050801",
         "dateFound": "2026-10-27"
       },
-      "status": "unverified",
-      "reason": "No readable enabled Apply control",
-      "checkedAt": "2026-10-30T18:32:15.953609+00:00"
+      "status": "closed",
+      "reason": "Employer page returned 404",
+      "checkedAt": "2026-10-31T17:38:31.091456+00:00"
     },
     {
       "job": {
@@ -728,7 +729,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-10-30T18:32:16.278297+00:00"
+      "checkedAt": "2026-10-31T17:38:31.311247+00:00"
     },
     {
       "job": {
@@ -751,7 +752,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 202",
-      "checkedAt": "2026-10-30T18:32:16.412312+00:00"
+      "checkedAt": "2026-10-31T17:38:31.490920+00:00"
     },
     {
       "job": {
@@ -774,7 +775,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-30T18:32:16.722820+00:00"
+      "checkedAt": "2026-10-31T17:38:31.585079+00:00"
     },
     {
       "job": {
@@ -797,7 +798,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-10-30T18:32:16.786800+00:00"
+      "checkedAt": "2026-10-31T17:38:31.840965+00:00"
     },
     {
       "job": {
@@ -820,7 +821,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:17.327821+00:00"
+      "checkedAt": "2026-10-31T17:38:31.995087+00:00"
     },
     {
       "job": {
@@ -843,7 +844,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.441491+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299498+00:00"
     },
     {
       "job": {
@@ -866,7 +867,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.441634+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299608+00:00"
     },
     {
       "job": {
@@ -889,7 +890,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.441666+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299673+00:00"
     },
     {
       "job": {
@@ -912,7 +913,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.441693+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299722+00:00"
     },
     {
       "job": {
@@ -935,7 +936,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.441715+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299760+00:00"
     },
     {
       "job": {
@@ -958,7 +959,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.441734+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299795+00:00"
     },
     {
       "job": {
@@ -981,7 +982,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-10-30T18:32:17.441750+00:00"
+      "checkedAt": "2026-10-31T17:38:32.299825+00:00"
     },
     {
       "job": {
@@ -1004,7 +1005,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.530761+00:00"
+      "checkedAt": "2026-10-31T17:38:32.303524+00:00"
     },
     {
       "job": {
@@ -1027,7 +1028,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.530813+00:00"
+      "checkedAt": "2026-10-31T17:38:32.303743+00:00"
     },
     {
       "job": {
@@ -1050,7 +1051,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.530838+00:00"
+      "checkedAt": "2026-10-31T17:38:32.303794+00:00"
     },
     {
       "job": {
@@ -1073,7 +1074,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-10-30T18:32:17.530858+00:00"
+      "checkedAt": "2026-10-31T17:38:32.303833+00:00"
     }
   ]
 }
