@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-01T06:07:54.390459+00:00",
+  "updatedAt": "2026-11-01T18:29:45.182969+00:00",
   "jobs": [
     {
       "job": {
@@ -23,7 +23,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-01T06:01:01.957743+00:00"
+      "checkedAt": "2026-11-01T18:23:19.594172+00:00"
     },
     {
       "job": {
@@ -43,11 +43,11 @@
         "notes": "12-week paid internship. Graduating Fall 2027 or Spring 2028. SF Bay Area rate $54-$56/hr, Bellevue rate $51.50-$53.50/hr.",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:01.958156+00:00"
+        "lastChecked": "2026-11-01T18:23:19.594650+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:01.958156+00:00",
+      "checkedAt": "2026-11-01T18:23:19.594650+00:00",
       "sourceFingerprint": "9c8f1bb1e7bec084c3980b5287246a67b7e545784d90f976209a4d71cb0935ed",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002"
     },
@@ -69,11 +69,11 @@
         "notes": "12-week consecutive internship. MBA program with expected graduation December 2027 \u2013 June 2028. Most roles at Seattle or Arlington, VA headquarters.",
         "source": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:01.958487+00:00"
+        "lastChecked": "2026-11-01T18:23:19.595060+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:01.958487+00:00",
+      "checkedAt": "2026-11-01T18:23:19.595060+00:00",
       "sourceFingerprint": "d10a07aab2d8ef258c61c4fe2ed236fc02ac4e3a808708cddcaf72fc2534e050",
       "finalUrl": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027"
     },
@@ -95,11 +95,11 @@
         "notes": "10 weeks. Two-year MBA candidates must return to study after the internship and finish by August 2028. No employer immigration support, including OPT or CPT.",
         "source": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:01.959618+00:00"
+        "lastChecked": "2026-11-01T18:23:19.595291+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:01.959618+00:00",
+      "checkedAt": "2026-11-01T18:23:19.595291+00:00",
       "sourceFingerprint": "02ee762cd8c3357a263f8a418315613620204b4aaf8659e36fd224fd7131a602",
       "finalUrl": "https://www.capitalonecareers.com/job/mclean/mba-product-intern-summer-2027/31238/101906667360"
     },
@@ -121,11 +121,11 @@
         "notes": "2027 graduate cohort for Fall 2026 or Spring 2027 graduates in computer science or a related engineering field. Exact start month is not stated; confirm May\u2013August availability.",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:02.102335+00:00"
+        "lastChecked": "2026-11-01T18:23:20.012275+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:02.102335+00:00",
+      "checkedAt": "2026-11-01T18:23:20.012275+00:00",
       "sourceFingerprint": "4d4402fac5b3467f35e2449dd8399ad21cc6eb874d8c4e1e1f61b8c3820616f0",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002"
     },
@@ -147,11 +147,11 @@
         "notes": "Not specified",
         "source": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:02.230084+00:00"
+        "lastChecked": "2026-11-01T18:23:20.088031+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:02.230084+00:00",
+      "checkedAt": "2026-11-01T18:23:20.088031+00:00",
       "sourceFingerprint": "c1010d6b17c805ed53cc84e806409f2545aab94e4d4f57c811b7ccdc3ed0e144",
       "finalUrl": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632"
     },
@@ -196,11 +196,11 @@
         "notes": "Not specified",
         "source": "https://www.atlassian.com/company/careers/details/26274",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:02.278117+00:00"
+        "lastChecked": "2026-11-01T18:23:20.176023+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:02.278117+00:00",
+      "checkedAt": "2026-11-01T18:23:20.176023+00:00",
       "sourceFingerprint": "e2a076ef08f19e4a726ecff9fbcac4a9d1ced64773c01aefc8e4ee44f5c183a5",
       "finalUrl": "https://www.atlassian.com/company/careers/details/26274"
     },
@@ -225,7 +225,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:02.451214+00:00"
+      "checkedAt": "2026-11-01T18:23:20.376565+00:00"
     },
     {
       "job": {
@@ -248,7 +248,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:02.456628+00:00"
+      "checkedAt": "2026-11-01T18:23:20.446675+00:00"
     },
     {
       "job": {
@@ -259,19 +259,19 @@
         "workMode": "On-site",
         "workAuth": "No sponsorship",
         "workAuthDetail": "At this time, Appian will not sponsor a new applicant for employment authorization for this position.",
-        "salary": "$110,000\u2014$113,000 USD",
+        "salary": "$110,000-$113,000 USD",
         "industry": "Technology",
         "startDate": "Not specified",
         "endDate": "N/A",
         "startDateFit": "Strong 2027 signal",
-        "priority": "Good fit",
-        "notes": "Based at headquarters in McLean, Virginia. Expected to be in the office 5 days a week. Currently pursuing a Bachelor's degree (or higher) in Computer Science or Computer Engineering. Applications and interviews start August 2026.",
+        "priority": "High priority",
+        "notes": "Currently pursuing a Bachelor's degree (or higher) in Computer Science or Computer Engineering. In office 5 days a week. Applications officially being reviewed starting August 2026. Posted July 24, 2026.",
         "source": "https://careers.appian.com/jobs/8069612-product-manager--2027-graduates-",
         "dateFound": "2026-10-27"
       },
       "status": "closed",
       "reason": "Employer page returned 404",
-      "checkedAt": "2026-11-01T06:07:53.253848+00:00"
+      "checkedAt": "2026-11-01T18:29:14.879872+00:00"
     },
     {
       "job": {
@@ -317,7 +317,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:02.836436+00:00"
+      "checkedAt": "2026-11-01T18:23:20.765870+00:00"
     },
     {
       "job": {
@@ -337,11 +337,11 @@
         "notes": "This is an in-person role for new college graduates in our Redwood City office, 3 days a week. Start date: July 2027.",
         "source": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:02.925766+00:00"
+        "lastChecked": "2026-11-01T18:23:20.956383+00:00"
       },
       "status": "open",
       "reason": "Matching listed Ashby posting with a job-specific application URL",
-      "checkedAt": "2026-11-01T06:01:02.925766+00:00",
+      "checkedAt": "2026-11-01T18:23:20.956383+00:00",
       "sourceFingerprint": "c46441a1c43d59b3a5163729b9a3f6e2fb2f6f9e10597e92d938c2ecd1cd36ce",
       "finalUrl": "https://jobs.ashbyhq.com/solace/ee8ee239-ad20-4c1e-868d-3357799589ea"
     },
@@ -363,11 +363,11 @@
         "notes": "Not specified",
         "source": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:03.192935+00:00"
+        "lastChecked": "2026-11-01T18:23:21.101659+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-01T06:01:03.192935+00:00",
+      "checkedAt": "2026-11-01T18:23:21.101659+00:00",
       "sourceFingerprint": "b84c5efc30efa2703924c66b8774ab516e896523c3280bc5411da9a075b044c7",
       "finalUrl": "https://job-boards.greenhouse.io/idmeuniversityrecruiting/jobs/7986694003"
     },
@@ -392,7 +392,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:01:03.321820+00:00"
+      "checkedAt": "2026-11-01T18:23:21.225952+00:00"
     },
     {
       "job": {
@@ -415,7 +415,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:03.533159+00:00"
+      "checkedAt": "2026-11-01T18:23:21.539885+00:00"
     },
     {
       "job": {
@@ -438,7 +438,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:03.533312+00:00"
+      "checkedAt": "2026-11-01T18:23:21.539941+00:00"
     },
     {
       "job": {
@@ -461,7 +461,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:03.533336+00:00"
+      "checkedAt": "2026-11-01T18:23:21.539971+00:00"
     },
     {
       "job": {
@@ -484,7 +484,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:03.533357+00:00"
+      "checkedAt": "2026-11-01T18:23:21.540001+00:00"
     },
     {
       "job": {
@@ -507,7 +507,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:01:03.832523+00:00"
+      "checkedAt": "2026-11-01T18:23:21.586574+00:00"
     },
     {
       "job": {
@@ -530,7 +530,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:01:04.259667+00:00"
+      "checkedAt": "2026-11-01T18:23:21.896399+00:00"
     },
     {
       "job": {
@@ -622,7 +622,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:04.466914+00:00"
+      "checkedAt": "2026-11-01T18:23:22.304203+00:00"
     },
     {
       "job": {
@@ -645,7 +645,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 500",
-      "checkedAt": "2026-11-01T06:01:04.630179+00:00"
+      "checkedAt": "2026-11-01T18:23:22.365776+00:00"
     },
     {
       "job": {
@@ -665,11 +665,11 @@
         "notes": "Currently pursuing an MBA degree 3+ years of professional business experience in a relevant field",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805",
         "dateFound": "2026-10-26",
-        "lastChecked": "2026-11-01T06:01:04.779913+00:00"
+        "lastChecked": "2026-11-01T18:23:22.611605+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-01T06:01:04.779913+00:00",
+      "checkedAt": "2026-11-01T18:23:22.611605+00:00",
       "sourceFingerprint": "22a6ff0c45c2a6fc4806c65f4caee820c8b69efbc4fd3a0195e86fa852e7bfd9",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805"
     },
@@ -694,7 +694,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:04.847451+00:00"
+      "checkedAt": "2026-11-01T18:23:22.743109+00:00"
     },
     {
       "job": {
@@ -740,7 +740,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:04.876176+00:00"
+      "checkedAt": "2026-11-01T18:23:22.840332+00:00"
     },
     {
       "job": {
@@ -763,7 +763,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:05.558874+00:00"
+      "checkedAt": "2026-11-01T18:23:23.426700+00:00"
     },
     {
       "job": {
@@ -783,11 +783,11 @@
         "notes": "Pursuing an MBA in a relevant field or equivalent program (graduating in winter or summer 2028)",
         "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:05.780708+00:00"
+        "lastChecked": "2026-11-01T18:23:23.814482+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-01T06:01:05.780708+00:00",
+      "checkedAt": "2026-11-01T18:23:23.814482+00:00",
       "sourceFingerprint": "f9cb4008d733f5d0687eb38703d5c64ca5b6ae3bcfce268d56f24c452c49fe02",
       "finalUrl": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1"
     },
@@ -809,11 +809,11 @@
         "notes": "Not specified",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-01T06:01:06.690790+00:00"
+        "lastChecked": "2026-11-01T18:23:24.742038+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-01T06:01:06.690790+00:00",
+      "checkedAt": "2026-11-01T18:23:24.742038+00:00",
       "sourceFingerprint": "485e76749327bf873497b808db36434196ebc2854b2f7bc19dc3a245262d3505",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983"
     },
@@ -861,7 +861,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-01T06:01:07.338875+00:00"
+      "checkedAt": "2026-11-01T18:23:25.537356+00:00"
     },
     {
       "job": {
@@ -884,7 +884,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 202",
-      "checkedAt": "2026-11-01T06:01:07.603965+00:00"
+      "checkedAt": "2026-11-01T18:23:25.676419+00:00"
     },
     {
       "job": {
@@ -901,13 +901,13 @@
         "endDate": "Not specified",
         "startDateFit": "Confirmed Summer 2027",
         "priority": "High priority",
-        "notes": "Job posted September 25, 2026.",
+        "notes": "Posted 09/25/2026",
         "source": "https://careers.mastercard.com/us/en/job/R-287624/Product-Management-Intern-Summer-2027-United-States",
         "dateFound": "2026-10-27"
       },
       "status": "closed",
       "reason": "Employer page returned 410",
-      "checkedAt": "2026-11-01T06:07:52.749645+00:00"
+      "checkedAt": "2026-11-01T18:29:14.481896+00:00"
     },
     {
       "job": {
@@ -930,7 +930,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:01:07.666068+00:00"
+      "checkedAt": "2026-11-01T18:23:26.002238+00:00"
     },
     {
       "job": {
@@ -953,7 +953,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:01:07.918815+00:00"
+      "checkedAt": "2026-11-01T18:23:26.399774+00:00"
     },
     {
       "job": {
@@ -976,7 +976,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:08.222743+00:00"
+      "checkedAt": "2026-11-01T18:23:26.619990+00:00"
     },
     {
       "job": {
@@ -999,7 +999,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.465184+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975124+00:00"
     },
     {
       "job": {
@@ -1045,7 +1045,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.465241+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975193+00:00"
     },
     {
       "job": {
@@ -1068,7 +1068,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.465276+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975236+00:00"
     },
     {
       "job": {
@@ -1091,7 +1091,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.465301+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975272+00:00"
     },
     {
       "job": {
@@ -1114,7 +1114,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.465322+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975302+00:00"
     },
     {
       "job": {
@@ -1137,7 +1137,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.465343+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975330+00:00"
     },
     {
       "job": {
@@ -1160,7 +1160,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:01:08.465360+00:00"
+      "checkedAt": "2026-11-01T18:23:26.975353+00:00"
     },
     {
       "job": {
@@ -1183,7 +1183,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.532300+00:00"
+      "checkedAt": "2026-11-01T18:23:27.237075+00:00"
     },
     {
       "job": {
@@ -1206,7 +1206,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.532382+00:00"
+      "checkedAt": "2026-11-01T18:23:27.237237+00:00"
     },
     {
       "job": {
@@ -1229,7 +1229,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.532409+00:00"
+      "checkedAt": "2026-11-01T18:23:27.237275+00:00"
     },
     {
       "job": {
@@ -1252,7 +1252,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:01:08.532431+00:00"
+      "checkedAt": "2026-11-01T18:23:27.237304+00:00"
     },
     {
       "job": {
@@ -1269,13 +1269,13 @@
         "endDate": "N/A",
         "startDateFit": "Strong 2027 signal",
         "priority": "High priority",
-        "notes": "Selective MBA leadership development program. Multi-year pathway with strategic rotations. Based in Seattle, WA. Amazon requires employees to be in office 5 days a week. Currently has, or is in the process of obtaining, a full-time MBA program.",
+        "notes": "Selective MBA leadership development program. Multi-year pathway for MBA graduates. Currently has or is in process of obtaining full-time MBA. Relocation to Seattle required. 5 days a week in office.",
         "source": "https://amazon.jobs/en/jobs/10490981/2027-amazon-leadership-accelerator-ala-product-manager-full-time",
         "dateFound": "2026-10-27"
       },
       "status": "out_of_scope",
       "reason": "No 2027 graduate/cohort/start signal in the posting",
-      "checkedAt": "2026-11-01T06:07:53.824751+00:00"
+      "checkedAt": "2026-11-01T18:29:15.160098+00:00"
     },
     {
       "job": {
@@ -1298,7 +1298,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-01T06:07:52.746155+00:00"
+      "checkedAt": "2026-11-01T18:23:27.237336+00:00"
     },
     {
       "job": {
@@ -1318,11 +1318,11 @@
         "notes": "Not specified",
         "source": "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Product-Management-Intern--Data-and-AI-Team---Summer-2027_REF089881W",
         "dateFound": "2026-11-01",
-        "lastChecked": "2026-11-01T06:07:52.746886+00:00"
+        "lastChecked": "2026-11-01T18:23:28.415905+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-01T06:07:52.746886+00:00",
+      "checkedAt": "2026-11-01T18:23:28.415905+00:00",
       "sourceFingerprint": "c38a6361be96b0e66de03a59b51897d38d2148272a4e70b87b057ed6042f0a3c",
       "finalUrl": "https://visa.wd5.myworkdayjobs.com/en-US/Visa_Early_Careers/job/Product-Management-Intern--Data-and-AI-Team---Summer-2027_REF089881W"
     },
@@ -1347,7 +1347,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.748332+00:00"
+      "checkedAt": "2026-11-01T18:23:29.312734+00:00"
     },
     {
       "job": {
@@ -1370,7 +1370,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.749569+00:00"
+      "checkedAt": "2026-11-01T18:23:29.312948+00:00"
     },
     {
       "job": {
@@ -1393,7 +1393,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.749592+00:00"
+      "checkedAt": "2026-11-01T18:23:29.312979+00:00"
     },
     {
       "job": {
@@ -1416,7 +1416,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.749609+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313003+00:00"
     },
     {
       "job": {
@@ -1439,7 +1439,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.749630+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313028+00:00"
     },
     {
       "job": {
@@ -1462,7 +1462,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.995409+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313051+00:00"
     },
     {
       "job": {
@@ -1485,7 +1485,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:52.995470+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313070+00:00"
     },
     {
       "job": {
@@ -1508,7 +1508,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253582+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313099+00:00"
     },
     {
       "job": {
@@ -1531,7 +1531,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253746+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313119+00:00"
     },
     {
       "job": {
@@ -1554,7 +1554,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253770+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313143+00:00"
     },
     {
       "job": {
@@ -1577,7 +1577,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253786+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313162+00:00"
     },
     {
       "job": {
@@ -1600,7 +1600,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253803+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313184+00:00"
     },
     {
       "job": {
@@ -1623,7 +1623,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253819+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313204+00:00"
     },
     {
       "job": {
@@ -1646,7 +1646,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.253834+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313224+00:00"
     },
     {
       "job": {
@@ -1669,7 +1669,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:07:53.394290+00:00"
+      "checkedAt": "2026-11-01T18:23:29.313242+00:00"
     },
     {
       "job": {
@@ -1692,7 +1692,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-01T06:07:53.435980+00:00"
+      "checkedAt": "2026-11-01T18:23:29.333942+00:00"
     },
     {
       "job": {
@@ -1715,7 +1715,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.513300+00:00"
+      "checkedAt": "2026-11-01T18:23:30.034988+00:00"
     },
     {
       "job": {
@@ -1761,7 +1761,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-01T06:07:53.824669+00:00"
+      "checkedAt": "2026-11-01T18:23:30.035181+00:00"
     },
     {
       "job": {
@@ -1785,6 +1785,259 @@
       "status": "closed",
       "reason": "Employer page returned 404",
       "checkedAt": "2026-11-01T06:07:53.840860+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Management Development Program (PMDP) Internship - Summer 2027",
+        "company": "Travelers",
+        "location": "Hartford, CT",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "Applicants must be authorized to work for any employer in the U.S. now and in the future. The company does not sponsor/support H-1B petitions, TN, or Forms I-983/STEM OPT, for this role.",
+        "salary": "$26.00 - $28.00 per hour",
+        "industry": "Insurance",
+        "startDate": "Early June through end of summer",
+        "endDate": "End of summer",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "24 target openings. Posted 09/01/2026. Subsidized apartments available for students beyond commutable distance. Rolling review beginning early September.",
+        "source": "https://careers.travelers.com/job/23785175/product-management-development-program-pmdp-intern-hartford-ct/",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Matching job heading is not readable",
+      "checkedAt": "2026-11-01T18:29:14.482739+00:00"
+    },
+    {
+      "job": {
+        "role": "GE Vernova Controls Product Management Intern - Summer 2027",
+        "company": "GE Vernova",
+        "location": "Greenville, SC; Longmont, CO",
+        "type": "Internship",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
+        "industry": "Industrial",
+        "startDate": "Summer 2027",
+        "endDate": "Not specified",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Posted 08/25/2026. Job Posting End Date: 2026-10-31. Supports control system products for power plants.",
+        "source": "https://careers.gevernova.com/ge-vernova-controls-product-management-intern-summer-2027/job/R5050803",
+        "dateFound": "2026-11-01"
+      },
+      "status": "closed",
+      "reason": "Employer page returned 404",
+      "checkedAt": "2026-11-01T18:29:14.483495+00:00"
+    },
+    {
+      "job": {
+        "role": "Associate Product Manager, University Graduate, 2027 Start",
+        "company": "Google",
+        "location": "Mountain View, CA; New York, NY; San Jose, CA; Sunnyvale, CA",
+        "type": "Full-time",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$116,000-$165,000",
+        "industry": "Technology",
+        "startDate": "Ability to start full-time in the primary cohort onboarding cycle between April and August 2027",
+        "endDate": "N/A",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Applications accepted September 22, 2026 through October 6, 2026. Currently enrolled in or graduated from a degree program within Product Management, Computer Science, Engineering, Data Science, Mathematics, Statistics, or a related technical field.",
+        "source": "https://www.google.com/about/careers/applications/jobs/results/136277892853080774-associate-product-manager-university-graduate-2027-start",
+        "dateFound": "2026-11-01"
+      },
+      "status": "closed",
+      "reason": "Employer page reports the posting closed or expired",
+      "checkedAt": "2026-11-01T18:29:14.483762+00:00"
+    },
+    {
+      "job": {
+        "role": "[2027] Associate Product Manager, Early Career",
+        "company": "Roblox",
+        "location": "San Mateo, CA",
+        "type": "Rotational/Development Program",
+        "workMode": "Hybrid",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "At this time, Roblox is not prepared to sponsor candidates for this position who will now, or in the future, require visa categories, or support future H-1B sponsorship.",
+        "salary": "$143,000 annually",
+        "industry": "Technology",
+        "startDate": "Not specified",
+        "endDate": "N/A",
+        "startDateFit": "Strong 2027 signal",
+        "priority": "High priority",
+        "notes": "21-month Associate Product Manager rotational program. Pursuing or possessing undergraduate/graduate degree in computer science, engineering, information systems, business, mathematics or related field. Applications close Friday, October 30th at 5 PM PST - recruiting on rolling basis.",
+        "source": "https://careers.roblox.com/jobs/6606375",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Employer page could not be reached (ReadTimeout)",
+      "checkedAt": "2026-11-01T18:29:14.938876+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Manager: New Grad Accelerator",
+        "company": "Stripe",
+        "location": "San Francisco, Seattle, or New York",
+        "type": "Full-time",
+        "workMode": "On-site",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$120,000-$180,000 USD",
+        "industry": "Fintech",
+        "startDate": "Not specified",
+        "endDate": "N/A",
+        "startDateFit": "Strong 2027 signal",
+        "priority": "High priority",
+        "notes": "12-month intensive training program. New grad or 0-2 years of professional experience, with CS or engineering degree. In-person at Stripe offices. Ideally placed full time in Product Manager role after program completion.",
+        "source": "https://stripe.com/careers/listing/product-manager-new-grad-accelerator/7737124",
+        "dateFound": "2026-11-01"
+      },
+      "status": "out_of_scope",
+      "reason": "No 2027 graduate/cohort/start signal in the posting",
+      "checkedAt": "2026-11-01T18:29:15.117078+00:00"
+    },
+    {
+      "job": {
+        "role": "MBA Product Manager - 2027",
+        "company": "Capital One",
+        "location": "Chicago, IL; McLean, VA; New York, NY; Plano, TX; Richmond, VA",
+        "type": "Rotational/Development Program",
+        "workMode": "Not specified",
+        "workAuth": "No sponsorship",
+        "workAuthDetail": "At this time, Capital One will not sponsor a new applicant for employment authorization, or offer any immigration related support for this position",
+        "salary": "$169,000-$203,000 (location dependent)",
+        "industry": "Fintech",
+        "startDate": "August 2027",
+        "endDate": "N/A",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Full-time new hires start as cohort within MBA Development Program in August 2027. Currently has or in process of obtaining 2-year MBA with expectation degree obtained by August 2027 or earlier.",
+        "source": "https://www.capitalonecareers.com/job/-/-/1732/mba-product-manager-2027",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Source redirected away from a matching employer posting",
+      "checkedAt": "2026-11-01T18:29:15.204445+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Development Program Associate - 2027",
+        "company": "Capital One",
+        "location": "Chicago, IL; McLean, VA; New York, NY; Plano, TX; Richmond, VA",
+        "type": "Rotational/Development Program",
+        "workMode": "Not specified",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$99,000-$119,000 (location dependent)",
+        "industry": "Fintech",
+        "startDate": "August 2027",
+        "endDate": "N/A",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Full-time new hires start as cohort in rotational program August 2027. Two-year rotational program. Currently has or in process of obtaining Bachelor's degree or higher with expectation complete most recent full-time degree by August 2027 or earlier.",
+        "source": "https://www.capitalonecareers.com/job/mclean/product-development-program-associate-2027/31238/97421687328",
+        "dateFound": "2026-11-01"
+      },
+      "status": "closed",
+      "reason": "Employer page returned 404",
+      "checkedAt": "2026-11-01T18:29:15.433789+00:00"
+    },
+    {
+      "job": {
+        "role": "IT Project & Product Manager (2027 Grads)",
+        "company": "Procter & Gamble",
+        "location": "Cincinnati, Ohio",
+        "type": "Full-time",
+        "workMode": "Hybrid",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$92,000-$116,500 a year",
+        "industry": "Consumer Goods",
+        "startDate": "Not specified",
+        "endDate": "N/A",
+        "startDateFit": "Strong 2027 signal",
+        "priority": "Good fit",
+        "notes": "Seeking 2027 graduates interested in project and product management within IT domain. Graduating Spring or Summer 2027 with Bachelor's degree in IT, CS, MIS, engineering, analytics or related field.",
+        "source": "https://www.pgcareers.com/in/en/job/R000157914/IT-Project-Product-Manager-2027-Grads",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-11-01T18:29:15.487608+00:00"
+    },
+    {
+      "job": {
+        "role": "Associate Product Manager (College Grad 2027)",
+        "company": "Solace",
+        "location": "Redwood City, CA",
+        "type": "Full-time",
+        "workMode": "Hybrid",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$90,000-$130,000",
+        "industry": "Healthcare",
+        "startDate": "July 2027",
+        "endDate": "N/A",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "Good fit",
+        "notes": "Entry-level product manager role. College graduate or graduating in 2027. Based in United States. In-person Redwood City hybrid 3 days/week. Start date July 2027.",
+        "source": "https://builtin.com/job/associate-product-manager-college-grad-2027/10566628",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-11-01T18:29:15.487781+00:00"
+    },
+    {
+      "job": {
+        "role": "Senior Associate Product Manager (MBA Grad 2027)",
+        "company": "Solace",
+        "location": "Redwood City, CA",
+        "type": "Full-time",
+        "workMode": "Hybrid",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
+        "industry": "Healthcare",
+        "startDate": "Not specified",
+        "endDate": "N/A",
+        "startDateFit": "Strong 2027 signal",
+        "priority": "Good fit",
+        "notes": "MBA graduate role for 2027. Hybrid in Redwood City.",
+        "source": "https://jobs.riverparkvc.com/companies/solace-2-4abaad68-dd81-407a-9e72-d82d75167901/jobs/89118256-senior-associate-product-manager-mba-grad-2027",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Source is not a specific recognized employer/ATS posting",
+      "checkedAt": "2026-11-01T18:29:15.487806+00:00"
+    },
+    {
+      "job": {
+        "role": "Product Manager 2 - Rotational Product Management (RPM) Program",
+        "company": "Intuit",
+        "location": "Mountain View, CA",
+        "type": "Rotational/Development Program",
+        "workMode": "Hybrid",
+        "workAuth": "Not specified",
+        "workAuthDetail": "Not specified",
+        "salary": "$130,500-$177,000",
+        "industry": "Technology",
+        "startDate": "Tuesday, September 7, 2027",
+        "endDate": "N/A",
+        "startDateFit": "Confirmed Summer 2027",
+        "priority": "High priority",
+        "notes": "Two-year Rotational Product Management (RPM) program. Selective growth accelerator with high-impact assignments. Applications expected to open September 2026 for fall 2027 full-time program. Bachelor's or non-MBA master's degree. Less than 2 years experience.",
+        "source": "https://jobs.intuit.com/job/mountain-view/product-manager-2-rotational-product-management-rpm-program/27595/rpm-program-id",
+        "dateFound": "2026-11-01"
+      },
+      "status": "unverified",
+      "reason": "Source redirected away from a matching employer posting",
+      "checkedAt": "2026-11-01T18:29:15.487834+00:00"
     }
   ]
 }
