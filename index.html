@@ -77,9 +77,6 @@
   .badge-opt { background: #e0f7fa; color: #00636b; }
   .badge-confirmed { background: #d9f2e0; color: #146c2e; font-weight: 700; }
   .badge-strong { background: #e3f0ff; color: #0b4a8f; }
-  .badge-high { background: #ffe3e3; color: #9c1f1f; font-weight: 700; }
-  .badge-good { background: #e3f0ff; color: #0b4a8f; }
-  .badge-watch { background: #eee; color: #666; }
   details.bench { background: #fff; border: 1px solid #e3e5e9; border-radius: 8px; padding: 12px 18px; margin: 24px 0; font-size: 13px; }
   details.bench summary { cursor: pointer; font-weight: 600; color: #1f2a44; }
   details.bench table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12.5px; }
@@ -98,7 +95,7 @@
   <div class="notice">
     <strong>About these openings:</strong> This tracker covers US product management internships for Summer 2027 and graduate PM roles with a stated 2027 hiring cycle. A 2027 cohort does not confirm a May–August start; check each role's dates.
     <br><br>
-    <strong>Source checks:</strong> Each listing links to its matching employer job description. Every daily run rechecks existing listings and searches for new openings. It checks the matching role, 2027 timing in the title or description, application availability and closure signals. Unreachable or inconclusive pages are excluded. Details that cannot be supported are marked <span class="badge badge-notspec">Not specified</span>. Industry and priority are tracker categories. Openings can close after the last update; confirm the employer's current terms before applying.
+    <strong>Source checks:</strong> Each listing links to its matching employer job description. Every daily run rechecks existing listings and searches for new openings. It checks the matching role, 2027 timing in the title or description, application availability and closure signals. Unreachable or inconclusive pages are excluded. Details that cannot be supported are marked <span class="badge badge-notspec">Not specified</span>. Industry is a tracker category. Openings can close after the last update; confirm the employer's current terms before applying.
   </div>
 
   <div class="stat-row" id="stat-row"></div>
@@ -111,10 +108,6 @@
     <div class="control">
       <label for="f-workauth">Work authorization</label>
       <select id="f-workauth"><option value="">All</option></select>
-    </div>
-    <div class="control">
-      <label for="f-priority">Priority</label>
-      <select id="f-priority"><option value="">All</option></select>
     </div>
     <div class="control">
       <label for="f-industry">Industry</label>
@@ -385,11 +378,6 @@ function badge(kind, value) {
       "Strong 2027 signal": "badge-strong",
       "Flexible/Potential": "badge-unclear",
       "Not specified": "badge-notspec"
-    },
-    priority: {
-      "High priority": "badge-high",
-      "Good fit": "badge-good",
-      "Watch": "badge-watch"
     }
   };
   const cls = (map[kind] && map[kind][value]) || "badge-notspec";
@@ -406,14 +394,12 @@ function renderStats(data) {
   const ftRotational = data.filter(d => d.type === 'Full-time' || d.type === 'Rotational/Development Program').length;
   const withSalary = data.filter(d => d.salary && !/not specified/i.test(d.salary)).length;
   const noSponsor = data.filter(d => d.workAuth === 'No sponsorship').length;
-  const highPriority = data.filter(d => d.priority === 'High priority').length;
   document.getElementById('stat-row').innerHTML = `
     <div class="stat"><b>${total}</b>Total listings</div>
     <div class="stat"><b>${interns}</b>Internships</div>
     <div class="stat"><b>${ftRotational}</b>Full-time / Rotational</div>
     <div class="stat"><b>${withSalary}</b>With salary stated</div>
     <div class="stat"><b>${noSponsor}</b>Explicitly no sponsorship</div>
-    <div class="stat"><b>${highPriority}</b>High priority</div>
   `;
 }
 
@@ -428,11 +414,10 @@ function populateSelect(id, values) {
 
 populateSelect('f-type', jobs.map(j => j.type));
 populateSelect('f-workauth', jobs.map(j => j.workAuth));
-populateSelect('f-priority', jobs.map(j => j.priority));
 populateSelect('f-industry', jobs.map(j => j.industry));
 
 const columns = [
-  { name: 'Role', width: '190px', formatter: (cell, row) => gridjs.html(`<a class="src-link" href="${escapeHtml(row.cells[12].data)}" target="_blank" rel="noopener noreferrer">${escapeHtml(cell)}</a>`) },
+  { name: 'Role', width: '190px', formatter: (cell, row) => gridjs.html(`<a class="src-link" href="${escapeHtml(row.cells[11].data)}" target="_blank" rel="noopener noreferrer">${escapeHtml(cell)}</a>`) },
   { name: 'Company', width: '120px' },
   { name: 'Location', width: '140px' },
   { name: 'Track', width: '130px', formatter: (cell) => gridjs.html(badge('type', cell)) },
@@ -442,7 +427,6 @@ const columns = [
   { name: 'Industry', width: '140px' },
   { name: 'Dates', width: '150px' },
   { name: 'Start-Date Fit', width: '130px', formatter: (cell) => gridjs.html(badge('startDateFit', cell)) },
-  { name: 'Priority', width: '100px', formatter: (cell) => gridjs.html(badge('priority', cell)) },
   { name: 'Notes', width: '200px' },
   { name: 'Source', width: '90px', formatter: (cell) => gridjs.html(`<a class="src-link" href="${escapeHtml(cell)}" target="_blank" rel="noopener">View »</a>`) },
   { name: 'Found On', width: '95px' },
@@ -452,7 +436,7 @@ const columns = [
 function toRows(data) {
   return data.map(j => [
     j.role, j.company, j.location, j.type, j.workMode, j.workAuth, j.salary,
-    j.industry, (j.startDate + ' → ' + j.endDate), j.startDateFit, j.priority,
+    j.industry, (j.startDate + ' → ' + j.endDate), j.startDateFit,
     j.notes, j.source, j.dateFound, j.lastChecked ? j.lastChecked.slice(0, 16).replace('T', ' ') : 'Not recorded'
   ]);
 }
@@ -471,14 +455,12 @@ renderStats(jobs);
 function applyFilters() {
   const type = document.getElementById('f-type').value;
   const workAuth = document.getElementById('f-workauth').value;
-  const priority = document.getElementById('f-priority').value;
   const industry = document.getElementById('f-industry').value;
   const q = document.getElementById('f-search').value.trim().toLowerCase();
 
   const filtered = jobs.filter(j => {
     if (type && j.type !== type) return false;
     if (workAuth && j.workAuth !== workAuth) return false;
-    if (priority && j.priority !== priority) return false;
     if (industry && j.industry !== industry) return false;
     if (q && !(j.role.toLowerCase().includes(q) || j.company.toLowerCase().includes(q) || j.industry.toLowerCase().includes(q))) return false;
     return true;
@@ -490,7 +472,6 @@ function applyFilters() {
 
 document.getElementById('f-type').addEventListener('change', applyFilters);
 document.getElementById('f-workauth').addEventListener('change', applyFilters);
-document.getElementById('f-priority').addEventListener('change', applyFilters);
 document.getElementById('f-industry').addEventListener('change', applyFilters);
 document.getElementById('f-search').addEventListener('input', applyFilters);
 
