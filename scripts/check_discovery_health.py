@@ -1,7 +1,7 @@
-"""Report a total discovery outage after verification and publication finish.
+"""Report failed discovery passes or missing searches after publication is requested.
 
 This command reads the existing report only; it never runs research or checks jobs.
-Partial discovery remains a warning in refresh_jobs.py, not a failed workflow.
+Partial coverage from source-fetch errors alone remains a warning.
 """
 import json
 from pathlib import Path
@@ -15,6 +15,7 @@ def main(report_path):
         if not isinstance(batches, list) or not batches or any(
             not isinstance(batch, dict)
             or batch.get('status') not in ('complete', 'partial', 'failed')
+            or not isinstance(batch.get('missingQueries', []), list)
             for batch in batches
         ):
             raise ValueError('Missing or invalid discovery batches')
@@ -22,8 +23,11 @@ def main(report_path):
         print(f'::error::Cannot assess discovery health: {error}')
         return 1
 
-    if all(batch['status'] == 'failed' for batch in batches):
-        print('::error::Every new-job discovery pass failed. Existing-job verification '
+    unhealthy = [str(batch.get('name', 'unnamed pass')) for batch in batches
+                 if batch['status'] == 'failed' or batch.get('missingQueries')]
+    if unhealthy:
+        print('::error::Discovery passes failed or missed required searches: '
+              + ', '.join(unhealthy) + '. Existing-job verification '
               'and publication are separate. Inspect data/refresh-report.json for '
               'the API or discovery errors; a published page does not mean searches ran.')
         return 1
