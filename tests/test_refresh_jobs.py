@@ -183,6 +183,60 @@ class PublishingTests(unittest.TestCase):
         self.assertEqual(report['newCandidatesChecked'], 0)
         self.assertEqual(report['publishedCount'], 2)
 
+    def test_verified_application_alias_publishes_once_but_rechecks_both_sources(self):
+        original = self.original_jobs[0]
+        alias = original | {'source': 'https://testcompany0.wd5.myworkdayjobs.com/Jobs/job/City/PM_R123-1'}
+        def check(job, previous):
+            result = self.check(job)
+            if job['company'] == original['company']:
+                result['applicationKey'] = 'workday:testcompany0:r123'
+            return result
+        report = self.run_refresh([alias], check=check)
+        self.assertEqual(report['publishedCount'], 2)
+        self.assertEqual(report['addedCount'], 0)
+        self.assertEqual(report['newCandidatesChecked'], 1)
+        self.assertEqual(report['duplicateOpenCount'], 1)
+        self.assertEqual(report['duplicateOpenSources'][0]['publishedSource'], original['source'])
+        self.assertEqual(len(report['checks']), 3)
+        report = self.run_refresh(check=check, failed=True)
+        self.assertEqual(report['existingRechecked'], 3)
+        self.assertEqual(report['publishedCount'], 2)
+        self.assertEqual(report['addedCount'], 0)
+        self.assertFalse(report['discoveryComplete'])
+
+    def test_unknown_alias_is_hidden_and_retried_without_hiding_verified_source(self):
+        original = self.original_jobs[0]
+        alias = original | {'source': 'https://testcompany0.wd5.myworkdayjobs.com/Jobs/job/City/PM_R123-1'}
+        def check(job, previous):
+            result = self.check(job)
+            if job['source'] == original['source']:
+                result['status'] = 'unverified'
+            elif job['source'] == alias['source']:
+                result['applicationKey'] = 'workday:testcompany0:r123'
+            return result
+        self.run_refresh([alias], check=check)
+        report = self.run_refresh(check=check, failed=True)
+        self.assertEqual(report['existingRechecked'], 3)
+        self.assertEqual(report['statusCounts']['unverified'], 1)
+        sources = {job['source'] for job in tracker._load_page_jobs(self.page)}
+        self.assertIn(alias['source'], sources)
+        self.assertNotIn(original['source'], sources)
+
+    def test_similar_titles_and_distinct_requisitions_are_not_collapsed(self):
+        original = self.original_jobs[0]
+        other = original | {'source': 'https://testcompany0.wd5.myworkdayjobs.com/Jobs/job/City/PM_R456'}
+        for known_identity in (False, True):
+            with self.subTest(known_identity=known_identity):
+                def check(job, previous):
+                    result = self.check(job)
+                    if known_identity and job['company'] == original['company']:
+                        req = 'r456' if job['source'] == other['source'] else 'r123'
+                        result['applicationKey'] = 'workday:testcompany0:' + req
+                    return result
+                report = self.run_refresh([other], check=check)
+                self.assertEqual(report['publishedCount'], 3)
+                self.assertEqual(report['duplicateOpenCount'], 0)
+
     def test_small_verified_result_is_not_padded(self):
         def one(job, previous):
             result = self.check(job)
@@ -327,6 +381,46 @@ class PostingVerificationTests(unittest.TestCase):
                 self.assertEqual(result['status'], expected)
                 if expected == 'open':
                     self.assertEqual(result['job']['startDate'], 'Not specified')
+                    self.assertEqual(result['applicationKey'], 'workday:testco:r123')
+                else:
+                    self.assertNotIn('applicationKey', result)
+
+    def test_career_page_identity_requires_matching_metadata_and_enabled_employer_apply(self):
+        url = 'https://testcompany0.wd5.myworkdayjobs.com/Jobs/job/City/PM_R123-1/apply'
+        metadata = '<script type="application/ld+json">' + json.dumps({
+            '@type': 'JobPosting', 'title': self.job['role'],
+            'identifier': {'@type': 'PropertyValue', 'value': 'R123'},
+        }) + '</script>'
+        html = self.html.replace('<button>Apply now</button>', f'<a href="{url}">Apply</a>') + metadata
+        cases = [
+            (html, 'workday:testcompany0:r123'),
+            (html.replace(metadata, ''), None),
+            (html.replace('"value": "R123"', '"value": "R999"'), None),
+            (html.replace('"title": "' + self.job['role'], '"title": "Unrelated'), None),
+            (html.replace('testcompany0.wd5', 'unrelated.wd5'), None),
+            (html.replace('<a href=', '<a disabled href='), None),
+            (html.replace('<a href=', '<a aria-disabled="true" href='), None),
+        ]
+        # Two matching metadata nodes and different Apply targets are ambiguous.
+        cases.append((html + metadata.replace('R123', 'R456')
+                      + f'<a href="{url.replace("R123", "R456")}">Apply</a>', None))
+        for page, expected in cases:
+            response = SimpleNamespace(status_code=200, url=self.job['source'], text=page)
+            with self.subTest(expected=expected, page=page), patch.object(tracker.requests, 'get', return_value=response):
+                self.assertEqual(tracker._verify_job(self.job).get('applicationKey'), expected)
+        # A prior identity does not turn a currently blocked page into an open alias.
+        with patch.object(tracker.requests, 'get', side_effect=requests.Timeout()):
+            result = tracker._verify_job(self.job, {'applicationKey': 'workday:testcompany0:r123'})
+            self.assertEqual(result['status'], 'unverified')
+            self.assertNotIn('applicationKey', result)
+
+    def test_workday_publication_identity_separates_tenants_and_requisitions(self):
+        url = 'https://company.wd5.myworkdayjobs.com/en-US/Jobs/job/City/PM_R123-1'
+        key = tracker._workday_application_key(url)
+        self.assertEqual(key, tracker._workday_application_key(url + '/apply?source=search'))
+        self.assertNotEqual(key, tracker._workday_application_key(url.replace('company.', 'other.')))
+        self.assertNotEqual(key, tracker._workday_application_key(url.replace('R123', 'R456')))
+        self.assertEqual(tracker._workday_application_key(url.replace('.com/', '.com.evil.test/')), '')
 
     def test_changed_source_regrounds_optional_facts(self):
         job = self.job | {'salary': '$999/hr'}
