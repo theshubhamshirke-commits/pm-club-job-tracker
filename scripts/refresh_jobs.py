@@ -320,6 +320,8 @@ class _PostingText(HTMLParser):
         self.ignored = 0
         self.heading = None
         self.control = None
+        self.control_href = None
+        self.control_links = []
         self.heading_positions = []
         self.heading_start = 0
 
@@ -335,6 +337,7 @@ class _PostingText(HTMLParser):
             attributes = dict(attrs)
             if 'disabled' not in attributes and attributes.get('aria-disabled') != 'true':
                 self.control = []
+                self.control_href = attributes.get('href') if tag == 'a' else None
 
     def handle_endtag(self, tag):
         if tag in ('script', 'style', 'noscript'):
@@ -347,8 +350,12 @@ class _PostingText(HTMLParser):
             self.heading_positions.append((self.headings[-1], self.heading_start))
             self.heading = None
         if tag in ('a', 'button') and self.control is not None:
-            self.controls.append(' '.join(self.control))
+            label = ' '.join(self.control)
+            self.controls.append(label)
+            if self.control_href:
+                self.control_links.append((label, self.control_href))
             self.control = None
+            self.control_href = None
 
     def handle_data(self, data):
         if self.ignored:
@@ -575,6 +582,45 @@ def _ashby_posting(url):
     return unknown
 
 
+def _workday_application_key(url):
+    """Identify a Workday requisition within its tenant, ignoring URL aliases."""
+    parts = urlsplit(url)
+    tenant = re.fullmatch(r'([\w-]+)\.wd\d+\.myworkdayjobs\.com', parts.hostname or '', re.I)
+    requisition = re.search(r'_(R[A-Z0-9]+|JR\d+|REF\w+)(?:-\d+)?(?:/|$)', parts.path, re.I)
+    if parts.scheme in ('http', 'https') and tenant and requisition and '/job/' in parts.path:
+        return f'workday:{tenant[1].lower()}:{requisition[1].lower()}'
+    return ''
+
+
+def _verified_application_key(job, url, html_text, page):
+    """Use source evidence, never a similar title alone, to link career/ATS pages."""
+    direct = _workday_application_key(url)
+    if direct:
+        return direct
+    identifiers = set()
+    for node in _iter_jobposting_nodes(html_text):
+        if _normalized(str(node.get('title', ''))) != _normalized(job['role']):
+            continue
+        identifier = node.get('identifier', '')
+        if isinstance(identifier, dict):
+            identifier = identifier.get('value', '')
+        if isinstance(identifier, str) and identifier:
+            identifiers.add(identifier.strip().lower())
+    keys = set()
+    for label, href in page.control_links:
+        if not re.fullmatch(r'apply(?: now| for (?:this )?(?:job|position))?', _normalized(label)):
+            continue
+        key = _workday_application_key(href)
+        if key and key.rsplit(':', 1)[1] in identifiers and _source_is_employer(job, href):
+            keys.add(key)
+    # Ambiguous or missing evidence leaves the two URLs separate.
+    return next(iter(keys)) if len(keys) == 1 else ''
+
+
+def _publication_key(record):
+    return record.get('applicationKey') or _job_key(record['job'])
+
+
 def _verify_job(job, previous=None):
     """Return an auditable status; unknown is never relabeled as closed or open."""
     checked = datetime.now(timezone.utc).isoformat()
@@ -632,6 +678,9 @@ def _verify_job(job, previous=None):
                 result['job']['workMode'] = ats['workMode']
         result['job']['lastChecked'] = checked
         result['finalUrl'] = response.url
+        application_key = _verified_application_key(job, response.url, response.text, page)
+        if application_key:
+            result['applicationKey'] = application_key
         return finish('open', reason)
     except requests.RequestException as error:
         return finish('unverified', f'Employer page could not be reached ({type(error).__name__})')
@@ -914,8 +963,22 @@ def refresh(path='index.html', data_dir=None, discovery=discover_jobs):
     new_checks = _check_many([(row, records.get(key)) for key, row in new.items()])
     refreshed.update({_job_key(record['job']): record for record in new_checks})
     records.update(refreshed)
-    open_records = [r for r in refreshed.values() if r['status'] == 'open']
-    jobs = [r['job'] for r in open_records]
+    # Keep every source record/check for independent retries, but display an
+    # employer requisition only once when verified application evidence agrees.
+    open_records, duplicates = {}, []
+    for record in refreshed.values():
+        if record['status'] != 'open':
+            continue
+        key = _publication_key(record)
+        if key in open_records:
+            duplicates.append({'source': record['job']['source'],
+                               'publishedSource': open_records[key]['job']['source'],
+                               'applicationKey': key})
+        else:
+            open_records[key] = record
+    previous_identities = {_publication_key(record) for key, record in refreshed.items()
+                           if key in published_keys}
+    jobs = [r['job'] for r in open_records.values()]
     jobs.sort(key=lambda j: (j['type'] != 'Internship', j['company'].casefold(), j['role'].casefold()))
     complete = bool(batches) and all(b['status'] == 'complete' for b in batches)
     now = datetime.now(timezone.utc).isoformat()
@@ -924,7 +987,8 @@ def refresh(path='index.html', data_dir=None, discovery=discover_jobs):
               'publishedCount': len(jobs), 'previousPublishedCount': len(published),
               'existingRechecked': checked_existing_count, 'discoveredCandidates': len(discovered),
               'newCandidatesChecked': len(new_checks),
-              'addedCount': sum(_job_key(j) not in published_keys for j in jobs),
+              'addedCount': sum(key not in previous_identities for key in open_records),
+              'duplicateOpenCount': len(duplicates), 'duplicateOpenSources': duplicates,
               'statusCounts': dict(Counter(r['status'] for r in refreshed.values())),
               'checks': [{k: v for k, v in r.items() if k != 'sourceFingerprint'} for r in refreshed.values()]}
     # Empty is an honest result of this check, not proof that no jobs exist.
