@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-13T20:27:23.718450+00:00",
+  "checkedAt": "2026-11-14T18:43:21.887855+00:00",
   "discoveryComplete": false,
   "batches": [
     {
@@ -8,7 +8,7 @@
       "fetchedUrls": [],
       "toolErrors": [],
       "status": "failed",
-      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Ch1ZG5JBEcVC6CuKhuy75'}",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Ch3K8rrFVpX7SCqJ53ZTK'}",
       "recoveredFromSources": 0
     },
     {
@@ -17,7 +17,7 @@
       "fetchedUrls": [],
       "toolErrors": [],
       "status": "failed",
-      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Ch1ZG5w8DxGDen5QHryeF'}",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Ch3K8svjsuu1usf2FYynY'}",
       "recoveredFromSources": 0
     },
     {
@@ -26,7 +26,7 @@
       "fetchedUrls": [],
       "toolErrors": [],
       "status": "failed",
-      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Ch1ZG6EEXQ93nk2GuMSan'}",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Ch3K8tZC636fVvghi2tSh'}",
       "recoveredFromSources": 0
     }
   ],
@@ -62,31 +62,31 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-13T20:26:41.293731+00:00"
+      "checkedAt": "2026-11-14T18:42:40.097261+00:00"
     },
     {
       "job": {
         "role": "Product Management Intern (Summer 2027)",
         "company": "Databricks",
-        "location": "Bellevue, WA; Mountain View, CA; San Francisco, CA",
+        "location": "Not specified",
         "type": "Internship",
         "workMode": "Not specified",
         "workAuth": "Not specified",
-        "workAuthDetail": "Sponsorship policy not stated. Export-control restrictions may apply.",
-        "salary": "$51.50-$56.00/hr",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
         "industry": "Technology",
         "startDate": "Summer 2027",
         "endDate": "Not specified",
         "startDateFit": "Confirmed Summer 2027",
         "priority": "High priority",
-        "notes": "12-week paid internship. Graduating Fall 2027 or Spring 2028. SF Bay Area rate $54-$56/hr, Bellevue rate $51.50-$53.50/hr.",
+        "notes": "Not specified",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:41.294551+00:00"
+        "lastChecked": "2026-11-14T18:42:40.097615+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-13T20:26:41.294551+00:00",
+      "checkedAt": "2026-11-14T18:42:40.097615+00:00",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002"
     },
     {
@@ -107,36 +107,36 @@
         "notes": "12-week consecutive internship. MBA program with expected graduation December 2027 \u2013 June 2028. Most roles at Seattle or Arlington, VA headquarters.",
         "source": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:41.295164+00:00"
+        "lastChecked": "2026-11-14T18:42:40.097924+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-13T20:26:41.295164+00:00",
+      "checkedAt": "2026-11-14T18:42:40.097924+00:00",
       "finalUrl": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027"
     },
     {
       "job": {
         "role": "Associate Product Manager, New Grad (2027 Start)",
         "company": "Databricks",
-        "location": "Bellevue, WA; Mountain View, CA; San Francisco, CA",
+        "location": "Not specified",
         "type": "Full-time",
         "workMode": "Not specified",
         "workAuth": "Not specified",
-        "workAuthDetail": "Sponsorship policy not stated. Export-control restrictions may apply.",
-        "salary": "$133,000-$150,000/year",
+        "workAuthDetail": "Not specified",
+        "salary": "Not specified",
         "industry": "Technology",
         "startDate": "2027",
         "endDate": "N/A",
         "startDateFit": "Strong 2027 signal",
         "priority": "High priority",
-        "notes": "2027 graduate cohort for Fall 2026 or Spring 2027 graduates in computer science or a related engineering field. Exact start month is not stated; confirm May\u2013August availability.",
+        "notes": "Not specified",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:41.298578+00:00"
+        "lastChecked": "2026-11-14T18:42:40.098104+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-13T20:26:41.298578+00:00",
+      "checkedAt": "2026-11-14T18:42:40.098104+00:00",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/associate-product-manager-new-grad-2027-start-7586263002"
     },
     {
@@ -157,11 +157,11 @@
         "notes": "Not specified",
         "source": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:41.447085+00:00"
+        "lastChecked": "2026-11-14T18:42:40.347787+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-13T20:26:41.447085+00:00",
+      "checkedAt": "2026-11-14T18:42:40.347787+00:00",
       "finalUrl": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632"
     },
     {
@@ -182,11 +182,11 @@
         "notes": "Not specified",
         "source": "https://www.atlassian.com/company/careers/details/26274",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:41.477515+00:00"
+        "lastChecked": "2026-11-14T18:42:40.362305+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-13T20:26:41.477515+00:00",
+      "checkedAt": "2026-11-14T18:42:40.362305+00:00",
       "finalUrl": "https://www.atlassian.com/company/careers/details/26274"
     },
     {
@@ -210,7 +210,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:41.562151+00:00"
+      "checkedAt": "2026-11-14T18:42:40.630993+00:00"
     },
     {
       "job": {
@@ -233,7 +233,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:41.966081+00:00"
+      "checkedAt": "2026-11-14T18:42:40.713798+00:00"
     },
     {
       "job": {
@@ -256,7 +256,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:42.016942+00:00"
+      "checkedAt": "2026-11-14T18:42:40.851304+00:00"
     },
     {
       "job": {
@@ -279,7 +279,7 @@
       },
       "status": "unverified",
       "reason": "Ashby did not confirm a listed matching posting and application URL",
-      "checkedAt": "2026-11-13T20:26:42.086771+00:00"
+      "checkedAt": "2026-11-14T18:42:41.064512+00:00"
     },
     {
       "job": {
@@ -302,7 +302,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:42.281307+00:00"
+      "checkedAt": "2026-11-14T18:42:41.184608+00:00"
     },
     {
       "job": {
@@ -325,7 +325,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:42.371543+00:00"
+      "checkedAt": "2026-11-14T18:42:41.209595+00:00"
     },
     {
       "job": {
@@ -348,7 +348,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:42.419741+00:00"
+      "checkedAt": "2026-11-14T18:42:41.381467+00:00"
     },
     {
       "job": {
@@ -371,7 +371,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:42.419818+00:00"
+      "checkedAt": "2026-11-14T18:42:41.381503+00:00"
     },
     {
       "job": {
@@ -394,7 +394,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:42.419860+00:00"
+      "checkedAt": "2026-11-14T18:42:41.381525+00:00"
     },
     {
       "job": {
@@ -417,7 +417,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:42.419902+00:00"
+      "checkedAt": "2026-11-14T18:42:41.381546+00:00"
     },
     {
       "job": {
@@ -440,7 +440,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:42.432559+00:00"
+      "checkedAt": "2026-11-14T18:42:41.533327+00:00"
     },
     {
       "job": {
@@ -463,7 +463,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:42.869387+00:00"
+      "checkedAt": "2026-11-14T18:42:41.702674+00:00"
     },
     {
       "job": {
@@ -486,7 +486,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:43.076850+00:00"
+      "checkedAt": "2026-11-14T18:42:41.844251+00:00"
     },
     {
       "job": {
@@ -509,7 +509,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 500",
-      "checkedAt": "2026-11-13T20:26:43.588974+00:00"
+      "checkedAt": "2026-11-14T18:42:42.179497+00:00"
     },
     {
       "job": {
@@ -529,11 +529,11 @@
         "notes": "Currently pursuing an MBA degree 3+ years of professional business experience in a relevant field",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805",
         "dateFound": "2026-10-26",
-        "lastChecked": "2026-11-13T20:26:43.719626+00:00"
+        "lastChecked": "2026-11-14T18:42:42.205162+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-13T20:26:43.719626+00:00",
+      "checkedAt": "2026-11-14T18:42:42.205162+00:00",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/MBA-Intern--Product-Management---Summer-2027_R2615805"
     },
     {
@@ -557,7 +557,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:43.834315+00:00"
+      "checkedAt": "2026-11-14T18:42:42.325380+00:00"
     },
     {
       "job": {
@@ -580,7 +580,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:43.926679+00:00"
+      "checkedAt": "2026-11-14T18:42:42.382087+00:00"
     },
     {
       "job": {
@@ -603,7 +603,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:44.732620+00:00"
+      "checkedAt": "2026-11-14T18:42:43.144864+00:00"
     },
     {
       "job": {
@@ -623,11 +623,11 @@
         "notes": "Pursuing an MBA in a relevant field or equivalent program (graduating in winter or summer 2028)",
         "source": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:46.134596+00:00"
+        "lastChecked": "2026-11-14T18:42:43.407142+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-13T20:26:46.134596+00:00",
+      "checkedAt": "2026-11-14T18:42:43.407142+00:00",
       "finalUrl": "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Product-Management-MBA-Intern--Data-Center-GPU---Summer-2027_JR2025670-1"
     },
     {
@@ -648,11 +648,11 @@
         "notes": "Not specified",
         "source": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-13T20:26:46.208341+00:00"
+        "lastChecked": "2026-11-14T18:42:44.835698+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-13T20:26:46.208341+00:00",
+      "checkedAt": "2026-11-14T18:42:44.835698+00:00",
       "finalUrl": "https://medline.wd5.myworkdayjobs.com/en-US/Medline/job/Product-Management-Intern---Summer-2027_R2616983"
     },
     {
@@ -676,7 +676,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-13T20:26:46.795738+00:00"
+      "checkedAt": "2026-11-14T18:42:45.173477+00:00"
     },
     {
       "job": {
@@ -699,7 +699,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 202",
-      "checkedAt": "2026-11-13T20:26:48.915012+00:00"
+      "checkedAt": "2026-11-14T18:42:45.606056+00:00"
     },
     {
       "job": {
@@ -722,7 +722,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:49.039940+00:00"
+      "checkedAt": "2026-11-14T18:42:45.852080+00:00"
     },
     {
       "job": {
@@ -745,7 +745,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:49.593671+00:00"
+      "checkedAt": "2026-11-14T18:42:45.976073+00:00"
     },
     {
       "job": {
@@ -768,7 +768,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:50.685773+00:00"
+      "checkedAt": "2026-11-14T18:42:46.431776+00:00"
     },
     {
       "job": {
@@ -791,7 +791,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032607+00:00"
+      "checkedAt": "2026-11-14T18:42:46.682880+00:00"
     },
     {
       "job": {
@@ -814,7 +814,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032698+00:00"
+      "checkedAt": "2026-11-14T18:42:46.682929+00:00"
     },
     {
       "job": {
@@ -837,7 +837,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032755+00:00"
+      "checkedAt": "2026-11-14T18:42:46.682960+00:00"
     },
     {
       "job": {
@@ -860,7 +860,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032803+00:00"
+      "checkedAt": "2026-11-14T18:42:46.682984+00:00"
     },
     {
       "job": {
@@ -883,7 +883,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032843+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683003+00:00"
     },
     {
       "job": {
@@ -906,7 +906,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032881+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683021+00:00"
     },
     {
       "job": {
@@ -929,7 +929,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032911+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683036+00:00"
     },
     {
       "job": {
@@ -952,7 +952,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.032947+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683055+00:00"
     },
     {
       "job": {
@@ -975,7 +975,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.033006+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683074+00:00"
     },
     {
       "job": {
@@ -998,7 +998,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.033047+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683092+00:00"
     },
     {
       "job": {
@@ -1021,7 +1021,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:51.033088+00:00"
+      "checkedAt": "2026-11-14T18:42:46.683112+00:00"
     },
     {
       "job": {
@@ -1044,7 +1044,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:51.390843+00:00"
+      "checkedAt": "2026-11-14T18:42:46.749343+00:00"
     },
     {
       "job": {
@@ -1067,7 +1067,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421523+00:00"
+      "checkedAt": "2026-11-14T18:42:47.322879+00:00"
     },
     {
       "job": {
@@ -1090,7 +1090,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421653+00:00"
+      "checkedAt": "2026-11-14T18:42:47.322933+00:00"
     },
     {
       "job": {
@@ -1113,7 +1113,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421707+00:00"
+      "checkedAt": "2026-11-14T18:42:47.322955+00:00"
     },
     {
       "job": {
@@ -1136,7 +1136,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421743+00:00"
+      "checkedAt": "2026-11-14T18:42:47.322971+00:00"
     },
     {
       "job": {
@@ -1159,7 +1159,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421781+00:00"
+      "checkedAt": "2026-11-14T18:42:47.322990+00:00"
     },
     {
       "job": {
@@ -1182,7 +1182,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421817+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323007+00:00"
     },
     {
       "job": {
@@ -1205,7 +1205,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421847+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323022+00:00"
     },
     {
       "job": {
@@ -1228,7 +1228,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421883+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323040+00:00"
     },
     {
       "job": {
@@ -1251,7 +1251,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421914+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323056+00:00"
     },
     {
       "job": {
@@ -1274,7 +1274,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421947+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323073+00:00"
     },
     {
       "job": {
@@ -1297,7 +1297,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.421975+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323087+00:00"
     },
     {
       "job": {
@@ -1320,7 +1320,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.422062+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323103+00:00"
     },
     {
       "job": {
@@ -1343,7 +1343,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.422098+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323119+00:00"
     },
     {
       "job": {
@@ -1366,7 +1366,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:51.422128+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323134+00:00"
     },
     {
       "job": {
@@ -1389,7 +1389,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:51.422157+00:00"
+      "checkedAt": "2026-11-14T18:42:47.323151+00:00"
     },
     {
       "job": {
@@ -1412,7 +1412,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:26:52.469284+00:00"
+      "checkedAt": "2026-11-14T18:42:47.830665+00:00"
     },
     {
       "job": {
@@ -1435,7 +1435,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:52.759654+00:00"
+      "checkedAt": "2026-11-14T18:42:47.939526+00:00"
     },
     {
       "job": {
@@ -1458,7 +1458,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:52.759748+00:00"
+      "checkedAt": "2026-11-14T18:42:47.939566+00:00"
     },
     {
       "job": {
@@ -1481,7 +1481,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:26:52.759787+00:00"
+      "checkedAt": "2026-11-14T18:42:47.939585+00:00"
     },
     {
       "job": {
@@ -1504,7 +1504,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-13T20:26:52.949308+00:00"
+      "checkedAt": "2026-11-14T18:42:48.754547+00:00"
     },
     {
       "job": {
@@ -1527,7 +1527,7 @@
       },
       "status": "unverified",
       "reason": "Source redirected away from a matching employer posting",
-      "checkedAt": "2026-11-13T20:26:52.991836+00:00"
+      "checkedAt": "2026-11-14T18:42:50.654301+00:00"
     },
     {
       "job": {
@@ -1550,7 +1550,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:53.218888+00:00"
+      "checkedAt": "2026-11-14T18:42:50.984829+00:00"
     },
     {
       "job": {
@@ -1573,7 +1573,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:53.219013+00:00"
+      "checkedAt": "2026-11-14T18:42:50.984870+00:00"
     },
     {
       "job": {
@@ -1596,7 +1596,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:26:53.219059+00:00"
+      "checkedAt": "2026-11-14T18:42:50.984891+00:00"
     },
     {
       "job": {
@@ -1619,7 +1619,7 @@
       },
       "status": "unverified",
       "reason": "Source redirected away from a matching employer posting",
-      "checkedAt": "2026-11-13T20:26:53.219108+00:00"
+      "checkedAt": "2026-11-14T18:42:50.984938+00:00"
     },
     {
       "job": {
@@ -1642,7 +1642,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-13T20:26:53.306487+00:00"
+      "checkedAt": "2026-11-14T18:42:51.194958+00:00"
     },
     {
       "job": {
@@ -1665,7 +1665,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:11.478386+00:00"
+      "checkedAt": "2026-11-14T18:43:10.359704+00:00"
     },
     {
       "job": {
@@ -1688,7 +1688,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:27:11.478494+00:00"
+      "checkedAt": "2026-11-14T18:43:10.359800+00:00"
     },
     {
       "job": {
@@ -1711,7 +1711,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:12.018656+00:00"
+      "checkedAt": "2026-11-14T18:43:10.950547+00:00"
     },
     {
       "job": {
@@ -1734,7 +1734,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:12.018749+00:00"
+      "checkedAt": "2026-11-14T18:43:10.950608+00:00"
     },
     {
       "job": {
@@ -1757,7 +1757,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:12.018807+00:00"
+      "checkedAt": "2026-11-14T18:43:10.950633+00:00"
     },
     {
       "job": {
@@ -1780,7 +1780,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:12.018864+00:00"
+      "checkedAt": "2026-11-14T18:43:10.950651+00:00"
     },
     {
       "job": {
@@ -1803,7 +1803,7 @@
       },
       "status": "unverified",
       "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-13T20:27:12.018899+00:00"
+      "checkedAt": "2026-11-14T18:43:10.950667+00:00"
     },
     {
       "job": {
@@ -1826,7 +1826,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-13T20:27:12.507659+00:00"
+      "checkedAt": "2026-11-14T18:43:11.634334+00:00"
     },
     {
       "job": {
@@ -1849,7 +1849,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:13.145871+00:00"
+      "checkedAt": "2026-11-14T18:43:12.473354+00:00"
     },
     {
       "job": {
@@ -1872,7 +1872,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:13.145952+00:00"
+      "checkedAt": "2026-11-14T18:43:12.473397+00:00"
     },
     {
       "job": {
@@ -1892,11 +1892,11 @@
         "notes": "Not specified",
         "source": "https://job-boards.greenhouse.io/gofundme/jobs/8304644",
         "dateFound": "2026-11-02",
-        "lastChecked": "2026-11-13T20:27:13.146039+00:00"
+        "lastChecked": "2026-11-14T18:43:12.473418+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-13T20:27:13.146039+00:00",
+      "checkedAt": "2026-11-14T18:43:12.473418+00:00",
       "finalUrl": "https://job-boards.greenhouse.io/gofundme/jobs/8304644"
     },
     {
@@ -1920,7 +1920,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:13.273398+00:00"
+      "checkedAt": "2026-11-14T18:43:12.683127+00:00"
     },
     {
       "job": {
@@ -1940,11 +1940,11 @@
         "notes": "Not specified",
         "source": "https://adobe.wd5.myworkdayjobs.com/en-US/external_experienced/job/XMLNAME-2027-MBA-University-Graduate---Product-Manager_R171900",
         "dateFound": "2026-11-02",
-        "lastChecked": "2026-11-13T20:27:13.273477+00:00"
+        "lastChecked": "2026-11-14T18:43:12.683161+00:00"
       },
       "status": "open",
       "reason": "Matching Workday posting is posted and accepts applications",
-      "checkedAt": "2026-11-13T20:27:13.273477+00:00",
+      "checkedAt": "2026-11-14T18:43:12.683161+00:00",
       "finalUrl": "https://adobe.wd5.myworkdayjobs.com/en-US/external_experienced/job/XMLNAME-2027-MBA-University-Graduate---Product-Manager_R171900"
     },
     {
@@ -1968,7 +1968,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:14.893671+00:00"
+      "checkedAt": "2026-11-14T18:43:13.683517+00:00"
     },
     {
       "job": {
@@ -1991,7 +1991,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-13T20:27:14.893754+00:00"
+      "checkedAt": "2026-11-14T18:43:13.683563+00:00"
     }
   ]
 }
