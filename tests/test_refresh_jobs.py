@@ -328,6 +328,25 @@ class PostingVerificationTests(unittest.TestCase):
                 if expected == 'open':
                     self.assertEqual(result['job']['startDate'], 'Not specified')
 
+    def test_databricks_restores_verified_fields_without_reusing_related_jobs(self):
+        job = self.job | {'company': 'Databricks', 'location': 'Not specified',
+                          'salary': 'Not specified', 'notes': 'Not specified',
+                          'source': 'https://www.databricks.com/company/careers/product/intern-12345678'}
+        html = (f"<h1>{job['role']}</h1><div>Bellevue, Washington; Mountain View, California</div>"
+                "<button>Apply now</button><p>Students graduating in Fall 2027 or Spring 2028</p>"
+                "\n<div>SF Bay Area Hourly Rate</div><span>$54 — $56 USD</span>"
+                "\n<div>Bellevue, Washington Hourly Rate</div><span>$51.50 — $53.50 USD</span>"
+                "<h2>Related Jobs</h2>\n<div>Local Pay Range $999 — $1000 USD</div>")
+        response = SimpleNamespace(status_code=200, url=job['source'], text=html)
+        with patch.object(tracker.requests, 'get', return_value=response):
+            checked = tracker._verify_job(job)
+            result = tracker._verify_job(job, checked)
+        self.assertEqual(result['status'], 'open')
+        self.assertEqual(result['job']['location'], 'Bellevue, Washington; Mountain View, California')
+        self.assertEqual(result['job']['salary'],
+                         'SF Bay Area Hourly Rate $54 — $56 USD; Bellevue, Washington Hourly Rate $51.50 — $53.50 USD')
+        self.assertIn('Fall 2027 or Spring 2028', result['job']['notes'])
+
     def test_changed_source_regrounds_optional_facts(self):
         job = self.job | {'salary': '$999/hr'}
         response = SimpleNamespace(status_code=200, url=job['source'], text=self.html)
