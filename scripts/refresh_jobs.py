@@ -493,6 +493,24 @@ def _ground_optional_details(job, source_text):
     job['startDateFit'] = 'Confirmed Summer 2027' if job['type'] == 'Internship' else 'Strong 2027 signal'
 
 
+def _read_databricks_details(job, primary):
+    """Read labelled details from the already verified posting's own text."""
+    city_state = r"[A-Za-z .'-]+, [A-Za-z .'-]+"
+    location = re.match(re.escape(job['role']) + rf'\s+({city_state}(?:;\s*{city_state})*)\s+Apply now\b', primary)
+    if location:
+        job['location'] = location[1].strip()
+
+    money = r'\$[\d,]+(?:\.\d{2})?'
+    pay_label = r"(?:[A-Za-z][A-Za-z ,'-]{0,60} Hourly Rate|Local Pay Range)"
+    ranges = re.findall(rf'^[ \t]*({pay_label}\s+{money}\s*[—–-]\s*{money} USD)\b', primary, re.M)
+    if ranges:
+        job['salary'] = '; '.join(ranges)
+
+    cohort = re.search(r'\bgraduat(?:e|ing) in (?:Fall|Spring) 20\d\d or (?:Fall|Spring) 20\d\d\b', primary, re.I)
+    if cohort and job['notes'] == 'Not specified':
+        job['notes'] = cohort[0]
+
+
 def _workday_posting(url, html_text):
     """Read Workday's public job payload, including posted/canApply flags.
 
@@ -626,6 +644,8 @@ def _verify_job(job, previous=None):
         # reviewed facts need not be replaced with a new model interpretation.
         if not previous or previous.get('sourceFingerprint') != fingerprint:
             _ground_optional_details(result['job'], job['role'] + '\n' + primary)
+        if urlparse(response.url).hostname in ('www.databricks.com', 'databricks.com'):
+            _read_databricks_details(result['job'], primary)
         if ats:
             result['job']['location'] = ats['location'] or 'Not specified'
             if ats.get('workMode'):
