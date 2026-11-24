@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-24T00:44:31.973103+00:00",
+  "updatedAt": "2026-11-24T22:59:21.383055+00:00",
   "jobs": [
     {
       "job": {
@@ -23,7 +23,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-24T00:43:52.592309+00:00"
+      "checkedAt": "2026-11-24T22:58:45.513741+00:00"
     },
     {
       "job": {
@@ -43,11 +43,11 @@
         "notes": "Not specified",
         "source": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-24T00:43:52.592691+00:00"
+        "lastChecked": "2026-11-24T22:58:45.514425+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-24T00:43:52.592691+00:00",
+      "checkedAt": "2026-11-24T22:58:45.514425+00:00",
       "sourceFingerprint": "adb21260316fdc69a8709d409db967573bae796c0aae7f0cdedad3c10e84c26d",
       "finalUrl": "https://www.databricks.com/company/careers/university-recruiting---product/product-management-intern-summer-2027-6883068002"
     },
@@ -69,11 +69,11 @@
         "notes": "12-week consecutive internship. MBA program with expected graduation December 2027 \u2013 June 2028. Most roles at Seattle or Arlington, VA headquarters.",
         "source": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-24T00:43:52.592995+00:00"
+        "lastChecked": "2026-11-24T22:58:45.514965+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-24T00:43:52.592995+00:00",
+      "checkedAt": "2026-11-24T22:58:45.514965+00:00",
       "sourceFingerprint": "d10a07aab2d8ef258c61c4fe2ed236fc02ac4e3a808708cddcaf72fc2534e050",
       "finalUrl": "https://amazon.jobs/en/jobs/10509639/product-manager-technical-pmt-intern-summer-2027"
     },
@@ -141,11 +141,11 @@
         "notes": "Not specified",
         "source": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-24T00:43:52.594604+00:00"
+        "lastChecked": "2026-11-24T22:58:45.518927+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-24T00:43:52.594604+00:00",
+      "checkedAt": "2026-11-24T22:58:45.518927+00:00",
       "sourceFingerprint": "c1010d6b17c805ed53cc84e806409f2545aab94e4d4f57c811b7ccdc3ed0e144",
       "finalUrl": "https://jobs.intuit.com/job/mountain-view/summer-2027-product-manager-intern/27595/100620927632"
     },
@@ -190,11 +190,11 @@
         "notes": "Not specified",
         "source": "https://www.atlassian.com/company/careers/details/26274",
         "dateFound": "2026-10-27",
-        "lastChecked": "2026-11-24T00:43:52.778778+00:00"
+        "lastChecked": "2026-11-24T22:58:45.680174+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-24T00:43:52.778778+00:00",
+      "checkedAt": "2026-11-24T22:58:45.680174+00:00",
       "sourceFingerprint": "e2a076ef08f19e4a726ecff9fbcac4a9d1ced64773c01aefc8e4ee44f5c183a5",
       "finalUrl": "https://www.atlassian.com/company/careers/details/26274"
     },
@@ -219,7 +219,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:52.965635+00:00"
+      "checkedAt": "2026-11-24T22:58:45.736526+00:00"
     },
     {
       "job": {
@@ -242,7 +242,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:53.090922+00:00"
+      "checkedAt": "2026-11-24T22:58:45.908146+00:00"
     },
     {
       "job": {
@@ -311,7 +311,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:53.258729+00:00"
+      "checkedAt": "2026-11-24T22:58:46.151305+00:00"
     },
     {
       "job": {
@@ -334,7 +334,7 @@
       },
       "status": "unverified",
       "reason": "Ashby did not confirm a listed matching posting and application URL",
-      "checkedAt": "2026-11-24T00:43:53.439159+00:00"
+      "checkedAt": "2026-11-24T22:58:46.297843+00:00"
     },
     {
       "job": {
@@ -357,7 +357,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:53.494524+00:00"
+      "checkedAt": "2026-11-24T22:58:46.336249+00:00"
     },
     {
       "job": {
@@ -379,8 +379,8 @@
         "dateFound": "2026-10-27"
       },
       "status": "unverified",
-      "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:53.648304+00:00"
+      "reason": "Workday job endpoint returned 403",
+      "checkedAt": "2026-11-24T22:58:46.468993+00:00"
     },
     {
       "job": {
@@ -403,7 +403,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:53.745620+00:00"
+      "checkedAt": "2026-11-24T22:58:46.559095+00:00"
     },
     {
       "job": {
@@ -426,7 +426,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:53.745654+00:00"
+      "checkedAt": "2026-11-24T22:58:46.559157+00:00"
     },
     {
       "job": {
@@ -449,7 +449,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:53.745675+00:00"
+      "checkedAt": "2026-11-24T22:58:46.559198+00:00"
     },
     {
       "job": {
@@ -472,7 +472,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:53.745694+00:00"
+      "checkedAt": "2026-11-24T22:58:46.559237+00:00"
     },
     {
       "job": {
@@ -494,8 +494,8 @@
         "dateFound": "2026-10-26"
       },
       "status": "unverified",
-      "reason": "Workday job endpoint returned 403",
-      "checkedAt": "2026-11-24T00:43:53.756758+00:00"
+      "reason": "Employer page returned HTTP 429",
+      "checkedAt": "2026-11-24T22:58:46.590649+00:00"
     },
     {
       "job": {
@@ -518,7 +518,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:53.786744+00:00"
+      "checkedAt": "2026-11-24T22:58:46.686584+00:00"
     },
     {
       "job": {
@@ -610,7 +610,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:53.878326+00:00"
+      "checkedAt": "2026-11-24T22:58:46.963518+00:00"
     },
     {
       "job": {
@@ -633,7 +633,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:53.959951+00:00"
+      "checkedAt": "2026-11-24T22:58:47.012368+00:00"
     },
     {
       "job": {
@@ -656,7 +656,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:54.033113+00:00"
+      "checkedAt": "2026-11-24T22:58:47.094703+00:00"
     },
     {
       "job": {
@@ -679,7 +679,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:54.178866+00:00"
+      "checkedAt": "2026-11-24T22:58:47.102725+00:00"
     },
     {
       "job": {
@@ -724,8 +724,8 @@
         "dateFound": "2026-10-26"
       },
       "status": "unverified",
-      "reason": "Employer page could not be reached (SSLError)",
-      "checkedAt": "2026-11-24T00:43:54.245681+00:00"
+      "reason": "Matching job heading is not readable",
+      "checkedAt": "2026-11-24T22:58:47.217482+00:00"
     },
     {
       "job": {
@@ -748,7 +748,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:54.412762+00:00"
+      "checkedAt": "2026-11-24T22:58:47.445678+00:00"
     },
     {
       "job": {
@@ -771,7 +771,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:55.258874+00:00"
+      "checkedAt": "2026-11-24T22:58:48.059602+00:00"
     },
     {
       "job": {
@@ -794,7 +794,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:55.322532+00:00"
+      "checkedAt": "2026-11-24T22:58:48.136914+00:00"
     },
     {
       "job": {
@@ -840,7 +840,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-24T00:43:55.383856+00:00"
+      "checkedAt": "2026-11-24T22:58:48.184934+00:00"
     },
     {
       "job": {
@@ -863,7 +863,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 202",
-      "checkedAt": "2026-11-24T00:43:56.487666+00:00"
+      "checkedAt": "2026-11-24T22:58:48.887222+00:00"
     },
     {
       "job": {
@@ -908,8 +908,8 @@
         "dateFound": "2026-10-27"
       },
       "status": "unverified",
-      "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:56.818952+00:00"
+      "reason": "Workday job endpoint returned 403",
+      "checkedAt": "2026-11-24T22:58:48.991098+00:00"
     },
     {
       "job": {
@@ -932,7 +932,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:56.889626+00:00"
+      "checkedAt": "2026-11-24T22:58:49.179618+00:00"
     },
     {
       "job": {
@@ -955,7 +955,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:56.951471+00:00"
+      "checkedAt": "2026-11-24T22:58:49.244554+00:00"
     },
     {
       "job": {
@@ -978,7 +978,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200667+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503686+00:00"
     },
     {
       "job": {
@@ -1024,7 +1024,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200704+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503769+00:00"
     },
     {
       "job": {
@@ -1047,7 +1047,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200732+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503841+00:00"
     },
     {
       "job": {
@@ -1070,7 +1070,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200756+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503890+00:00"
     },
     {
       "job": {
@@ -1093,7 +1093,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200775+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503929+00:00"
     },
     {
       "job": {
@@ -1116,7 +1116,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200793+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503965+00:00"
     },
     {
       "job": {
@@ -1162,7 +1162,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200809+00:00"
+      "checkedAt": "2026-11-24T22:58:49.503993+00:00"
     },
     {
       "job": {
@@ -1185,7 +1185,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200828+00:00"
+      "checkedAt": "2026-11-24T22:58:49.504028+00:00"
     },
     {
       "job": {
@@ -1208,7 +1208,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200847+00:00"
+      "checkedAt": "2026-11-24T22:58:49.504067+00:00"
     },
     {
       "job": {
@@ -1231,7 +1231,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.200864+00:00"
+      "checkedAt": "2026-11-24T22:58:49.504101+00:00"
     },
     {
       "job": {
@@ -1277,7 +1277,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:57.200883+00:00"
+      "checkedAt": "2026-11-24T22:58:49.504141+00:00"
     },
     {
       "job": {
@@ -1300,7 +1300,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:57.832890+00:00"
+      "checkedAt": "2026-11-24T22:58:49.717914+00:00"
     },
     {
       "job": {
@@ -1323,7 +1323,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899574+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762395+00:00"
     },
     {
       "job": {
@@ -1346,7 +1346,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899614+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762479+00:00"
     },
     {
       "job": {
@@ -1369,7 +1369,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899637+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762520+00:00"
     },
     {
       "job": {
@@ -1392,7 +1392,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899652+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762555+00:00"
     },
     {
       "job": {
@@ -1415,7 +1415,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899671+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762593+00:00"
     },
     {
       "job": {
@@ -1438,7 +1438,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899689+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762629+00:00"
     },
     {
       "job": {
@@ -1461,7 +1461,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899704+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762660+00:00"
     },
     {
       "job": {
@@ -1484,7 +1484,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899721+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762696+00:00"
     },
     {
       "job": {
@@ -1507,7 +1507,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899736+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762727+00:00"
     },
     {
       "job": {
@@ -1530,7 +1530,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899752+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762762+00:00"
     },
     {
       "job": {
@@ -1553,7 +1553,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899766+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762791+00:00"
     },
     {
       "job": {
@@ -1576,7 +1576,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899780+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762857+00:00"
     },
     {
       "job": {
@@ -1599,7 +1599,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899794+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762893+00:00"
     },
     {
       "job": {
@@ -1622,7 +1622,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:57.899807+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762924+00:00"
     },
     {
       "job": {
@@ -1645,7 +1645,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:57.899820+00:00"
+      "checkedAt": "2026-11-24T22:58:49.762954+00:00"
     },
     {
       "job": {
@@ -1668,7 +1668,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:43:57.959351+00:00"
+      "checkedAt": "2026-11-24T22:58:49.837705+00:00"
     },
     {
       "job": {
@@ -1691,7 +1691,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:58.023366+00:00"
+      "checkedAt": "2026-11-24T22:58:49.883403+00:00"
     },
     {
       "job": {
@@ -1737,7 +1737,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:43:58.023405+00:00"
+      "checkedAt": "2026-11-24T22:58:49.883479+00:00"
     },
     {
       "job": {
@@ -1783,7 +1783,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:43:58.023423+00:00"
+      "checkedAt": "2026-11-24T22:58:49.883516+00:00"
     },
     {
       "job": {
@@ -1852,7 +1852,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-24T00:43:58.875819+00:00"
+      "checkedAt": "2026-11-24T22:58:50.029101+00:00"
     },
     {
       "job": {
@@ -1898,7 +1898,7 @@
       },
       "status": "unverified",
       "reason": "Source redirected away from a matching employer posting",
-      "checkedAt": "2026-11-24T00:44:00.737927+00:00"
+      "checkedAt": "2026-11-24T22:58:50.249405+00:00"
     },
     {
       "job": {
@@ -1944,7 +1944,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:01.147476+00:00"
+      "checkedAt": "2026-11-24T22:58:50.534626+00:00"
     },
     {
       "job": {
@@ -1967,7 +1967,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:01.147517+00:00"
+      "checkedAt": "2026-11-24T22:58:50.534695+00:00"
     },
     {
       "job": {
@@ -1990,7 +1990,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:01.147538+00:00"
+      "checkedAt": "2026-11-24T22:58:50.534734+00:00"
     },
     {
       "job": {
@@ -2013,7 +2013,7 @@
       },
       "status": "unverified",
       "reason": "Source redirected away from a matching employer posting",
-      "checkedAt": "2026-11-24T00:44:01.147557+00:00"
+      "checkedAt": "2026-11-24T22:58:50.534775+00:00"
     },
     {
       "job": {
@@ -2036,7 +2036,7 @@
       },
       "status": "unverified",
       "reason": "Employer page could not be reached (ReadTimeout)",
-      "checkedAt": "2026-11-24T00:44:01.357514+00:00"
+      "checkedAt": "2026-11-24T22:58:50.763823+00:00"
     },
     {
       "job": {
@@ -2059,7 +2059,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:22.786045+00:00"
+      "checkedAt": "2026-11-24T22:59:15.623210+00:00"
     },
     {
       "job": {
@@ -2105,7 +2105,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:44:22.786134+00:00"
+      "checkedAt": "2026-11-24T22:59:15.623314+00:00"
     },
     {
       "job": {
@@ -2128,7 +2128,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:22.906842+00:00"
+      "checkedAt": "2026-11-24T22:59:15.686167+00:00"
     },
     {
       "job": {
@@ -2151,7 +2151,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:22.906880+00:00"
+      "checkedAt": "2026-11-24T22:59:15.686240+00:00"
     },
     {
       "job": {
@@ -2174,7 +2174,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:22.906905+00:00"
+      "checkedAt": "2026-11-24T22:59:15.686286+00:00"
     },
     {
       "job": {
@@ -2197,7 +2197,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:22.906922+00:00"
+      "checkedAt": "2026-11-24T22:59:15.686320+00:00"
     },
     {
       "job": {
@@ -2220,7 +2220,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:44:22.906937+00:00"
+      "checkedAt": "2026-11-24T22:59:15.686351+00:00"
     },
     {
       "job": {
@@ -2381,7 +2381,7 @@
       },
       "status": "unverified",
       "reason": "Matching job heading is not readable",
-      "checkedAt": "2026-11-24T00:44:22.994385+00:00"
+      "checkedAt": "2026-11-24T22:59:15.732150+00:00"
     },
     {
       "job": {
@@ -2404,7 +2404,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:23.699891+00:00"
+      "checkedAt": "2026-11-24T22:59:18.184099+00:00"
     },
     {
       "job": {
@@ -2427,7 +2427,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:23.699932+00:00"
+      "checkedAt": "2026-11-24T22:59:18.184167+00:00"
     },
     {
       "job": {
@@ -2447,11 +2447,11 @@
         "notes": "Not specified",
         "source": "https://job-boards.greenhouse.io/gofundme/jobs/8304644",
         "dateFound": "2026-11-02",
-        "lastChecked": "2026-11-24T00:44:23.699954+00:00"
+        "lastChecked": "2026-11-24T22:59:18.184207+00:00"
       },
       "status": "open",
       "reason": "Matching employer heading and Apply control",
-      "checkedAt": "2026-11-24T00:44:23.699954+00:00",
+      "checkedAt": "2026-11-24T22:59:18.184207+00:00",
       "sourceFingerprint": "02e4564e9b066dbccee12a1131558be36fe0421fb40e2818f511f3904eb9f027",
       "finalUrl": "https://job-boards.greenhouse.io/gofundme/jobs/8304644"
     },
@@ -2476,7 +2476,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:24.121192+00:00"
+      "checkedAt": "2026-11-24T22:59:18.235595+00:00"
     },
     {
       "job": {
@@ -2499,7 +2499,7 @@
       },
       "status": "unverified",
       "reason": "Employer page returned HTTP 429",
-      "checkedAt": "2026-11-24T00:44:24.121226+00:00"
+      "checkedAt": "2026-11-24T22:59:18.235663+00:00"
     },
     {
       "job": {
@@ -2545,7 +2545,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:24.191183+00:00"
+      "checkedAt": "2026-11-24T22:59:18.310972+00:00"
     },
     {
       "job": {
@@ -2568,7 +2568,7 @@
       },
       "status": "unverified",
       "reason": "Source is not a specific recognized employer/ATS posting",
-      "checkedAt": "2026-11-24T00:44:24.191591+00:00"
+      "checkedAt": "2026-11-24T22:59:18.311043+00:00"
     }
   ]
 }
